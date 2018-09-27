@@ -44,7 +44,7 @@ class LoginController extends Controller
      * @param  mixed $user
      * @return mixed
      */
-    protected function authenticated(Request $request)
+    protected function authenticated()
     {
         if (auth()->user()->isAdmin()) {
             return redirect()->route('dashboard');

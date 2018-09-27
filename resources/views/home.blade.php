@@ -72,6 +72,15 @@
                         @if(auth()->user()->isAdmin())
                             <a href="{{ route('dashboard') }}">Dashboard</a>
                         @endif
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                            {{ csrf_field() }}
+                        </form>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
