@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 27, 2018 at 07:44 AM
+-- Generation Time: Sep 29, 2018 at 05:49 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -62,7 +62,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2018_09_27_103215_create_permissions_table', 1),
 (4, '2018_09_27_103250_create_permission_user_table', 1),
-(5, '2018_09_27_103614_create_admin_logs_table', 1);
+(5, '2018_09_27_103614_create_admin_logs_table', 1),
+(6, '2018_09_29_090033_create_settings_table', 1);
 
 -- --------------------------------------------------------
 
@@ -91,8 +92,16 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `eng_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permissions_eng_title_unique` (`eng_title`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `fa_title`, `eng_title`, `created_at`, `updated_at`) VALUES
+(1, 'ایجاد ادمین', 'admin-create', '2018-09-29 05:49:14', '2018-09-29 05:49:14');
 
 -- --------------------------------------------------------
 
@@ -104,6 +113,28 @@ DROP TABLE IF EXISTS `permission_user`;
 CREATE TABLE IF NOT EXISTS `permission_user` (
   `permission_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permission_user`
+--
+
+INSERT INTO `permission_user` (`permission_id`, `user_id`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+DROP TABLE IF EXISTS `settings`;
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -120,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` tinyint(4) NOT NULL,
+  `role` tinyint(4) NOT NULL DEFAULT '2',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -134,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$It5I8vi8hApF90vE3yeok.LoqsrK3qacCqSPFgfVbtEIqUAsITLx2', 1, NULL, '2018-09-27 07:21:12', '2018-09-27 07:21:12'),
-(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$sQiAv1OAbZMHgzArkEEOH.kwMQrAWxHhYPTcMvqYlsrdHDJdlUqIS', 2, '1RdMtLqN8zcVPq484UOPbbIVValFpjGmv4QrvdByLAhoG1HiHCgirBqMRCJi', '2018-09-27 07:21:12', '2018-09-27 07:21:12');
+(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', 1, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
+(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$NC8rgQrTh8sLujCXsRULUuJr5NXES.QrfZ0OCjCmsd8Pov.wH/GB6', 2, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

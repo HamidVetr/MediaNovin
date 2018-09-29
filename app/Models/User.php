@@ -38,6 +38,22 @@ class User extends Authenticatable
         2 => 'کاربر',
     ];
 
+    private $permissions = null;
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function hasPermission($permission)
+    {
+        if (is_null($this->permissions)) {
+            $this->permissions = $this->permissions()->pluck('id','eng_title');
+        }
+
+        return isset($this->permissions[$permission]) ? true:false;
+    }
+
     public function isAdmin(){
         return $this->role == 1 ? true:false;
     }
