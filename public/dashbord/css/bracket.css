@@ -553,6 +553,7 @@ small,
 .small {
   font-size: 80%;
   font-weight: normal;
+  color: #e10000
 }
 
 mark,
@@ -3628,7 +3629,7 @@ tbody.collapse.show {
 }
 
 .breadcrumb-item {
-  float: left;
+  float: right;
 }
 .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
@@ -9871,8 +9872,8 @@ textarea.parsley-error:active {
 /* ------------------------------------------------- */
 .form-layout-footer .btn, .form-layout-footer .sp-container button, .sp-container .form-layout-footer button {
   text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  /*letter-spacing: 1px;*/
   font-weight: 500;
   padding: 12px 20px;
 }
@@ -9951,6 +9952,7 @@ textarea.parsley-error:active {
 .form-layout-5 {
   padding: 30px;
   border: 1px solid #ced4da;
+  background: #fff;
 }
 .form-layout-4 .form-control-label,
 .form-layout-5 .form-control-label {
@@ -15558,6 +15560,7 @@ textarea.parsley-success:focus {
 .toggle-slide .toggle-on.active,
 .toggle-slide .toggle-off.active {
   opacity: 1;
+  font-family: iranSans!important;
 }
 
 .toggle-light .toggle-slide {
@@ -16682,6 +16685,7 @@ textarea.parsley-success:focus {
 }
 .br-pageheader .breadcrumb-item.active {
   color: #495057;
+  float:right;
 }
 
 .br-pagetitle {
@@ -16690,7 +16694,7 @@ textarea.parsley-success:focus {
   padding-right: 15px;
 }
 .br-pagetitle .icon {
-  font-size: 70px;
+  font-size: 30px;
   line-height: 0;
   color: #343a40;
 }
@@ -16719,7 +16723,7 @@ textarea.parsley-success:focus {
 }
 
 .br-pagebody {
-  margin-top: 30px;
+  margin-top: 70px;
   padding: 0 15px;
 }
 @media (min-width: 576px) {
@@ -17507,7 +17511,7 @@ textarea.parsley-success:focus {
 }
 @media (min-width: 992px) {
   .rtl .br-mainpanel {
-    margin-right: 230px;
+    margin-right: 113px;
     margin-left: 0;
   }
 }
@@ -17516,8 +17520,8 @@ textarea.parsley-success:focus {
   right: auto;
 }
 .rtl .br-pageheader {
-  direction: ltr;
-  display: flex;
+  direction: rtl;
+  display: block;
   justify-content: flex-end;
 }
 @media (min-width: 576px) {
@@ -62223,3 +62227,60 @@ table.jambo_table{
 .empty-state img{
   max-width: 100%;
 }
+
+
+.icon .fa-bars{
+  font-size:15px!important;
+  color:#fff;
+}
+.br-section-text {
+  background-color: rgb(221, 221, 221);
+  box-shadow: rgba(255, 255, 255, 0.15) 0px 1px 0px inset, rgba(0, 0, 0, 0.075) 0px 1px 1px;
+  margin-bottom: 25px;
+  background-image: -webkit-linear-gradient(top, rgb(240, 240, 240), rgb(223, 223, 223)) !important;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: rgb(221, 221, 221);
+  box-shadow: rgba(255, 255, 255, 0.15) 0px 1px 0px inset, rgba(0, 0, 0, 0.075) 0px 1px 1px;
+  margin-bottom: 25px;
+  background-image: -webkit-linear-gradient(top, rgb(240, 240, 240), rgb(223, 223, 223)) !important;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.br-section-wrapper-level{
+  background: #fff;
+  padding: 30px;
+}
+.notype, .notype ul {
+  list-style-type: none;
+}
+
+.img-edit{
+  list-style: none;
+  float:left;
+
+}
+
+.img-edit li{
+  float: right;
+}
+.heading-elements{
+
+  float: left;
+}
+
+.title-add h4{
+  display: inline-block;
+}
+.table-mananger thead tr th{
+  text-align: center;
+}
+
+.table-mananger tbody tr th{
+  text-align: center;
+}
+.table-mananger tbody tr td{
+  text-align: center;
+}
+

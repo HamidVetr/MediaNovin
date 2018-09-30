@@ -70,7 +70,7 @@
                 <div class="top-right links">
                     @auth
                         @if(auth()->user()->isAdmin())
-                            <a href="{{ route('dashboard') }}">Dashboard</a>
+                            <a href="{{ route('dashboard.home') }}">Dashboard</a>
                         @endif
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
