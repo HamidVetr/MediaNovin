@@ -21,10 +21,4 @@ Route::group(['prefix' => '/dashboard', 'as' => 'dashboard.', 'namespace' => '\D
         Route::post('/{adminId}/active', 'AdminController@active')->name('active');
         Route::post('/{adminId}/deactive', 'AdminController@deactive')->name('deactive');
     });
-
-    Route::group(['prefix' => '/tickets', 'as' => 'tickets.'], function () {
-        Route::get('/', function (){return view('dashboard.tickets.index');})->name('index');
-        Route::get('/create', function (){return view('dashboard.tickets.create');})->name('create');
-        Route::get('/show', function (){return view('dashboard.tickets.show');})->name('show');
-    });
 });

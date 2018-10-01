@@ -1,0 +1,13 @@
+{
+  "name": "mwteam/ticket",
+  "description": "Ticket management package",
+  "authors": [
+    {
+      "name": "mwteam",
+      "email": "mwteam@mihanwebhost.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+  }
+}

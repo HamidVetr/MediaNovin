@@ -15,6 +15,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        view()->composer(['dashboard.partials.sidebar'], function ($view) {
+            $packages = config('packages.packages');
+            $menus = [];
+
+            foreach ($packages as $package){
+                $config = include base_path('packages/mwteam/'. $package.'/src/config.php');
+                $menus[] = $config['sidebar'];
+            }
+
+            $view->with(['menus' => $menus]);
+        });
     }
 
     /**
