@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,22 +14,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'first_name', 'last_name', 'username', 'email', 'password', 'role'
+        'first_name', 'last_name', 'username', 'email', 'password', 'role', 'deactivated_at'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -40,11 +31,20 @@ class User extends Authenticatable
 
     private $permissions = null;
 
+    //****************************** relations *************************
+
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);
     }
 
+    //****************************** scopes ************************************
+    public function scopeAdmins($query)
+    {
+        return $query->where('role',1)->where('id','!=',1);
+    }
+
+    //****************************** methods ************************************
     public function hasPermission($permission)
     {
         if (is_null($this->permissions)) {

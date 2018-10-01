@@ -15,8 +15,8 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         Permission::create([
-            'fa_title' => 'ایجاد ادمین',
-            'eng_title' => 'admin-create',
+            'fa_title' => 'مدیران',
+            'eng_title' => 'admins',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

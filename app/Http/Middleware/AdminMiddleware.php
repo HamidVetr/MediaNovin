@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Gate;
 
 class AdminMiddleware
 {
@@ -13,9 +14,13 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $permission = null)
     {
         if (auth()->check() && auth()->user()->isAdmin()){
+            if (!is_null($permission) && Gate::denies('has-permission', $permission)) {
+                abort(404);
+            }
+
             return $next($request);
         }
 

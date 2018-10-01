@@ -5,11 +5,15 @@
 @endsection
 
 @section('content')
+    @if($errors->any())
+        @include('dashboard.partials.alert-error',['messages' => $errors->all()])
+    @endif
+
     <div class="br-mainpanel">
         <div class="br-pageheader">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a href="" class="breadcrumb-item">خانه</a>
-                <a href="" class="breadcrumb-item">مدیران سایت</a>
+                <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
+                <a href="{{route('dashboard.admins.index')}}" class="breadcrumb-item">مدیران سایت</a>
                 <span class="breadcrumb-item active">افزودن</span>
             </nav>
         </div>
@@ -19,73 +23,65 @@
             <h4 class="pd-r-10">افزودن مدیر</h4>
         </div>
         <div class="pd-t-30">
-           <form  id="adminadd">
-               <div class="row">
-                   <div class="col-xl-12">
-                       <div class="form-layout form-layout-4">
-                           <div class="row mg-t-20">
-                               <label for="" class="col-sm-2 form-control-label">
-                                   نام :
-                                   <span class="tx-danger">*</span>
-                               </label>
-                               <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                   <input type="text" class="form-control" name="first_name">
-                               </div>
-                           </div>
-                           <div class="row mg-t-20">
-                               <label for="" class="col-sm-2 form-control-label">
-                                   نام خانوادگی :
-                                   <span class="tx-danger">*</span>
-                               </label>
-                               <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                   <input type="text" class="form-control" name="last_name">
-                               </div>
-                           </div>
-                           <div class="row mg-t-20">
-                               <label for="" class="col-sm-2 form-control-label">
-                                   نام کاربری:
-                                   <span class="tx-danger">*</span>
-                               </label>
-                               <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                   <input type="text" class="form-control" name="username">
-                               </div>
-                           </div>
-                           <div class="row mg-t-20">
-                               <label for="" class="col-sm-2 form-control-label">
-                                   ایمیل:
-                                   <span class="tx-danger">*</span>
-                               </label>
-                               <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                   <input type="text" class="form-control" name="email">
-                               </div>
-                           </div>
-                           <div class="row mg-t-20">
-                               <label for="" class="col-sm-2 form-control-label">
-                                   رمز عبور:
-                                   <span class="tx-danger">*</span>
-                               </label>
-                               <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                   <input type="text" class="form-control"  name="password">
-                               </div>
-                           </div>
-                           <div class="row mg-t-20">
-                               <label for="" class="col-sm-2 form-control-label">
-                                   تکرار رمز عبور:
-                                   <span class="tx-danger">*</span>
-                               </label>
-                               <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                   <input type="text" class="form-control"  name="password_confirmation">
-                               </div>
-                           </div>
-                           <div class="form-layout-footer mg-t-30 text-center">
-                               <button type="submit" class="btn btn-info">ایجاد مدیر</button>
-                           </div>
+            {!! Form::model($admin , ['method'=>'POST', 'route' => ['dashboard.admins.store'], 'files' => false]) !!}
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-layout form-layout-4">
+                            <div class="row mg-t-20">
+                                <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                {!! Form::label('first_name', 'نام:', ['class' => 'col-sm-2 form-control-label']) !!}
 
-                       </div>
-                   </div>
-               </div>
-           </form>
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="row mg-t-20">
+                                <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                {!! Form::label('last_name', 'نام خانوادگی:', ['class' => 'col-sm-2 form-control-label']) !!}
 
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="row mg-t-20">
+                                <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                {!! Form::label('username', 'نام کاربری:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::text('username', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="row mg-t-20">
+                                <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                {!! Form::label('email', 'ایمیل:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="row mg-t-20">
+                                <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                {!! Form::label('password', 'رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::password('password', ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="row mg-t-20">
+                                <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                {!! Form::label('password_confirmation', 'تکرار رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="form-layout-footer mg-t-30 text-center">
+                                {!! Form::submit('ایجاد مدیر', ['class' => 'btn btn-info']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection

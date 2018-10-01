@@ -15,7 +15,6 @@ Route::group(['prefix' => '/dashboard', 'as' => 'dashboard.', 'namespace' => '\D
         Route::post('/', 'AdminController@store')->name('store');
         Route::get('/{adminId}/edit', 'AdminController@edit')->name('edit');
         Route::put('/{adminId}', 'AdminController@update')->name('update');
-        Route::delete('/{adminId}', 'AdminController@destroy')->name('destroy');
         Route::get('/{adminId}/permissions', 'AdminController@showPermissions')->name('showPermissions');
         Route::put('/{adminId}/permissions', 'AdminController@updatePermissions')->name('updatePermissions');
         Route::post('/{adminId}/active', 'AdminController@active')->name('active');

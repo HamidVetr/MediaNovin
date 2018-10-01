@@ -22,16 +22,18 @@
             </li><!-- br-menu-item -->
         @endforeach
 
-        <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{Request::is('dashboard/admins*') ? 'active':''}}">
-                <i class="menu-item-icon icon ion-ios-contact-outline tx-24"></i>
-                <span class="menu-item-label">بخش مدیران</span>
-            </a><!-- br-menu-link -->
-            <ul class="br-menu-sub">
-                <li class="sub-item"><a href="{{route('dashboard.admins.create')}}" class="sub-link">اضافه کردن مدیر جدید</a></li>
-                <li class="sub-item"><a href="{{route('dashboard.admins.index')}}" class="sub-link">لیست مدیران</a></li>
-            </ul>
-        </li>
+        @can('has-permission', 'admins')
+            <li class="br-menu-item">
+                <a href="#" class="br-menu-link with-sub {{Request::is('dashboard/admins*') ? 'active':''}}">
+                    <i class="menu-item-icon icon ion-ios-contact-outline tx-24"></i>
+                    <span class="menu-item-label">بخش مدیران</span>
+                </a><!-- br-menu-link -->
+                <ul class="br-menu-sub">
+                    <li class="sub-item"><a href="{{route('dashboard.admins.create')}}" class="sub-link">اضافه کردن مدیر جدید</a></li>
+                    <li class="sub-item"><a href="{{route('dashboard.admins.index')}}" class="sub-link">لیست مدیران</a></li>
+                </ul>
+            </li>
+        @endcan
 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link">
