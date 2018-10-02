@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <div class="br-mainpanel">
         <div class="br-pageheader">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a href="" class="breadcrumb-item">خانه</a>
@@ -86,7 +85,6 @@
             </div>
          </form>
         </div>
-    </div>
 @endsection
 @section('js-footer')
     <script type="text/javascript" src="/dashbord/js/bootstrapValidator.min.js"></script>
