@@ -47,7 +47,7 @@
                 <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-t-20 mg-b-10">لیست 10 ورود آخر ادمین</h6>
                 <table class="table table-striped jambo_table bulk_action">
                     <div class="text-center empty-state">
-                        <img src="{{ asset('dashboard/images/empty.png') }}" width="400">
+                        <img src="{{ asset('assets/dashboard/images/empty.png') }}" width="400">
                         <div>لیست ورود ادمینی وجود ندارد</div>
                     </div>
                     <thead>
@@ -61,61 +61,61 @@
                     <tbody>
                     <tr class="even pointer">
                         <th  scope="row">1</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/chrome.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/chrome.png') }}"></a></td>
                         <td>12:45:00</td>
                         <td>1397/07/04</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">2</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/explorer.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/explorer.png') }}"></a></td>
                         <td>10:16:22</td>
                         <td>1397/07/03</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">3</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/safari.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/safari.png') }}"></a></td>
                         <td>05:22:16</td>
                         <td>1397/07/01</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">4</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/opera.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/opera.png') }}"></a></td>
                         <td>15:22:56</td>
                         <td>1397/07/01</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">5</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/firefox.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/firefox.png') }}"></a></td>
                         <td>13:30:00</td>
                         <td>1397/06/31</td>
                     </tr>
                     <tr class="even pointer">
                         <th  scope="row">1</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/chrome.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/chrome.png') }}"></a></td>
                         <td>12:45:00</td>
                         <td>1397/07/04</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">2</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/explorer.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/explorer.png') }}"></a></td>
                         <td>10:16:22</td>
                         <td>1397/07/03</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">3</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/safari.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/safari.png') }}"></a></td>
                         <td>05:22:16</td>
                         <td>1397/07/01</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">4</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/opera.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/opera.png') }}"></a></td>
                         <td>15:22:56</td>
                         <td>1397/07/01</td>
                     </tr>
                     <tr class="even pointer">
                         <th scope="row">5</th>
-                        <td><a href=""><img src="{{ asset('dashboard/images/firefox.png') }}"></a></td>
+                        <td><a href=""><img src="{{ asset('assets/dashboard/images/firefox.png') }}"></a></td>
                         <td>13:30:00</td>
                         <td>1397/06/31</td>
                     </tr>
@@ -138,7 +138,7 @@
 @endsection
 
 @section('js-footer')
-    <script src="{{ asset('dashboard/js/highcharts.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/highcharts.js') }}"></script>
     <script type="text/javascript">
         Highcharts.setOptions({
             lang: {

@@ -30,7 +30,7 @@ class DashboardServiceProvider extends ServiceProvider
         ], 'dashboard/lang');
 
         $this->publishes([
-            __DIR__.'/assets' => public_path('/'),
+            __DIR__.'/assets' => public_path('/assets'),
         ], 'dashboard/assets');
 
         if ($this->app->runningInConsole()) {

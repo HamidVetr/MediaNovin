@@ -5,7 +5,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('dashboard/css/toggles-full.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/dashboard/css/toggles-full.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
@@ -77,7 +77,7 @@
                                 <td>{{$admin->username}}</td>
                                 <td>{{$admin->email}}</td>
                                 <td>
-                                    <a href="{{route('dashboard.admins.showPermissions', ['adminId' => $admin->id])}}"><img src="{{asset('dashboard/images/admin.png')}}" alt="" width="30"></a>
+                                    <a href="{{route('dashboard.admins.showPermissions', ['adminId' => $admin->id])}}"><img src="{{asset('assets/dashboard/images/admin.png')}}" alt="" width="30"></a>
                                 </td>
                                 <td>
                                     <ul class="img-edit">
@@ -90,16 +90,16 @@
                                             </form>
                                             @if(is_null($admin->deleted_at))
                                                 <a href="javascript:{}" onclick="document.getElementById('form-status').submit();">
-                                                    <img data-toggle="tooltip" title="غیر فعال کردن" src="{{ asset('dashboard/images/edit.png') }}" alt="" width="18">
+                                                    <img data-toggle="tooltip" title="غیر فعال کردن" src="{{ asset('assets/dashboard/images/edit.png') }}" alt="" width="18">
                                                 </a>
                                             @else
                                                 <a href="javascript:{}" onclick="document.getElementById('form-status').submit();">
-                                                    <img data-toggle="tooltip" title="فعال کردن" src="{{ asset('dashboard/images/edit.png') }}" alt="" width="18">
+                                                    <img data-toggle="tooltip" title="فعال کردن" src="{{ asset('assets/dashboard/images/edit.png') }}" alt="" width="18">
                                                 </a>
                                             @endif
                                         </li>
                                         <li>
-                                            <a href="{{route('dashboard.admins.edit' , ['adminId' => $admin->id])}}"><img data-toggle="tooltip" title="ویرایش اطلاعات" src="{{ asset('dashboard/images/edit.png') }}" alt="" width="18"></a>
+                                            <a href="{{route('dashboard.admins.edit' , ['adminId' => $admin->id])}}"><img data-toggle="tooltip" title="ویرایش اطلاعات" src="{{ asset('assets/dashboard/images/edit.png') }}" alt="" width="18"></a>
                                         </li>
                                     </ul>
                                 </td>
@@ -121,6 +121,6 @@
 @endsection
 
 @section('js-footer')
-    <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
-    <script src="{{ asset('dashboard/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/bootstrap.js') }}"></script>
 @endsection

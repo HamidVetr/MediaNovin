@@ -26,7 +26,7 @@ class TicketServiceProvider extends ServiceProvider
         ], 'ticket/lang');
 
         $this->publishes([
-            __DIR__.'/assets' => public_path('/'),
+            __DIR__.'/assets' => public_path('/assets'),
         ], 'ticket/assets');
 
         if ($this->app->runningInConsole()) {

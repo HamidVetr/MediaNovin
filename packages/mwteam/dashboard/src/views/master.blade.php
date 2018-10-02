@@ -9,11 +9,11 @@
     @yield('meta')
     <title>@yield('title')</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bracket.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/them.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/ionicons.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap.rtl.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard/css/bracket.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard/css/them.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard/css/ionicons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard/css/bootstrap.rtl.css') }}">
 
     @yield('css')
     @yield('js-header')
@@ -30,11 +30,11 @@
         </div>
     </div>
 
-    <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
-    <script src="{{ asset('dashboard/js/popper.js') }}"></script>
-    <script src="{{ asset('dashboard/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('dashboard/js/bracket.js') }}"></script>
-    <script src="{{ asset('dashboard/js/bootstrapValidator.min.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/popper.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/bracket.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/bootstrapValidator.min.js') }}"></script>
     <script src="{{ asset('dashbaord/js/uniform.js') }}"></script>
     <script>
         $('[data-toggle="tooltip"]').tooltip();
