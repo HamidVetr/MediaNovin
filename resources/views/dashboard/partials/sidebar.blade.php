@@ -10,7 +10,7 @@
 
         @foreach($menus as $menu)
             <li class="br-menu-item">
-                <a href="" class="br-menu-link with-sub {{Request::is($menu['path']) ? 'active':''}}">
+                <a href="" class="br-menu-link with-sub {{Request::is($menu['path'].'*') ? 'active':''}}">
                     <i class="menu-item-icon icon {{$menu['icon']}}"></i>
                     <span class="menu-item-label">{{$menu['title']}}</span>
                 </a><!-- br-menu-link -->

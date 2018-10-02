@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Mwteam\Dashboard\DashboardServiceProvider::class,
         Mwteam\Ticket\TicketServiceProvider::class,
     ],
 

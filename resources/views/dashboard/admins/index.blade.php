@@ -127,17 +127,7 @@
 @section('js-footer')
     <script src="/dashbord/js/jquery.js"></script>
     <script src="/dashbord/js/bootstrap.js"></script>
-    <script src="/dashbord/js/toggles.min.js"></script>
-    <script src="/dashbord/js/jquery.switchButton.js"></script>
     <script>
-        $(function(){
-            // Toggles
-            $('.toggle').toggles({
-                on: true,
-                height: 26
-            });
-        });
-
         $('[data-toggle="tooltip"]').tooltip();
     </script>
 @endsection

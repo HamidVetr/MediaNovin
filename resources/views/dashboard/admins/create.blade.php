@@ -23,7 +23,7 @@
             <h4 class="pd-r-10">افزودن مدیر</h4>
         </div>
         <div class="pd-t-30">
-            {!! Form::model($admin , ['method'=>'POST', 'route' => ['dashboard.admins.store'], 'files' => false]) !!}
+            {!! Form::open(['method'=>'POST', 'route' => ['dashboard.admins.store'], 'files' => false]) !!}
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="form-layout form-layout-4">
