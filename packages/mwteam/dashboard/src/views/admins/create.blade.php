@@ -4,6 +4,8 @@
     ایجاد مدیر
 @endsection
 
+@section('admins-create') active @endsection
+
 @section('content')
     @if($errors->any())
         @include('dashboard::partials.alert-error',['messages' => $errors->all()])

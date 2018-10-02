@@ -3,6 +3,7 @@
 namespace Mwteam\Dashboard;
 
 use Illuminate\Support\ServiceProvider;
+use Mwteam\Dashboard\Commands\SeedCommand;
 
 class DashboardServiceProvider extends ServiceProvider
 {
@@ -35,7 +36,7 @@ class DashboardServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-//                FooCommand::class,
+                SeedCommand::class,
             ]);
         }
 
@@ -45,7 +46,10 @@ class DashboardServiceProvider extends ServiceProvider
 
             foreach ($packages as $package){
                 $config = include base_path('packages/mwteam/'. $package.'/src/config.php');
-                $menus[] = $config['sidebar'];
+
+                if (isset($config['sidebar'])){
+                    $menus[] = $config['sidebar'];
+                }
             }
 
             $view->with(['menus' => $menus]);

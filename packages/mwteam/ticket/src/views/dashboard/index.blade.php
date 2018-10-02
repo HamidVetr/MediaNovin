@@ -1,8 +1,8 @@
 @extends('dashboard::master')
 
-@section('title')
-    تیکت ها
-@endsection
+@section('title') تیکت ها @endsection
+
+@section('tickets-index') active @endsection
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('dashbord/css/persian-datepicker-0.4.5.css') }}">

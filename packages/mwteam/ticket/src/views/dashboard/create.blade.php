@@ -1,8 +1,8 @@
 @extends('dashboard::master')
 
-@section('title')
-    ارسال تیکت
-@endsection
+@section('title') ارسال تیکت @endsection
+
+@section('tickets-create') active @endsection
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('dashbord/css/select2.min.css') }}">

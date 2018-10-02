@@ -43,7 +43,7 @@ class AdminController extends Controller
             'username' => $request['username'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
-            'role' => 1
+            'role' => 'admin'
         ]);
 
         session()->flash('success','مدیر جدید ایجاد گردید. اکنون می توانید دسترسی های مدیر جدید را تعیین نمایید.');

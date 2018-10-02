@@ -1,8 +1,8 @@
 @extends('dashboard::master')
 
-@section('title')
-    لیست مدیران
-@endsection
+@section('title') لیست مدیران @endsection
+
+@section('admins-index') active @endsection
 
 @section('css')
     <link href="{{ asset('assets/dashboard/css/toggles-full.css') }}" rel="stylesheet" type="text/css">
@@ -111,9 +111,9 @@
 
             <div class="text-center content-group-lg pt-20">
                 @if($hasFilter == true)
-                    {{$admins->appends($request)->links()}}
+                    {{$admins->appends($request)->links('dashboard::partials.pagination')}}
                 @else
-                    {{$admins->links()}}
+                    {{$admins->links('dashboard::partials.pagination')}}
                 @endif
             </div>
         </div>

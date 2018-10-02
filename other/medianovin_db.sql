@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 02, 2018 at 10:26 AM
+-- Generation Time: Oct 02, 2018 at 12:12 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -63,7 +63,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2018_09_27_103215_create_permissions_table', 1),
 (4, '2018_09_27_103250_create_permission_user_table', 1),
 (5, '2018_09_27_103614_create_admin_logs_table', 1),
-(6, '2018_09_29_090033_create_settings_table', 1);
+(6, '2018_09_29_090033_create_settings_table', 1),
+(7, '2018_10_01_094311_create_tickets_table', 2);
 
 -- --------------------------------------------------------
 
@@ -89,19 +90,25 @@ DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `fa_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `eng_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `en_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `permissions_eng_title_unique` (`eng_title`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `permissions_eng_title_unique` (`en_title`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
 --
 
-INSERT INTO `permissions` (`id`, `fa_title`, `eng_title`, `created_at`, `updated_at`) VALUES
-(1, 'مدیران', 'admins', '2018-09-29 05:49:14', '2018-09-29 05:49:14');
+INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `created_at`, `updated_at`) VALUES
+(1, 'مدیران', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(2, 'ایجاد مدیر', 'admins-create', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(3, 'ویرایش مدیر', 'admins-edit', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(4, 'حذف مدیر', 'admins-delete', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(5, 'تیکت ها', 'tickets', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(6, 'ایجاد تیکت', 'tickets-create', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(7, 'حذف تیکت', 'tickets-delete', '2018-10-02 11:41:10', '2018-10-02 11:41:10');
 
 -- --------------------------------------------------------
 
@@ -120,7 +127,13 @@ CREATE TABLE IF NOT EXISTS `permission_user` (
 --
 
 INSERT INTO `permission_user` (`permission_id`, `user_id`) VALUES
-(1, 1);
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1);
 
 -- --------------------------------------------------------
 
@@ -136,6 +149,31 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets`
+--
+
+DROP TABLE IF EXISTS `tickets`;
+CREATE TABLE IF NOT EXISTS `tickets` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `user_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 'تست', 'closed', '2018-10-02 11:30:25', '2018-10-02 11:30:25'),
+(2, 2, 'تست', 'closed', '2018-10-02 11:41:10', '2018-10-02 11:41:10');
 
 -- --------------------------------------------------------
 
@@ -166,11 +204,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', '1', 'LoChFzzl3rBO4qt3hDVv19UYCaMHUKEXsNNwOLxhEZoB8c7FT3Y3QK61gySV', NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
-(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$NC8rgQrTh8sLujCXsRULUuJr5NXES.QrfZ0OCjCmsd8Pov.wH/GB6', '2', NULL, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
-(3, 'sfdfsfsdfsdfsd', 'c', 'admin2', 'admin2@email.com', '$2y$10$QgVr/8cnd4/KN6buZjAGG.Hgq21IHAVtFhZtOuaPjqRQ3u1z63iBW', '1', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 05:49:14', '2018-10-01 11:53:20'),
-(4, 'd', 'd', 'admin3', 'admin3@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', '1', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 09:49:00', '2018-10-01 09:49:00'),
-(5, 'e', 'e', 'admin4', 'admin4@email.com', '$2y$10$gzpeCfmI1fXICFgrlexF2e4l6RrPUJFBZ72b51xBdK729Eq1oPVhu', '1', NULL, NULL, '2018-10-01 10:43:39', '2018-10-01 10:43:39');
+(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', 'super-admin', 'LoChFzzl3rBO4qt3hDVv19UYCaMHUKEXsNNwOLxhEZoB8c7FT3Y3QK61gySV', NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
+(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$NC8rgQrTh8sLujCXsRULUuJr5NXES.QrfZ0OCjCmsd8Pov.wH/GB6', 'user', NULL, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
+(3, 'sfdfsfsdfsdfsd', 'c', 'admin2', 'admin2@email.com', '$2y$10$QgVr/8cnd4/KN6buZjAGG.Hgq21IHAVtFhZtOuaPjqRQ3u1z63iBW', 'admin', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 05:49:14', '2018-10-01 11:53:20'),
+(4, 'd', 'd', 'admin3', 'admin3@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', 'admin', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 09:49:00', '2018-10-01 09:49:00'),
+(5, 'e', 'e', 'admin4', 'admin4@email.com', '$2y$10$gzpeCfmI1fXICFgrlexF2e4l6RrPUJFBZ72b51xBdK729Eq1oPVhu', 'admin', NULL, NULL, '2018-10-01 10:43:39', '2018-10-01 10:43:39');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

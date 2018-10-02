@@ -16,7 +16,7 @@
                 </a><!-- br-menu-link -->
                 <ul class="br-menu-sub">
                     @foreach($menu['subMenus'] as $subMenu)
-                        <li class="sub-item"><a href="{{$subMenu['url']}}" class="sub-link">{{$subMenu['title']}}</a></li>
+                        <li class="sub-item"><a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}</a></li>
                     @endforeach
                 </ul>
             </li><!-- br-menu-item -->
@@ -29,8 +29,8 @@
                     <span class="menu-item-label">بخش مدیران</span>
                 </a><!-- br-menu-link -->
                 <ul class="br-menu-sub">
-                    <li class="sub-item"><a href="{{route('dashboard.admins.create')}}" class="sub-link">اضافه کردن مدیر جدید</a></li>
-                    <li class="sub-item"><a href="{{route('dashboard.admins.index')}}" class="sub-link">لیست مدیران</a></li>
+                    <li class="sub-item"><a href="{{route('dashboard.admins.create')}}" class="sub-link @yield('admins-create')">اضافه کردن مدیر جدید</a></li>
+                    <li class="sub-item"><a href="{{route('dashboard.admins.index')}}" class="sub-link @yield('admins-index')">لیست مدیران</a></li>
                 </ul>
             </li>
         @endcan

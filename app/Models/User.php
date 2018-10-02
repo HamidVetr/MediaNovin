@@ -18,7 +18,7 @@ class User extends Authenticatable
     use Notifiable, SoftDeletes;
 
     protected $fillable = [
-        'first_name', 'last_name', 'username', 'email', 'password', 'role', 'deactivated_at'
+        'first_name', 'last_name', 'username', 'email', 'password', 'role'
     ];
 
     protected $hidden = [
@@ -50,7 +50,7 @@ class User extends Authenticatable
     public function hasPermission($permission)
     {
         if (is_null($this->permissions)) {
-            $this->permissions = $this->permissions()->pluck('id','eng_title');
+            $this->permissions = $this->permissions()->pluck('id','en_title');
         }
 
         return isset($this->permissions[$permission]) ? true:false;
