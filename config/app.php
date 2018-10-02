@@ -179,6 +179,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Mwteam\Dashboard\DashboardServiceProvider::class,
         Mwteam\Ticket\TicketServiceProvider::class,
+        Mwteam\Blog\BlogServiceProvider::class,
     ],
 
     /*
