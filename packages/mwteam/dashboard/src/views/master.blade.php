@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    @yield('meta')
+    <title>@yield('title')</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bracket.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/them.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/ionicons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap.rtl.css') }}">
+
+    @yield('css')
+    @yield('js-header')
+</head>
+<body>
+    <div class="br-logo"><a href="#"><span>[</span> مدیا <i> نوین </i> <span>]</span></a></div>
+
+    @include('dashboard::partials.sidebar')
+    @include('dashboard::partials.header')
+
+    <div class="br-mainpanel">
+        <div class="br-pagebody">
+            @yield('content')
+        </div>
+    </div>
+
+    <script src="{{ asset('dashboard/js/jquery.js') }}"></script>
+    <script src="{{ asset('dashboard/js/popper.js') }}"></script>
+    <script src="{{ asset('dashboard/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('dashboard/js/bracket.js') }}"></script>
+    <script src="{{ asset('dashboard/js/bootstrapValidator.min.js') }}"></script>
+    <script src="{{ asset('dashbaord/js/uniform.js') }}"></script>
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
+
+    @yield('js-footer')
+</body>
+</html>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace Mwteam\Dashboard\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,13 +18,13 @@ class AdminController extends Controller
         $hasFilter = count($request->except('page')) > 0 ? true:false;
         $admins = User::admins()->withTrashed()->orderBy('deleted_at')->paginate(1);
 
-        return view('dashboard.admins.index')->with(['admins' => $admins , 'hasFilter' => $hasFilter]);
+        return view('dashboard::admins.index')->with(['admins' => $admins , 'hasFilter' => $hasFilter]);
     }
 
     public function create()
     {
         $admin = new User();
-        return view('dashboard.admins.create')->with(['admin' => $admin]);
+        return view('dashboard::admins.create')->with(['admin' => $admin]);
     }
 
     public function store(Request $request)
@@ -53,7 +53,7 @@ class AdminController extends Controller
     public function edit($adminId)
     {
         $admin = User::admins()->where('id', $adminId)->firstOrFail();
-        return view('dashboard.admins.edit')->with(['admin' => $admin]);
+        return view('dashboard::admins.edit')->with(['admin' => $admin]);
     }
 
     public function update($adminId, Request $request)
@@ -84,7 +84,7 @@ class AdminController extends Controller
     {
         $permissions = [];
 
-        return view('dashboard.admins.permissions');
+        return view('dashboard::admins.permissions');
     }
 
     public function updatePermissions()

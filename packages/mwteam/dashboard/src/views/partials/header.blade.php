@@ -1,0 +1,31 @@
+<div class="br-header">
+    <div class="br-header-left">
+        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href="#"><i class="icon ion-navicon-round"></i></a></div>
+        <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href="#"><i class="icon ion-navicon-round"></i></a></div>
+    </div><!-- br-header-left -->
+    <div class="br-header-right">
+        <nav class="nav">
+            <div class="dropdown">
+                <a href="#" class="nav-link nav-link-profile" data-toggle="dropdown">
+                    <span class="logged-name hidden-md-down">مریم محمدی</span>
+                    <img src="{{ asset('dashboard/images/img1.jpg') }}" class="wd-32 rounded-circle" alt="">
+                    <span class="square-10 bg-success"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-header wd-250">
+                    <div class="tx-center">
+                        <a href="#"><img src="{{ asset('dashboard/images/img1.jpg') }}" class="wd-80 rounded-circle" alt=""></a>
+                        <h6 class="logged-fullname">مریم محمدی</h6>
+                        <p>youremail@domain.com</p>
+                    </div>
+                    <hr>
+                    <ul class="list-unstyled user-profile-nav">
+                        <li><a href="#"><i class="icon ion-ios-person"></i>ویرایش پروفایل</a></li>
+                        <li><a href="#"><i class="icon ion-ios-gear"></i> تنظیمات</a></li>
+                        <li><a href="#"><i class="icon ion-power"></i> خروج</a></li>
+                    </ul>
+                </div><!-- dropdown-menu -->
+            </div><!-- dropdown -->
+        </nav>
+
+    </div><!-- br-header-right -->
+</div><!-- br-header -->

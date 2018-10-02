@@ -1,0 +1,166 @@
+@extends('dashboard::master')
+
+@section('title')
+    ویرایش مدیر
+@endsection
+
+@section('content')
+    @if($errors->any())
+        @include('dashboard::partials.alert-error',['messages' => $errors->all()])
+    @endif
+
+    @if(session()->has('success'))
+        @include('dashboard::partials.alert-success',['messages' => [session()->get('success')]])
+    @endif
+
+    <div class="br-pageheader">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a href="" class="breadcrumb-item">خانه</a>
+            <a href="" class="breadcrumb-item">مدیران سایت</a>
+            <span class="breadcrumb-item active">ویرایش اطلاعات</span>
+        </nav>
+    </div>
+
+    <div class="br-pagetitle">
+        <i class="icon icon ion-android-exit"></i>
+        <h4 class="pd-r-10">ویرایش اطلاعات</h4>
+    </div>
+    <div class="pd-t-30">
+        {!! Form::model($admin , ['method'=>'PUT', 'route' => ['dashboard.admins.update','adminId' => $admin->id], 'files' => false]) !!}
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="form-layout form-layout-4">
+                        <div class="row mg-t-20">
+                            <span class="tx-danger" style="margin-top: 12px;">*</span>
+                            {!! Form::label('first_name', 'نام:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="row mg-t-20">
+                            <span class="tx-danger" style="margin-top: 12px;">*</span>
+                            {!! Form::label('last_name', 'نام خانوادگی:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="row mg-t-20">
+                            <span class="tx-danger" style="margin-top: 12px;">*</span>
+                            {!! Form::label('username', 'نام کاربری:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                {!! Form::text('username', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="row mg-t-20">
+                            <span class="tx-danger" style="margin-top: 12px;">*</span>
+                            {!! Form::label('email', 'ایمیل:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="row mg-t-20">
+                            <span class="tx-danger" style="margin-top: 12px;">*</span>
+                            {!! Form::label('password', 'رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                {!! Form::password('password', ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="row mg-t-20">
+                            <span class="tx-danger" style="margin-top: 12px;">*</span>
+                            {!! Form::label('password_confirmation', 'تکرار رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-layout-footer mg-t-30 text-center">
+                            {!! Form::submit('ویرایش مدیر', ['class' => 'btn btn-info']) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {!! Form::close() !!}
+    </div>
+@endsection
+@section('js-footer')
+    <script>
+        $('#adminadd').bootstrapValidator({
+            fields: {
+                first_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا نام را وارد کنید'
+                        }
+                    }
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا نام خانوادگی را وارد کنید'
+                        }
+                    }
+                },
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا نام کاربری را وارد کنید'
+                        }
+                    }
+                },
+                mobile: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا شماره موبایل خود   را وارد کنید'
+                        },
+                    }
+                },
+                'national-id': {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا شماره ملی خود را وارد کنید'
+                        },
+                        stringLength: {
+                            min: 10,
+                            max: 10,
+                            message: 'تعداد ارقام کد ملی باید 10 عدد باشد'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا آدرس پست الکترونیکی را وارد کنید'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'رمز عبور را وارد کنید'
+                        },
+                        identical: {
+                            field: 'password_confirmation',
+                            message: 'رمز عبور و تکرار آن یکسان نیست'
+                        }
+                    }
+                },
+                password_confirmation: {
+                    validators: {
+                        notEmpty: {
+                            message: 'تکرار گذرواژه را لطفا وارد کنید'
+                        },
+                        identical: {
+                            field: 'password',
+                            message: 'رمز عبور و تکرار آن یکسان نیست'
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+@endsection
