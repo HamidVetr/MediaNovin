@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 29, 2018 at 05:49 AM
+-- Generation Time: Oct 02, 2018 at 10:26 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `fa_title`, `eng_title`, `created_at`, `updated_at`) VALUES
-(1, 'ایجاد ادمین', 'admin-create', '2018-09-29 05:49:14', '2018-09-29 05:49:14');
+(1, 'مدیران', 'admins', '2018-09-29 05:49:14', '2018-09-29 05:49:14');
 
 -- --------------------------------------------------------
 
@@ -151,22 +151,26 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` tinyint(4) NOT NULL DEFAULT '2',
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', 1, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
-(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$NC8rgQrTh8sLujCXsRULUuJr5NXES.QrfZ0OCjCmsd8Pov.wH/GB6', 2, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', '1', 'LoChFzzl3rBO4qt3hDVv19UYCaMHUKEXsNNwOLxhEZoB8c7FT3Y3QK61gySV', NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
+(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$NC8rgQrTh8sLujCXsRULUuJr5NXES.QrfZ0OCjCmsd8Pov.wH/GB6', '2', NULL, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
+(3, 'sfdfsfsdfsdfsd', 'c', 'admin2', 'admin2@email.com', '$2y$10$QgVr/8cnd4/KN6buZjAGG.Hgq21IHAVtFhZtOuaPjqRQ3u1z63iBW', '1', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 05:49:14', '2018-10-01 11:53:20'),
+(4, 'd', 'd', 'admin3', 'admin3@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', '1', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 09:49:00', '2018-10-01 09:49:00'),
+(5, 'e', 'e', 'admin4', 'admin4@email.com', '$2y$10$gzpeCfmI1fXICFgrlexF2e4l6RrPUJFBZ72b51xBdK729Eq1oPVhu', '1', NULL, NULL, '2018-10-01 10:43:39', '2018-10-01 10:43:39');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

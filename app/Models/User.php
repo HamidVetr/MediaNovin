@@ -26,8 +26,9 @@ class User extends Authenticatable
     ];
 
     protected static $roles = [
-        1 => 'ادمین',
-        2 => 'کاربر',
+        'super-admin' => 'سوپر ادمین',
+        'admin' => 'ادمین',
+        'user' => 'کاربر',
     ];
 
     private $permissions = null;
@@ -42,7 +43,7 @@ class User extends Authenticatable
     //****************************** scopes ************************************
     public function scopeAdmins($query)
     {
-        return $query->where('role',1)->where('id','!=',1);
+        return $query->where('role','admin');
     }
 
     //****************************** methods ************************************
@@ -56,10 +57,10 @@ class User extends Authenticatable
     }
 
     public function isAdmin(){
-        return $this->role == 1 ? true:false;
+        return $this->role == 'admin' || $this->role == 'super-admin' ? true:false;
     }
 
     public function isUser(){
-        return $this->role == 2 ? true:false;
+        return $this->role == 'user' ? true:false;
     }
 }
