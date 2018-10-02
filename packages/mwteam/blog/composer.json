@@ -1,0 +1,17 @@
+{
+    "name": "mwteam/blog",
+    "description": "Creating blog made easy",
+    "type": "project",
+    "require": {
+        "morilog/jalali": "dev-master",
+        "laravelcollective/html": "^5.7@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HamidVetr",
+            "email": "hamid.vetr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

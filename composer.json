@@ -28,7 +28,8 @@
         "psr-4": {
             "App\\": "app/",
             "Mwteam\\Dashboard\\": "packages/mwteam/dashboard/src",
-            "Mwteam\\Ticket\\": "packages/mwteam/ticket/src"
+            "Mwteam\\Ticket\\": "packages/mwteam/ticket/src",
+            "Mwteam\\Blog\\": "packages/mwteam/blog/src"
         }
     },
     "autoload-dev": {
