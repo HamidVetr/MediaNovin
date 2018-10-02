@@ -1,4 +1,4 @@
-@extends('dashboard.master')
+@extends('packages.mwteam.dashboard.src.views.master')
 
 @section('content')
 <div class="container">

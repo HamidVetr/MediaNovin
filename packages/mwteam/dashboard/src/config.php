@@ -2,6 +2,6 @@
 
 return [
     'packages' => [
-        'dashboard',
+        //
     ],
 ];
