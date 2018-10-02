@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/dashbord/css/them.css">
     <link rel="stylesheet" type="text/css" href="/dashbord/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/dashbord/css/ionicons.css">
+    <link rel="stylesheet" type="text/css" href="/dashbord/css/bootstrap.rtl.css">
 
     @yield('css')
     @yield('js-header')

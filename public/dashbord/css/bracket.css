@@ -62212,8 +62212,12 @@ table.jambo_table{
     opacity: 0.13;
 }
 
-.fa {
-  font-size: 90px!important;
+/*.fa {*/
+  /*font-size: 90px!important;*/
+/*}*/
+
+.count span .fa{
+  font-size: 90px;
 }
 .tabelaccor, .tabelaccor th, .tile_stats_count, .modal-footer {
     text-align: center !important;
@@ -62284,3 +62288,139 @@ table.jambo_table{
   text-align: center;
 }
 
+
+/*tickets***************/
+
+.search-advance-vendor {
+    text-align: left;
+    width: 100%;
+    display: block!important;
+}
+.searchbtn {
+    border: none;
+    padding: 5px;
+    border-style: none;
+    box-shadow: none!important;
+    background: #00b197;
+    color: #fff!important;
+    outline: none!important;
+    cursor: pointer;
+}
+.searchbtn-store {
+    border-radius: 50%!important;
+    padding: 9px;
+    margin-bottom: 5px;
+}
+img {
+    max-width: 100%;
+}
+#searchboxpage {
+     display: none;
+}
+.searchboxpage-vendor {
+    padding: 5px 15px;
+    background: #aab7be5c;
+    position: relative;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+.searchboxpage-vendor:before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  width: 0;
+  left: 6px;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 18px solid #aab7be5c;
+}
+.table-tickets thead tr th{
+  text-align: center;
+}
+
+.table-tickets tbody tr th{
+  text-align: center;
+}
+.table-tickets tbody tr td{
+  text-align: center;
+}
+.table-tickets tbody tr td .btn{
+  font-size: 12px;
+}
+.select2-container .select2-selection--single{
+  height: 39px!important;
+  border: 1px solid rgba(0, 0, 0, 0.15)!important;
+}
+
+
+.md-form {
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.file-field {
+  position: relative;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+.file-field .btn {
+  float: left;
+}
+.btn.btn-sm {
+  padding: .5rem 1.6rem;
+  font-size: .64rem;
+}
+.btn-primary {
+  background-color: #4285f4!important;
+  color: #fff!important;
+}
+
+
+.file-field span {
+  cursor: pointer;
+}
+.file-field input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+.file-field .file-path-wrapper {
+  overflow: hidden;
+  padding-left: 10px;
+  height: 2.5rem;
+}
+.file-field input.file-path {
+  width: 100%;
+  height: 36px;
+}
+
+.md-form input[type=text]{
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  outline: 0;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #ced4da!important;
+  border-radius: 0;
+  box-sizing: content-box;
+  background-color: transparent;
+}
+.md-form .file-path-wrapper input[type=text]{
+  border: none!important;
+  border-bottom: 1px solid #ced4da!important;
+  border-radius: none!important;
+}
+
+.file-path-wrapper .file-path{
+  border: none;
+  border-bottom: 1px solid #ced4da!important;
+}

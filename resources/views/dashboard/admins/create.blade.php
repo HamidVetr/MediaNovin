@@ -9,7 +9,6 @@
         @include('dashboard.partials.alert-error',['messages' => $errors->all()])
     @endif
 
-    <div class="br-mainpanel">
         <div class="br-pageheader">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
@@ -83,7 +82,6 @@
                 </div>
             {!! Form::close() !!}
         </div>
-    </div>
 @endsection
 
 @section('js-footer')

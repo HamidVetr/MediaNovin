@@ -12,8 +12,6 @@
     @if(session()->has('success'))
         @include('dashboard.partials.alert-success',['messages' => [session()->get('success')]])
     @endif
-
-    <div class="br-mainpanel">
         <div class="br-pageheader">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
@@ -119,9 +117,6 @@
                 </div>
             </div>
         </div>
-
-    </div>
-
 @endsection
 
 @section('js-footer')
