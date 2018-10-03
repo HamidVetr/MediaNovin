@@ -6,6 +6,7 @@ return [
         'title' => 'تیکتینگ',
         'path' => 'dashboard/tickets',
         'yield' => 'tickets',
+        'notification' => 'ticketCount',
         'subMenus' => [
             [
                 'title' => 'ارسال تیکت',
@@ -20,7 +21,7 @@ return [
         ]
     ],
     'seed' => [
-        'Mwteam\\Ticket\\Database\\Seeds\\PermissionTableSeeder',
-        'Mwteam\\Ticket\\Database\\Seeds\\TicketTableSeeder'
+        'permission' => 'Mwteam\\Ticket\\Database\\Seeds\\PermissionTableSeeder',
+        'ticket' => 'Mwteam\\Ticket\\Database\\Seeds\\TicketTableSeeder'
     ]
 ];

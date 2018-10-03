@@ -5,6 +5,7 @@ namespace Mwteam\Dashboard\App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mwteam\Dashboard\App\Models\Permission;
 
 class AdminController extends Controller
 {
@@ -79,16 +80,31 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function showPermissions()
+    public function showPermissions($adminId)
     {
-        $permissions = [];
+        $admin = User::admins()->where('id', $adminId)
+            ->with('permissions')
+            ->firstOrFail();
 
-        return view('dashboard::admins.permissions');
+        $adminPermissions = $admin->permissions->pluck('id')->toArray();
+        $permissions = Permission::all()->mapToGroups(function ($item) use($adminPermissions){
+            return [
+                $item['parent'] => [
+                    'id' => $item['id'],
+                    'fa_title' => $item['fa_title'],
+                    'en_title' => $item['en_title'],
+                    'value' => in_array($item['id'], $adminPermissions),
+                ]
+            ];
+        });
+
+        return view('dashboard::admins.permissions')->with(['permissions' => $permissions]);
     }
 
-    public function updatePermissions()
+    public function updatePermissions(Request $request)
     {
-
+        //return $request;
+        return redirect()->back()->withInput($request->all());
     }
 
     public function active($adminId)

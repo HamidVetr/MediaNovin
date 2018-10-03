@@ -28,37 +28,36 @@
             </p>
 
         <div class="table-responsive">
-            <form action="" method="" id="">
-                <ul class="notype">
-                    <br>
-                    <li>
-                        <input  type="checkbox" id="op1" name="sections" value="1">
-                        <label for="op1">بخش ها</label>
-                        <ul>
-                            <li>
-                                <input type="checkbox" id="op11" name="categories" value="1">
-                                <label for="op11">دسته بندی ها</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="op12" name="products" value="1">
-                                <label for="op12">کالاها</label>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="op123" name="categories" value="1">
-                                        <label for="op11">محصولات</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="op132" name="products" value="1">
-                                        <label for="op12">پوشاک</label>
 
-                                    </li>
-                                </ul>
 
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </form>
+            {!! Form::model($permissions , ['method'=>'PUT', 'route' => ['dashboard.admins.updatePermissions', 'adminId' => 3], 'files' => false]) !!}
+                @foreach($permissions['0'] as $permission)
+                    <div class="row mg-t-20">
+                        <h3>
+                            {!! Form::label($permission['en_title'], $permission['fa_title'], ['class' => 'col-sm-2 form-control-label']) !!}
+                        </h3>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            {!! Form::checkbox($permission['en_title'], 1, $permission['value'], ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+                    @if(isset($permissions[$permission['id']]))
+                        @foreach($permissions[$permission['id']] as $subPermission)
+                            <div class="row mg-t-20">
+                                {!! Form::label($subPermission['en_title'], $subPermission['fa_title'], ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::checkbox($subPermission['en_title'], 1, $subPermission['value'], ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
+
+                <div class="form-layout-footer mg-t-30 text-center">
+                    {!! Form::submit('ایجاد مدیر', ['class' => 'btn btn-info']) !!}
+                </div>
+            {!! Form::close() !!}
         </div>
      </div>
     </div>
