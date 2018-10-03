@@ -14,6 +14,9 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        global $notifications;
+        $notifications = [];
+
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'dashboard');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
@@ -39,6 +42,21 @@ class DashboardServiceProvider extends ServiceProvider
                 SeedCommand::class,
             ]);
         }
+
+        view()->composer('dashboard::partials.sidebar', function ($view) {
+            $packages = config('packages.packages');
+            $menus = [];
+
+            foreach ($packages as $package){
+                $config = include base_path('packages/mwteam/'. $package.'/src/config.php');
+
+                if (isset($config['sidebar'])){
+                    $menus[] = $config['sidebar'];
+                }
+            }
+
+            $view->with(['menus' => $menus]);
+        });
 
         view()->composer('dashboard::partials.sidebar', function ($view) {
             $packages = config('packages.packages');

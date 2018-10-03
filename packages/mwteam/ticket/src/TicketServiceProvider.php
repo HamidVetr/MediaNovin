@@ -13,6 +13,10 @@ class TicketServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        global $notifications;
+
+        $notifications['ticketCount'] = 2;
+
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'ticket');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
