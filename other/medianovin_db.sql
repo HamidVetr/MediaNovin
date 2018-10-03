@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 02, 2018 at 12:12 PM
+-- Generation Time: Oct 03, 2018 at 12:40 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -91,24 +91,25 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `fa_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `en_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permissions_eng_title_unique` (`en_title`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
 --
 
-INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `created_at`, `updated_at`) VALUES
-(1, 'مدیران', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(2, 'ایجاد مدیر', 'admins-create', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(3, 'ویرایش مدیر', 'admins-edit', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(4, 'حذف مدیر', 'admins-delete', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(5, 'تیکت ها', 'tickets', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(6, 'ایجاد تیکت', 'tickets-create', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(7, 'حذف تیکت', 'tickets-delete', '2018-10-02 11:41:10', '2018-10-02 11:41:10');
+INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `parent`, `created_at`, `updated_at`) VALUES
+(1, 'مدیران', 'admins', NULL, '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(2, 'ایجاد مدیر', 'admins-create', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(3, 'ویرایش مدیر', 'admins-edit', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(4, 'حذف مدیر', 'admins-delete', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(5, 'تیکت ها', 'tickets', NULL, '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(6, 'ایجاد تیکت', 'tickets-create', 'tickets', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(7, 'حذف تیکت', 'tickets-delete', 'tickets', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(11, 'تنظیمات', 'settings', NULL, '2018-10-02 20:30:00', '2018-10-02 20:30:00');
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,8 @@ INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `created_at`, `updated_
 DROP TABLE IF EXISTS `permission_user`;
 CREATE TABLE IF NOT EXISTS `permission_user` (
   `permission_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL
+  `user_id` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`permission_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -128,8 +130,11 @@ CREATE TABLE IF NOT EXISTS `permission_user` (
 
 INSERT INTO `permission_user` (`permission_id`, `user_id`) VALUES
 (1, 1),
+(1, 3),
 (2, 1),
+(2, 3),
 (3, 1),
+(3, 3),
 (4, 1),
 (5, 1),
 (6, 1),
@@ -165,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tickets`
@@ -173,7 +178,8 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 
 INSERT INTO `tickets` (`id`, `user_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
 (1, 2, 'تست', 'closed', '2018-10-02 11:30:25', '2018-10-02 11:30:25'),
-(2, 2, 'تست', 'closed', '2018-10-02 11:41:10', '2018-10-02 11:41:10');
+(2, 2, 'تست', 'closed', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
+(3, 2, 'تست', 'closed', '2018-10-03 07:42:52', '2018-10-03 07:42:52');
 
 -- --------------------------------------------------------
 
