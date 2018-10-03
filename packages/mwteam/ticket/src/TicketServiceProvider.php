@@ -13,27 +13,21 @@ class TicketServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/views', 'ticket');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'ticket');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->publishes([
-            __DIR__.'/views' => resource_path('views/vendor/ticket'),
+            __DIR__ . '/resources/views' => resource_path('views/vendor/ticket'),
         ], 'ticket/views');
 
         $this->publishes([
-            __DIR__.'/lang' => resource_path('lang/vendor/ticket'),
+            __DIR__ . '/resources/lang' => resource_path('lang/vendor/ticket'),
         ], 'ticket/lang');
 
         $this->publishes([
-            __DIR__.'/assets' => public_path('/assets'),
+            __DIR__ . '/resources/assets' => public_path('/assets'),
         ], 'ticket/assets');
-
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-//                FooCommand::class,
-            ]);
-        }
     }
 
     /**
