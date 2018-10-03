@@ -23,22 +23,42 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="br-section-wrapper-level">
+
+                   <div class="panel-heading">
+                       <h6 class="panel-title">41 - تبریک، برنده مزایده شده اید</h6>
+                   </div>
+                    <div class="panel-body">
+                       <ul class="media-list chat-list content-group">
+                          <li class="media">
+                              <div class="media-left">
+                                  <img src="assets/dashboard/images/analytics.png" alt="" class="img-circle img-md">
+                              </div>
+                              <div class="media-body">
+                                   <div class="media-content">
+                                       شما برنده مزایده شده اید. از بخش ناحیه کاربری، خریدهای من، مزایدات، می توانید نسبت به پرداخت اقدام نمایید. شما برنده مزایده شده اید. از بخش ناحیه کاربری، خریدهای من، مزایدات، می توانید نسبت به پرداخت اقدام نمایید.
+                                   </div>
+                                   <span class="media-annotation display-block mt-10">
+                                       <i class="fa fa-calendar position-right text-muted"></i>
+                                        1397/6/25 14:09
+                                   </span>
+                              </div>
+                          </li>
+                       </ul>
+                    </div>
+
+
                     <div class="form-group row mg-t-20">
                         <label for="" class="col-sm-2 form-control-label">
                             متن پیام:
                             <span class="tx-danger">*</span>
                         </label>
-                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                        <div class="col-sm-12 mg-t-10 mg-sm-t-0">
                             <textarea name="" id="" cols="30" rows="6" class="form-control"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group row mg-t-20">
-                        <label for="" class="col-sm-2 form-control-label">
-                            انتخاب فایل:
-                            <span class="tx-danger">*</span>
-                        </label>
-                        <div class="col-lg-8 col-md-10">
+                        <div class="col-lg-12 col-md-12">
                             <form class="md-form" action="#">
                                 <div class="file-field">
                                     <div class="btn btn-primary btn-md float-left">
@@ -93,7 +113,7 @@
                         <div class="list-group-item">
                             <div class="row justify-content-center">
                                 <div class="">
-                                       <button class="btn btn-danger active btn-block mg-b-10">حذف</button>
+                                       <button class="btn btn-danger active btn-block mg-b-10" data-toggle="modal"data-target="#modaldemo5">حذف</button>
                                 </div>
                             </div>
                         </div>
@@ -102,6 +122,24 @@
             </div>
         </div>
     </div>
+    <div id="modaldemo5" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content tx-size-sm">
+                <div class="modal-body tx-center pd-y-20 pd-x-20">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                    <h6 class="tx-danger  tx-semibold mg-b-20">آیا مایل به حذف هستید؟</h6>
+                    <p class="pd-x-100"></p>
+                    <button type="button" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
+                        حذف</button>
+                    <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
+                        انصراف</button>
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 @endsection
 
 @section('bottom-assets')
