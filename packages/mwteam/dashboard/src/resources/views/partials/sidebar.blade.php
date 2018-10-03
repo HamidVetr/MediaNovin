@@ -9,16 +9,26 @@
             </a><!-- br-menu-link -->
         </li><!-- br-menu-item -->
 
-        @foreach($menus as $menu)
+        @foreach($menus as $menu_name => $menu)
             <li class="br-menu-item">
                 <a href="" class="br-menu-link with-sub @yield($menu['yield'])">
                     <i class="menu-item-icon icon {{$menu['icon']}}"></i>
-                    <span class="menu-item-label">{{$menu['title']}}</span>
+                    <span class="menu-item-label">{{$menu['title']}}
+                        @if(isset(${$menu_name . '_notification_count'}))
+                            <span class="badge badge-danger">{{ ${$menu_name . '_notification_count'}['total'] }}</span>
+                        @endif
+                    </span>
                 </a><!-- br-menu-link -->
 
                 <ul class="br-menu-sub">
                     @foreach($menu['subMenus'] as $subMenu)
-                        <li class="sub-item"><a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}</a></li>
+                        <li class="sub-item">
+                            <a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}
+                                @if(isset(${$menu_name . '_notification_count'}) && isset(${$menu_name . '_notification_count'}[$subMenu['yield']]))
+                                    <span class="badge badge-danger">{{ ${$menu_name . '_notification_count'}[$subMenu['yield']] }}</span>
+                                @endif
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
             </li><!-- br-menu-item -->

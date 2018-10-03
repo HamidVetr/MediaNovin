@@ -2,7 +2,7 @@
 namespace Mwteam\Dashboard\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Mwteam\Dashboard\Models\Permission;
+use Mwteam\Dashboard\App\Models\Permission;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 

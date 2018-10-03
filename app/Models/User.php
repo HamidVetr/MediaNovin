@@ -53,7 +53,7 @@ class User extends Authenticatable
             $this->permissions = $this->permissions()->pluck('id','en_title');
         }
 
-        return isset($this->permissions[$permission]) ? true:false;
+        return isset($this->permissions[$permission]) ? true : false;
     }
 
     public function isAdmin(){

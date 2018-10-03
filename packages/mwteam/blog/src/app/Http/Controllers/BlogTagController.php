@@ -8,6 +8,11 @@ use Mwteam\Blog\App\Models\BlogTag;
 
 class BlogTagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class BlogTagController extends Controller
      */
     public function index()
     {
-        //
+        return view('Blog::dashboard.tags.index');
     }
 
     /**
@@ -25,7 +30,7 @@ class BlogTagController extends Controller
      */
     public function create()
     {
-        //
+        return view('Blog::dashboard.tags.create');
     }
 
     /**

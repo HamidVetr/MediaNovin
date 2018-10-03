@@ -8,6 +8,11 @@ use Mwteam\Blog\App\Models\BlogComment;
 
 class BlogCommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class BlogCommentController extends Controller
      */
     public function index()
     {
-        //
+        return view('Blog::dashboard.comments.index');
     }
 
     /**

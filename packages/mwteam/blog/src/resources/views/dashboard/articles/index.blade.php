@@ -1,7 +1,7 @@
 @extends('dashboard::master')
 
 @section('title') لیست مقالات @endsection
-
+@section('blog') active @endsection
 @section('blog-articles-index') active @endsection
 
 @section('top-assets')

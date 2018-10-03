@@ -15,7 +15,14 @@ class CreateBlogCommentsTable extends Migration
     {
         Schema::create('blog_comments', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('blog_article_id')->nullable(false);
+            $table->unsignedInteger('parent_id')->nullable(true);
+            $table->string('name')->nullable(false);
+            $table->string('email')->nullable(true);
+            $table->string('mobile', 15)->nullable(true);
+            $table->text('body')->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
