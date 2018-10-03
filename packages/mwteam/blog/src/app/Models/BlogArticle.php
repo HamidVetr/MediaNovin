@@ -13,10 +13,14 @@ class BlogArticle extends Model
         'blog_category_id',
         'author',
         'editor',
-        'title',
-        'slug',
-        'description',
-        'body',
+        'fa_title',
+        'en_title',
+        'fa_slug',
+        'en_slug',
+        'fa_description',
+        'en_description',
+        'fa_body',
+        'en_body',
         'comments',
     ];
 
@@ -27,11 +31,11 @@ class BlogArticle extends Model
 
     public function category()
     {
-        $this->belongsTo(BlogCategory::class, 'blog_category_id');
+        return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }
 
     public function tags()
     {
-        $this->hasMany(BlogTag::class, 'blog_article_id');
+        return $this->belongsToMany(BlogTag::class, 'blog_article_blog_tag', 'blog_article_id', 'blog_tag_id');
     }
 }

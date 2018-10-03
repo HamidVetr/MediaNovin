@@ -1,4 +1,5 @@
 <?php
+
 namespace Mwteam\Blog\Database\Seeds;
 
 use Illuminate\Database\Seeder;

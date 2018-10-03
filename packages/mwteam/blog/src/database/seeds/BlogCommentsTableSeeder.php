@@ -1,8 +1,12 @@
 <?php
 
+namespace Mwteam\Blog\Database\Seeds;
+
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
+use Mwteam\Blog\App\Models\BlogArticle;
+use Mwteam\Blog\App\Models\BlogComment;
 
 class BlogCommentsTableSeeder extends Seeder
 {
@@ -15,20 +19,17 @@ class BlogCommentsTableSeeder extends Seeder
     {
         DB::table('blog_comments')->truncate();
         $faker = Faker::create("fa_IR");
-        $comments = [];
-        $time = \Carbon\Carbon::now();
 
-        foreach (range(1, 5000) as $index){
-            $comments[] = [
-                'blog_article_id' => rand(1, 200),
+        foreach (range(1,5000) as $index) {
+            $article_id = rand(1, 200);
+            BlogComment::create([
+                'blog_article_id' => $article_id,
                 'name' => $faker->firstName,
                 'email' => $faker->email,
                 'body' => $faker->realText(150),
-                'created_at' => $time,
-                'updated_at' => $time,
-            ];
-        }
+            ]);
 
-        DB::table('blog_comments')->insert($comments);
+            BlogArticle::find($article_id)->increment('comments');
+        }
     }
 }
