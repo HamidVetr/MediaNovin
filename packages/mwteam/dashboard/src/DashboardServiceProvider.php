@@ -3,7 +3,7 @@
 namespace Mwteam\Dashboard;
 
 use Illuminate\Support\ServiceProvider;
-use Mwteam\Dashboard\Commands\SeedCommand;
+use Mwteam\Dashboard\App\Console\Commands\SeedCommand;
 
 class DashboardServiceProvider extends ServiceProvider
 {
