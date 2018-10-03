@@ -1,10 +1,10 @@
 @extends('dashboard::master')
 
 @section('title') ساخت مقاله جدید @endsection
-
+@section('blog') active @endsection
 @section('blog-articles-create') active @endsection
 
-@section('css')
+@section('top-assets')
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/select2.min.css') }}">
 @endsection
 
@@ -96,7 +96,7 @@
     </div>
 @endsection
 
-@section('js-footer')
+@section('bottom-assets')
     <script type="text/javascript" src="{{ asset('assets/dashboard/js/select2.min.js') }}"></script>
 
     <script type="text/javascript">

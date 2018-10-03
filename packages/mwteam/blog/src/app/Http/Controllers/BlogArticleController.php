@@ -12,13 +12,16 @@ class BlogArticleController extends Controller
     {
         $this->middleware('admin');
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
+        $this->authorize('index', BlogArticle::class);
         return view('Blog::dashboard.articles.index');
     }
 
@@ -26,9 +29,11 @@ class BlogArticleController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
+        $this->authorize('create', BlogArticle::class);
         return view('Blog::dashboard.articles.create');
     }
 

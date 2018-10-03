@@ -167,6 +167,9 @@ return [
         /*
          * Package Service Providers...
          */
+        Mwteam\Dashboard\DashboardServiceProvider::class,
+        Mwteam\Ticket\TicketServiceProvider::class,
+        Mwteam\Blog\BlogServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -177,9 +180,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Mwteam\Dashboard\DashboardServiceProvider::class,
-        Mwteam\Ticket\TicketServiceProvider::class,
-        Mwteam\Blog\BlogServiceProvider::class,
     ],
 
     /*

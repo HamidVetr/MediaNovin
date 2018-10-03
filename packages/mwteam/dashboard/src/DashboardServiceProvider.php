@@ -2,7 +2,7 @@
 
 namespace Mwteam\Dashboard;
 
-use Illuminate\Support\ServiceProvider;
+use Mwteam\Dashboard\PackageServiceProvider as ServiceProvider;
 use Mwteam\Dashboard\App\Console\Commands\SeedCommand;
 
 class DashboardServiceProvider extends ServiceProvider
@@ -48,7 +48,7 @@ class DashboardServiceProvider extends ServiceProvider
                 $config = include base_path('packages/mwteam/'. $package.'/src/config.php');
 
                 if (isset($config['sidebar'])){
-                    $menus[] = $config['sidebar'];
+                    $menus[$package] = $config['sidebar'];
                 }
             }
 

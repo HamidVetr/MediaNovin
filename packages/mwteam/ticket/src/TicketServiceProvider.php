@@ -2,7 +2,7 @@
 
 namespace Mwteam\Ticket;
 
-use Illuminate\Support\ServiceProvider;
+use Mwteam\Dashboard\PackageServiceProvider as ServiceProvider;
 
 class TicketServiceProvider extends ServiceProvider
 {
