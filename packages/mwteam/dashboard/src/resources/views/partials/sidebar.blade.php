@@ -13,14 +13,7 @@
             <li class="br-menu-item">
                 <a href="" class="br-menu-link with-sub @yield($menu['yield'])">
                     <i class="menu-item-icon icon {{$menu['icon']}}"></i>
-                    <span class="menu-item-label">{{$menu['title']}}
-
-                        @if(isset($menu['notification']))
-                            <span class="badge badge-warning"> {{$notifications[$menu['notification']]}}</span>
-                        @endif
-                    </span>
-
-
+                    <span class="menu-item-label">{{$menu['title']}}</span>
                 </a><!-- br-menu-link -->
 
                 <ul class="br-menu-sub">
