@@ -62428,3 +62428,28 @@ img {
   font-size: 20px!important;
   color:#fa0000;
 }
+
+.font-ban .fa-minus-circle{
+  font-size: 20px;
+  color: #d10000;
+}
+
+.tooltip {
+  font-family: iranSans!important;
+  font-size: 20px;
+}
+.tooltip .tooltip-inner {
+  background-color: #ffc;
+  color: #c00;
+  min-width: 100px;
+  font-family: iranSans!important;
+}
+
+.font-edit .fa-pencil-square{
+  color: #0064ffeb;
+  font-size: 20px;
+}
+.text-LEft{
+  direction: ltr;
+  text-align: left;
+}

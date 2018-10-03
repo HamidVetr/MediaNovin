@@ -22,7 +22,7 @@
         <h4 class="pd-r-10">افزودن مدیر</h4>
     </div>
     <div class="pd-t-30">
-        {!! Form::open(['method'=>'POST', 'route' => ['dashboard.admins.store'], 'files' => false]) !!}
+        {!! Form::open(['method'=>'POST', 'route' => ['dashboard.admins.store'], 'files' => false ,'id'=>'adminadd']) !!}
             <div class="row">
                 <div class="col-xl-12">
                     <div class="form-layout form-layout-4">
@@ -47,7 +47,7 @@
                             {!! Form::label('username', 'نام کاربری:', ['class' => 'col-sm-2 form-control-label']) !!}
 
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::text('username', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('username', null, ['class' => 'form-control text-LEft']) !!}
                             </div>
                         </div>
                         <div class="row mg-t-20">
@@ -55,7 +55,7 @@
                             {!! Form::label('email', 'ایمیل:', ['class' => 'col-sm-2 form-control-label']) !!}
 
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('email', null, ['class' => 'form-control text-LEft']) !!}
                             </div>
                         </div>
                         <div class="row mg-t-20">
@@ -63,7 +63,7 @@
                             {!! Form::label('password', 'رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
 
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::password('password', ['class' => 'form-control']) !!}
+                                {!! Form::password('password', ['class' => 'form-control text-LEft']) !!}
                             </div>
                         </div>
                         <div class="row mg-t-20">
@@ -71,7 +71,7 @@
                             {!! Form::label('password_confirmation', 'تکرار رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
 
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+                                {!! Form::password('password_confirmation', ['class' => 'form-control text-LEft']) !!}
                             </div>
                         </div>
                         <div class="form-layout-footer mg-t-30 text-center">
@@ -85,6 +85,7 @@
 @endsection
 
 @section('bottom-assets')
+    <script type="text/javascript" src="../assets/dashboard/js/bootstrapValidator.min.js"></script>
     <script>
         $('#adminadd').bootstrapValidator({
             fields: {
@@ -106,25 +107,6 @@
                     validators: {
                         notEmpty: {
                             message: 'لطفا نام کاربری را وارد کنید'
-                        }
-                    }
-                },
-                mobile: {
-                    validators: {
-                        notEmpty: {
-                            message: 'لطفا شماره موبایل خود   را وارد کنید'
-                        },
-                    }
-                },
-                'national-id': {
-                    validators: {
-                        notEmpty: {
-                            message: 'لطفا شماره ملی خود را وارد کنید'
-                        },
-                        stringLength: {
-                            min: 10,
-                            max: 10,
-                            message: 'تعداد ارقام کد ملی باید 10 عدد باشد'
                         }
                     }
                 },

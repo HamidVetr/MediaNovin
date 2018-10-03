@@ -77,11 +77,13 @@
                                 <td>{{$admin->username}}</td>
                                 <td>{{$admin->email}}</td>
                                 <td>
-                                    <a href="{{route('dashboard.admins.showPermissions', ['adminId' => $admin->id])}}"><img src="{{asset('assets/dashboard/images/admin.png')}}" alt="" width="30"></a>
+                                    <a href="{{route('dashboard.admins.showPermissions', ['adminId' => $admin->id])}}">
+                                        <img src="{{asset('assets/dashboard/images/admin.png')}}" alt="" width="30">
+                                    </a>
                                 </td>
                                 <td>
                                     <ul class="img-edit">
-                                        <li>
+                                        <li class="pd-l-10">
                                             <form id="form-status" method="post" action="{{is_null($admin->deleted_at) ?
                                                 route('dashboard.admins.deactive' , ['adminId' => $admin->id]):
                                                 route('dashboard.admins.active' , ['adminId' => $admin->id])}}">
@@ -90,16 +92,19 @@
                                             </form>
                                             @if(is_null($admin->deleted_at))
                                                 <a href="javascript:{}" onclick="document.getElementById('form-status').submit();">
-                                                    <img data-toggle="tooltip" title="غیر فعال کردن" src="{{ asset('assets/dashboard/images/edit.png') }}" alt="" width="18">
+                                                    <span class="font-ban">
+                                                        <i class="fa fa-minus-circle" data-toggle="tooltip" title="غیر فعال کردن"></i>
+                                                    </span>
                                                 </a>
                                             @else
-                                                <a href="javascript:{}" onclick="document.getElementById('form-status').submit();">
-                                                    <img data-toggle="tooltip" title="فعال کردن" src="{{ asset('assets/dashboard/images/edit.png') }}" alt="" width="18">
-                                                </a>
                                             @endif
                                         </li>
                                         <li>
-                                            <a href="{{route('dashboard.admins.edit' , ['adminId' => $admin->id])}}"><img data-toggle="tooltip" title="ویرایش اطلاعات" src="{{ asset('assets/dashboard/images/edit.png') }}" alt="" width="18"></a>
+                                            <a href="{{route('dashboard.admins.edit' , ['adminId' => $admin->id])}}">
+                                                <span class="font-edit">
+                                                    <i class="fa  fa-pencil-square" data-toggle="tooltip" title="ویرایش اطلاعات"></i>
+                                                </span>
+                                            </a>
                                         </li>
                                     </ul>
                                 </td>
@@ -123,4 +128,7 @@
 @section('bottom-assets')
     <script src="{{ asset('assets/dashboard/js/jquery.js') }}"></script>
     <script src="{{ asset('assets/dashboard/js/bootstrap.js') }}"></script>
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
 @endsection
