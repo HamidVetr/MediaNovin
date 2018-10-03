@@ -31,7 +31,22 @@
                                 <span class="tx-danger">*</span>
                             </label>
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control"  name="first_name">
+                                <input type="text" class="form-control"  name="title">
+                            </div>
+                        </div>
+                        <div class="form-group row mg-t-20">
+                            <label for="" class="col-sm-2 form-control-label">
+                                نام کاربر:
+                                <span class="tx-danger">*</span>
+                            </label>
+                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                <select data-placeholder="انتخاب کنید..." class="form-control js-example-placeholder-single" name="users"  id="e9">
+                                    <option value=""></option>
+                                    <option value="1">عظیمی</option>
+                                    <option value="2">سلطانی</option>
+                                    <option value="3">محمدی</option>
+                                    <option value="4"></option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row mg-t-20">
@@ -56,7 +71,7 @@
                                 <span class="tx-danger">*</span>
                             </label>
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <textarea name="" id="" cols="30" rows="6" class="form-control"></textarea>
+                                <textarea name="text" id="" cols="30" rows="6" class="form-control"></textarea>
                             </div>
                         </div>
 
@@ -66,7 +81,6 @@
                                 <span class="tx-danger">*</span>
                             </label>
                            <div class="col-lg-8 col-md-10">
-                            <form class="md-form" action="#">
                                 <div class="file-field">
                                     <div class="btn btn-primary btn-md float-left">
 
@@ -74,13 +88,12 @@
                                             <i class="fa fa-cloud-upload"></i>
                                         </span>
                                         <span class="pd-r-5">انتخاب فایل</span>
-                                        <input type="file" multiple>
+                                        <input type="file" multiple name="file">
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text" placeholder="یک یا چند فایل را آپلود کنید">
                                     </div>
                                 </div>
-                            </form>
                            </div>
                         </div>
 
@@ -98,6 +111,7 @@
 
 @section('bottom-assets')
     <script type="text/javascript" src="{{ asset('assets/dashboard/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="assets/dashboard/js/bootstrapValidator.min.js"></script>
 
     <script type="text/javascript">
             $('#e9').select2();
@@ -106,5 +120,47 @@
                 placeholder: "انتخاب کنید...",
                 allowClear: true
             });
+    </script>
+    <script>
+        $('#tiketsend').bootstrapValidator({
+            excluded: ':disabled',
+            fields: {
+                title: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا عنوان را وارد کنید'
+                        }
+                    }
+                },
+               users: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا نام کاربر را انتخاب کنبد'
+                        }
+                    }
+                },
+                status: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا وضعیت را انتخاب کنید'
+                        }
+                    }
+                },
+               text: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا متن  خود   را وارد کنید'
+                        },
+                    }
+                },
+                file: {
+                    validators: {
+                        notEmpty: {
+                            message: 'لطفا آدرس پست الکترونیکی را وارد کنید'
+                        }
+                    }
+                },
+            }
+        })
     </script>
 @endsection
