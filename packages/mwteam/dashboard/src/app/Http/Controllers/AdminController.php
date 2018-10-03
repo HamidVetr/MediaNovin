@@ -101,9 +101,20 @@ class AdminController extends Controller
         return view('dashboard::admins.permissions')->with(['permissions' => $permissions]);
     }
 
-    public function updatePermissions(Request $request)
+    public function updatePermissions(Request $request, $adminId)
     {
+        $this->validate($request, [
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'required|array',
+            'permissions.*.*' => 'required|integer|min:1'
+        ]);
         return $request;
+        $admin = User::admins()->where('id', $adminId)->firstOrFail();
+
+        $permissions = Permission::all()->mapToGroups(function ($item){
+            return [$item['parent'] => $item['id']];
+        });
+
         return redirect()->back()->withInput($request->all());
     }
 
