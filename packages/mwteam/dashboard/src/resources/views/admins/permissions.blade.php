@@ -1,6 +1,6 @@
 @extends('dashboard::master')
 
-@section('title') مجوزهای مدیر @endsection
+@section('title') تعیین سطح دسترسی @endsection
 @section('admins') active @endsection
 
 @section('content')
@@ -31,31 +31,28 @@
 
 
             {!! Form::model($permissions , ['method'=>'PUT', 'route' => ['dashboard.admins.updatePermissions', 'adminId' => 3], 'files' => false]) !!}
-                @foreach($permissions[''] as $permission)
-                    <div class="row mg-t-20">
-                        <h3>
-                            {!! Form::label($permission['en_title'], $permission['fa_title'], ['class' => 'col-sm-2 form-control-label']) !!}
-                        </h3>
-                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            {!! Form::checkbox($permission['en_title'], 1, $permission['value'], ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
+                <ul class="notype">
+                    @foreach($permissions[''] as $permission)
+                        <li>
+                            {!! Form::checkbox('permissions['.$permission['id'].']', 1, $permission['value']) !!}
+                            {!! Form::label('permissions['.$permission['id'].']', $permission['fa_title']) !!}
 
-                    @if(isset($permissions[$permission['en_title']]))
-                        @foreach($permissions[$permission['en_title']] as $subPermission)
-                            <div class="row mg-t-20">
-                                {!! Form::label($subPermission['en_title'], $subPermission['fa_title'], ['class' => 'col-sm-2 form-control-label']) !!}
-
-                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    {!! Form::checkbox($subPermission['en_title'], 1, $subPermission['value'], ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-                @endforeach
+                            @if(isset($permissions[$permission['en_title']]))
+                                <ul>
+                                    @foreach($permissions[$permission['en_title']] as $subPermission)
+                                        <li>
+                                            {!! Form::checkbox('permissions['.$permission['id'].']['.$subPermission['id'].']', 1, $subPermission['value']) !!}
+                                            {!! Form::label('permissions['.$permission['id'].']['.$subPermission['id'].']', $subPermission['fa_title']) !!}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
 
                 <div class="form-layout-footer mg-t-30 text-center">
-                    {!! Form::submit('ایجاد مدیر', ['class' => 'btn btn-info']) !!}
+                    {!! Form::submit('ذخیره تغییرات', ['class' => 'btn btn-info']) !!}
                 </div>
             {!! Form::close() !!}
         </div>
