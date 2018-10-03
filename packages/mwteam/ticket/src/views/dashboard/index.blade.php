@@ -5,7 +5,7 @@
 @section('tickets-index') active @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('dashbord/css/persian-datepicker-0.4.5.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/dashboard/css/persian-datepicker-0.4.5.css') }}">
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
     <div class="pd-t-30">
            <div class="br-section-wrapper-level">
                <div class="search-advance search-advance-vendor">
-                   <button type="button" class="bg-teal-400 searchbtn searchbtn-store btn-icon btn-rounded"  data-toggle="tooltip" title="جستجو پیشرفته"><img src="{{ asset('dashbord/images/search.svg') }}" width="18"></button>
+                   <button type="button" class="bg-teal-400 searchbtn searchbtn-store btn-icon btn-rounded"  data-toggle="tooltip" title="جستجو پیشرفته"><img src="{{ asset('/assets/dashboard/images/search.svg') }}" width="18"></button>
                    <div id="searchboxpage" class="searchboxpage-vendor">
                        <br><br>
                        <form action="">
@@ -76,6 +76,7 @@
                                         <th>به روز شده</th>
                                         <th>وضعیت</th>
                                         <th>جزئیات</th>
+                                        <th>عملیات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,7 +93,14 @@
                                     </td>
                                     <td>
                                         <a href="">
-                                            <img src="{{ asset('dashbord/images/analytics.png') }}" alt="">
+                                            <img src="{{ asset('/assets/dashboard/images/analytics.png') }}" alt="">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" data-toggle="modal"data-target="#modaldemo5">
+                                            <span class="trash-ticket">
+                                                <i class="fa fa-trash-o"></i>
+                                            </span>
                                         </a>
                                     </td>
                                 </tr>
@@ -109,7 +117,14 @@
                                     </td>
                                     <td>
                                         <a href="">
-                                            <img src="{{ asset('dashbord/images/analytics.png') }}" alt="">
+                                            <img src="{{ asset('/assets/dashboard/images/analytics.png') }}" alt="">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" data-toggle="modal"data-target="#modaldemo5">
+                                            <span class="trash-ticket">
+                                                <i class="fa fa-trash-o"></i>
+                                            </span>
                                         </a>
                                     </td>
                                 </tr>
@@ -126,7 +141,14 @@
                                     </td>
                                     <td>
                                         <a href="">
-                                            <img src="{{ asset('dashbord/images/analytics.png') }}" alt="">
+                                            <img src="{{ asset('/assets/dashboard/images/analytics.png') }}" alt="">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" data-toggle="modal"data-target="#modaldemo5">
+                                            <span class="trash-ticket">
+                                                <i class="fa fa-trash-o"></i>
+                                            </span>
                                         </a>
                                     </td>
                                 </tr>
@@ -143,7 +165,14 @@
                                     </td>
                                     <td>
                                         <a href="">
-                                            <img src="{{ asset('dashbord/images/analytics.png') }}" alt="">
+                                            <img src="{{ asset('/assets/dashboard/images/analytics.png') }}" alt="">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" data-toggle="modal"data-target="#modaldemo5">
+                                            <span class="trash-ticket">
+                                                <i class="fa fa-trash-o"></i>
+                                            </span>
                                         </a>
                                     </td>
                                 </tr>
@@ -160,7 +189,14 @@
                                     </td>
                                     <td>
                                         <a href="">
-                                            <img src="{{ asset('dashbord/images/analytics.png') }}" alt="">
+                                            <img src="{{ asset('/assets/dashboard/images/analytics.png') }}" alt="">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" data-toggle="modal"data-target="#modaldemo5">
+                                            <span class="trash-ticket">
+                                                <i class="fa fa-trash-o"></i>
+                                            </span>
                                         </a>
                                     </td>
                                 </tr>
@@ -195,11 +231,29 @@
                </div>
            </div>
        </div>
+    <div id="modaldemo5" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content tx-size-sm">
+                <div class="modal-body tx-center pd-y-20 pd-x-20">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                    <h6 class="tx-danger  tx-semibold mg-b-20">آیا مایلید تیکت مورد نظر خود را حذف کنید؟</h6>
+                    <p class="pd-x-100"></p>
+                    <button type="button" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
+                      حذف</button>
+                    <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
+                     انصراف</button>
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 @endsection
 
 @section('js-footer')
-    <script src="{{ asset('dashbord/js/persian-datepicker-0.4.5.js') }}"></script>
-    <script src="{{ asset('dashbord/js/pwt-date.js') }}"></script>
+    <script src="{{ asset('/assets/dashboard/js/persian-datepicker-0.4.5.js') }}"></script>
+    <script src="{{ asset('/assets/dashboard/js/pwt-date.js') }}"></script>
     <script type="text/javascript">
         $('.searchbtn').click(function(){
             $('#searchboxpage').stop().slideToggle();
