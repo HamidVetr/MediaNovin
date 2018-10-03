@@ -14,7 +14,7 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/views', 'dashboard');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'dashboard');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
@@ -23,15 +23,15 @@ class DashboardServiceProvider extends ServiceProvider
         ], 'dashboard/config');
 
         $this->publishes([
-            __DIR__.'/views' => resource_path('views/vendor/dashboard'),
+            __DIR__ . '/resources/views' => resource_path('views/vendor/dashboard'),
         ], 'dashboard/views');
 
         $this->publishes([
-            __DIR__.'/lang' => resource_path('lang/vendor/dashboard'),
+            __DIR__.'/resources/lang' => resource_path('lang/vendor/dashboard'),
         ], 'dashboard/lang');
 
         $this->publishes([
-            __DIR__.'/assets' => public_path('/assets'),
+            __DIR__.'/resources/assets' => public_path('/assets'),
         ], 'dashboard/assets');
 
         if ($this->app->runningInConsole()) {
