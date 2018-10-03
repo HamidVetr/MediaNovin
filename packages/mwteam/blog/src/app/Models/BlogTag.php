@@ -13,6 +13,6 @@ class BlogTag extends Model
 
     public function articles()
     {
-        return $this->hasMany(BlogArticle::class, 'blog_tag_id');
+        return $this->belongsToMany(BlogArticle::class, 'blog_article_blog_tag', 'blog_tag_id', 'blog_article_id');
     }
 }
