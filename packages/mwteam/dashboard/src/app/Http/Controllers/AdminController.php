@@ -103,7 +103,7 @@ class AdminController extends Controller
 
     public function updatePermissions(Request $request)
     {
-        //return $request;
+        return $request;
         return redirect()->back()->withInput($request->all());
     }
 

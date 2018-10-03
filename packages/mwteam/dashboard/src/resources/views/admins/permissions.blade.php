@@ -31,7 +31,7 @@
 
 
             {!! Form::model($permissions , ['method'=>'PUT', 'route' => ['dashboard.admins.updatePermissions', 'adminId' => 3], 'files' => false]) !!}
-                @foreach($permissions['0'] as $permission)
+                @foreach($permissions[''] as $permission)
                     <div class="row mg-t-20">
                         <h3>
                             {!! Form::label($permission['en_title'], $permission['fa_title'], ['class' => 'col-sm-2 form-control-label']) !!}
@@ -41,8 +41,8 @@
                         </div>
                     </div>
 
-                    @if(isset($permissions[$permission['id']]))
-                        @foreach($permissions[$permission['id']] as $subPermission)
+                    @if(isset($permissions[$permission['en_title']]))
+                        @foreach($permissions[$permission['en_title']] as $subPermission)
                             <div class="row mg-t-20">
                                 {!! Form::label($subPermission['en_title'], $subPermission['fa_title'], ['class' => 'col-sm-2 form-control-label']) !!}
 
