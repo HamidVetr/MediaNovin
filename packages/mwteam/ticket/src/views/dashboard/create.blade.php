@@ -5,7 +5,7 @@
 @section('tickets-create') active @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('dashbord/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/dashboard/css/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -97,7 +97,7 @@
 @endsection
 
 @section('js-footer')
-    <script type="text/javascript" src="{{ asset('dashbord/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/dashboard/js/select2.min.js') }}"></script>
 
     <script type="text/javascript">
             $('#e9').select2();
