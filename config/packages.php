@@ -2,6 +2,7 @@
 
 return [
     'packages' => [
-        'ticket'
+        'ticket',
+        'blog',
     ]
 ];

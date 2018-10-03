@@ -4,9 +4,14 @@ namespace Mwteam\Blog\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mwteam\Blog\App\Models\BlogArticle;
 
 class BlogArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class BlogArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view('Blog::dashboard.articles.index');
     }
 
     /**
@@ -24,7 +29,7 @@ class BlogArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('Blog::dashboard.articles.create');
     }
 
     /**
@@ -41,10 +46,10 @@ class BlogArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param BlogArticle $article
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BlogArticle $blogArticle)
     {
         //
     }
@@ -52,10 +57,10 @@ class BlogArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param BlogArticle $article
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BlogArticle $blogArticle)
     {
         //
     }
@@ -64,10 +69,10 @@ class BlogArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param BlogArticle $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BlogArticle $blogArticle)
     {
         //
     }
@@ -75,10 +80,10 @@ class BlogArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param BlogArticle $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(BlogArticle $blogArticle)
     {
         //
     }
