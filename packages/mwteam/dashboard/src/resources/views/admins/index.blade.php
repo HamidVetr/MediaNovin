@@ -91,7 +91,7 @@
                                                 {{csrf_field()}}
                                             </form>
                                             @if(is_null($admin->deleted_at))
-                                                <a href="javascript:{}" onclick="document.getElementById('form-status').submit();">
+                                                <a data-toggle="modal" data-target="#modaldemo6" href="javascript:{}"  onclick="document.getElementById('form-status').submit();">
                                                     <span class="font-ban">
                                                         <i class="fa fa-minus-circle" data-toggle="tooltip" title="غیر فعال کردن"></i>
                                                     </span>
@@ -100,7 +100,7 @@
                                             @endif
                                         </li>
                                         <li>
-                                            <a href="{{route('dashboard.admins.edit' , ['adminId' => $admin->id])}}">
+                                            <a  href="{{route('dashboard.admins.edit' , ['adminId' => $admin->id])}}">
                                                 <span class="font-edit">
                                                     <i class="fa  fa-pencil-square" data-toggle="tooltip" title="ویرایش اطلاعات"></i>
                                                 </span>
@@ -123,6 +123,24 @@
             </div>
         </div>
     </div>
+    <div id="modaldemo5" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content tx-size-sm">
+                <div class="modal-body tx-center pd-y-20 pd-x-20">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                    <h6 class="tx-black  tx-semibold mg-b-20">آیا مایلید شناسه مدیر را غیرفعال کنید؟</h6>
+                    <p class="pd-x-100"></p>
+                    <button type="button" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
+                        حذف</button>
+                    <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
+                        انصراف</button>
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 @endsection
 
 @section('bottom-assets')
@@ -131,4 +149,5 @@
     <script>
         $('[data-toggle="tooltip"]').tooltip();
     </script>
+
 @endsection
