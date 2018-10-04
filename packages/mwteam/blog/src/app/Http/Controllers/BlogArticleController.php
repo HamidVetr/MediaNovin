@@ -25,23 +25,9 @@ class BlogArticleController extends Controller
     public function index()
     {
         $this->authorize('index', BlogArticle::class);
-
-        if (isset($_GET['title']) || isset($_GET['user']) || isset($_GET['formDate']) || isset($_GET['toDate'])){
-            if (isset($_GET['fromDate'])) {
-                dd(CalendarUtils::isValidateJalaliDate(...explode('/', $_GET['fromDate'])));
-                $fromDate = implode('-', CalendarUtils::toGregorian(...explode('/', $_GET['fromDate']))) . ' 00:00:00';
-            }
-
-            if (isset($_GET['toDate'])) {
-                $toDate = implode('-', CalendarUtils::toGregorian(...explode('/', $_GET['toDate']))) . ' 23:59:59';
-            }
-
-            if (isset($_GET['user'])){
-                $user_ids = User::whereRaw("CONCAT_WS (' ', first_name, last_name) like '%{$_GET['user']}%'")->select('id')->get();
-                dd($user_ids);
-            }
-
-        }else {
+        if ($this->search($_GET)){
+            return $this->search($_GET);
+        }else{
             $articles = BlogArticle::with(['author', 'editor'])->paginate(10);
         }
 
@@ -114,5 +100,36 @@ class BlogArticleController extends Controller
     public function destroy(BlogArticle $blogArticle)
     {
         //
+    }
+
+    private function search($data)
+    {
+        if (isset($data['title']) || isset($data['user']) || isset($data['formDate']) || isset($data['toDate'])) {
+            if ($data['fromDate'] != '') {
+                if (CalendarUtils::isValidateJalaliDate(...explode('/', $data['fromDate']))) {
+                    $fromDate = implode('-', CalendarUtils::toGregorian(...explode('/', $data['fromDate']))) . ' 00:00:00';
+                }
+            }
+
+            if ($data['toDate'] != '') {
+                if (CalendarUtils::isValidateJalaliDate(...explode('/', $data['toDate']))) {
+                    $toDate = implode('-', CalendarUtils::toGregorian(...explode('/', $data['toDate']))) . ' 23:59:59';
+                }
+            }
+
+            if ($data['user'] != '') {
+                $userIDs = User::adminOrSuperAdmin()->whereRaw("CONCAT_WS (' ', first_name, last_name) like '%{$data['user']}%'")->select('id')->get();
+                return $userIDs;
+            }
+
+            if ($data['title'] != '') {
+                $title = $data['title'];
+            }
+
+
+            $articles = BlogArticle::with(['author', 'editor'])->whereBetween('created_at', [$fromDate, $toDate])->paginate(10);
+        }else{
+            return false;
+        }
     }
 }

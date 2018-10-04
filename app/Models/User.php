@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $query->where('role','admin');
     }
 
+    public function scopeAdminOrSuperAdmin($query)
+    {
+        return $query->where('role','admin')->orWhere('role', 'super-admin');
+    }
+
     //****************************** methods ************************************
     public function hasPermission($permission)
     {
