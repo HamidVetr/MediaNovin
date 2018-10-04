@@ -38,10 +38,6 @@ class SeedCommand extends Command
      */
     public function handle()
     {
-        if(is_null($this->option('package')) || ($this->option('package') == 'dashboard' && $this->option('table') == 'permission')){
-            $this->call('db:seed', ['--class' => "Mwteam\\Dashboard\\Database\\Seeds\\PermissionTableSeeder"]);
-        }
-
         $packages = config('packages.packages');
 
         foreach ($packages as $package){

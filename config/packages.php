@@ -2,6 +2,7 @@
 
 return [
     'packages' => [
+        'dashboard',
         'ticket',
         'blog',
     ]

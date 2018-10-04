@@ -27,7 +27,7 @@ class DashboardServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->publishes([
-            __DIR__.'/config.php' => config_path('packages.php'),
+            __DIR__.'/packages.php.php' => config_path('packages.php'),
         ], 'dashboard/config');
 
         $this->publishes([

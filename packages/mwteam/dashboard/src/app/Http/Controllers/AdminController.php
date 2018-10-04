@@ -9,11 +9,6 @@ use Mwteam\Dashboard\App\Models\Permission;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin:admins');
-    }
-
     public function index(Request $request)
     {
         $this->authorize('admins',User::class);
@@ -25,13 +20,13 @@ class AdminController extends Controller
 
     public function create()
     {
-        $this->authorize('adminsCreate',User::class);
+        $this->authorize('admins',User::class);
         return view('dashboard::admins.create');
     }
 
     public function store(Request $request)
     {
-        $this->authorize('adminsCreate',User::class);
+        $this->authorize('admins',User::class);
         $this->validate($request,[
             'first_name' => 'required|string|max:191',
             'last_name' => 'required|string|max:191',
@@ -55,14 +50,14 @@ class AdminController extends Controller
 
     public function edit($adminId)
     {
-        $this->authorize('adminsEdit',User::class);
+        $this->authorize('admins',User::class);
         $admin = User::admins()->withTrashed()->where('id', $adminId)->firstOrFail();
         return view('dashboard::admins.edit')->with(['admin' => $admin]);
     }
 
     public function update($adminId, Request $request)
     {
-        $this->authorize('adminsEdit',User::class);
+        $this->authorize('admins',User::class);
         $admin = User::admins()->withTrashed()->where('id', $adminId)->firstOrFail();
 
         $this->validate($request,[
@@ -87,7 +82,7 @@ class AdminController extends Controller
 
     public function showPermissions($adminId)
     {
-        $this->authorize('adminsEdit',User::class);
+        $this->authorize('admins',User::class);
         $admin = User::admins()->withTrashed()->where('id', $adminId)
             ->with('permissions')
             ->firstOrFail();
@@ -110,7 +105,7 @@ class AdminController extends Controller
 
     public function updatePermissions(Request $request, $adminId)
     {
-        $this->authorize('adminsEdit',User::class);
+        $this->authorize('admins',User::class);
         $admin = User::admins()->withTrashed()->where('id', $adminId)->firstOrFail();
 
         $this->validate($request, [
@@ -157,7 +152,7 @@ class AdminController extends Controller
 
     public function active($adminId)
     {
-        $this->authorize('adminsDelete',User::class);
+        $this->authorize('admins',User::class);
         User::admins()->onlyTrashed()->where('id', $adminId)->restore();
         session()->flash('success','مدیر با شناسه ' .$adminId. ' فعال گردید.');
         return redirect()->back();
@@ -165,7 +160,7 @@ class AdminController extends Controller
 
     public function deactive($adminId)
     {
-        $this->authorize('adminsDelete',User::class);
+        $this->authorize('admins',User::class);
         User::admins()->where('id', $adminId)->where('id', '!=', auth()->user()->id)->delete();
         session()->flash('success','مدیر با شناسه ' .$adminId. ' غیر فعال گردید.');
         return redirect()->back();

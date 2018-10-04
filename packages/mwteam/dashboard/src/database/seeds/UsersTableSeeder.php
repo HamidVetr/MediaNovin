@@ -1,4 +1,5 @@
 <?php
+namespace Mwteam\Dashboard\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -18,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@email.com',
             'password' => bcrypt('123456'),
-            'role' => 'admin',
+            'role' => 'super-admin',
         ]);
 
         User::create([
@@ -28,6 +29,15 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@email.com',
             'password' => bcrypt('123456'),
             'role' => 'user',
+        ]);
+
+        User::create([
+            'first_name' => 'c',
+            'last_name' => 'c',
+            'username' => 'admin2',
+            'email' => 'admin2@email.com',
+            'password' => bcrypt('123456'),
+            'role' => 'admin',
         ]);
     }
 }

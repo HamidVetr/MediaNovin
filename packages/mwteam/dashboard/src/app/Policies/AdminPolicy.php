@@ -23,19 +23,4 @@ class AdminPolicy
     {
         return $user->hasPermission('admins');
     }
-
-    public function adminsCreate(User $user)
-    {
-        return $user->hasPermission('admins-create');
-    }
-
-    public function adminsEdit(User $user)
-    {
-        return $user->hasPermission('admins-edit');
-    }
-
-    public function adminsDelete(User $user)
-    {
-        return $user->hasPermission('admins-delete');
-    }
 }

@@ -19,14 +19,17 @@ class PermissionTableSeeder extends Seeder
             [
                 'fa_title' => 'تیکت ها',
                 'en_title' => 'tickets',
+                'parent' => null
             ],
             [
-                'fa_title' => 'ایجاد تیکت',
-                'en_title' => 'tickets-create',
+                'fa_title' => 'ارسال تیکت',
+                'en_title' => 'tickets-send',
+                'parent' => 'tickets'
             ],
             [
                 'fa_title' => 'حذف تیکت',
                 'en_title' => 'tickets-delete',
+                'parent' => 'tickets'
             ],
         ];
 
@@ -34,6 +37,7 @@ class PermissionTableSeeder extends Seeder
             $newPermission = Permission::create([
                 'fa_title' => $permission['fa_title'],
                 'en_title' => $permission['en_title'],
+                'parent' => $permission['parent'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

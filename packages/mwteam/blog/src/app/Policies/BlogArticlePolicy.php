@@ -19,6 +19,11 @@ class BlogArticlePolicy
         //
     }
 
+    public function blog(User $user)
+    {
+        return $user->hasPermission('blog');
+    }
+
     public function index(User $user)
     {
         $blogArticlesCreate = $user->hasPermission('blog-articles-create');
