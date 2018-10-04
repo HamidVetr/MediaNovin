@@ -16,6 +16,11 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
+        $prev_permissions = Permission::select('en_title')->get()->toArray();
+        $seeded_permissions = array_map(function ($permission){
+            return $permission['en_title'];
+        }, $prev_permissions);
+
         $permissions = [
             [
                 'fa_title' => 'وبلاگ',
@@ -76,17 +81,19 @@ class PermissionTableSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission){
-            $newPermission = Permission::create([
-                'fa_title' => $permission['fa_title'],
-                'en_title' => $permission['en_title'],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
+            if (!in_array($permission['en_title'], $seeded_permissions)) {
+                $newPermission = Permission::create([
+                    'fa_title' => $permission['fa_title'],
+                    'en_title' => $permission['en_title'],
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
 
-            DB::table('permission_user')->insert([
-                'permission_id' => $newPermission->id,
-                'user_id' => 1
-            ]);
+                DB::table('permission_user')->insert([
+                    'permission_id' => $newPermission->id,
+                    'user_id' => 1
+                ]);
+            }
         }
     }
 }

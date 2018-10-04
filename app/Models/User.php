@@ -63,4 +63,9 @@ class User extends Authenticatable
     public function isUser(){
         return $this->role == 'user' ? true:false;
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

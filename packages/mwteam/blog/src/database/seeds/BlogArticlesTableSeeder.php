@@ -24,8 +24,9 @@ class BlogArticlesTableSeeder extends Seeder
                 'blog_category_id' => rand(1, 20),
                 'fa_title' => $faker->firstName,
                 'fa_slug' => str_replace(' ', '-', $faker->name),
+                'fa_description' => $faker->realText(100),
                 'fa_body' => $faker->realText(700),
-                'author' => '1',
+                'author_id' => '1',
             ];
 
             $article = BlogArticle::create($data);

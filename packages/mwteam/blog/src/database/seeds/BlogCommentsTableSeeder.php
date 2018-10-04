@@ -27,6 +27,7 @@ class BlogCommentsTableSeeder extends Seeder
                 'name' => $faker->firstName,
                 'email' => $faker->email,
                 'body' => $faker->realText(150),
+                'approved' => rand(0, 1),
             ]);
 
             BlogArticle::find($article_id)->increment('comments');

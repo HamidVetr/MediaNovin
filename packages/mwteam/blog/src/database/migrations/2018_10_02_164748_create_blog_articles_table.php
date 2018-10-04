@@ -16,8 +16,9 @@ class CreateBlogArticlesTable extends Migration
         Schema::create('blog_articles', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('blog_category_id')->nullable(false);
-            $table->unsignedInteger('author')->nullable(false);
-            $table->unsignedInteger('editor')->nullable(true);
+            $table->unsignedInteger('author_id')->nullable(false);
+            $table->unsignedInteger('editor_id')->nullable(true);
+            $table->string('image')->nullable(true);
             $table->string('fa_title')->nullable(false);
             $table->string('en_title')->nullable(true);
             $table->string('fa_slug')->nullable(true);

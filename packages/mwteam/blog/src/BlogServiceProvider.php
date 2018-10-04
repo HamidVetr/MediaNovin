@@ -2,6 +2,7 @@
 
 namespace Mwteam\Blog;
 
+use Mwteam\Blog\App\Models\BlogComment;
 use Mwteam\Dashboard\PackageServiceProvider as ServiceProvider;
 use Mwteam\Blog\App\Models\BlogArticle;
 use Mwteam\Blog\App\Policies\BlogArticlePolicy;
@@ -42,11 +43,12 @@ class BlogServiceProvider extends ServiceProvider
         ], 'blog/assets');
 
         view()->composer('dashboard::partials.sidebar', function ($view) {
+            $notApprovedComments = BlogComment::whereApproved(false)->count();
+            $total = $notApprovedComments;
             $view->with([
-                'blog_notification_count' => [
-                    'total' => 5,
-                    'blog-articles-index' => 2,
-                    'blog-categories-index' => 3,
+                'blogNotificationsCount' => [
+                    'total' => $total,
+                    'blog-comments-index' => $notApprovedComments,
                 ],
             ]);
         });

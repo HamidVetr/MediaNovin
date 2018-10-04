@@ -66,7 +66,7 @@ class DashboardServiceProvider extends ServiceProvider
                 $config = include base_path('packages/mwteam/'. $package.'/src/config.php');
 
                 if (isset($config['sidebar'])){
-                    $menus[] = $config['sidebar'];
+                    $menus[$package] = $config['sidebar'];
                 }
             }
 

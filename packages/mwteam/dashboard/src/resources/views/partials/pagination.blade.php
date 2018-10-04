@@ -4,11 +4,11 @@
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="page-item hidden-xs-down disabled">
-                    <a class="page-link" href="#" aria-label="First"><i class="fa fa-angle-double-right"></i></a>
+                    <a class="page-link" href="#" aria-label="First"><i class="fa fa-angle-right"></i></a>
                 </li>
             @else
                 <li class="page-item hidden-xs-down">
-                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" aria-label="First"><i class="fa fa-angle-double-right"></i></a>
+                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" aria-label="First"><i class="fa fa-angle-right"></i></a>
                 </li>
             @endif
 
@@ -34,11 +34,11 @@
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
                 <li class="page-item hidden-xs-down">
-                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" aria-label="Last"><i class="fa fa-angle-double-left"></i></a>
+                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" aria-label="Last"><i class="fa fa-angle-left"></i></a>
                 </li>
             @else
                 <li class="page-item hidden-xs-down disabled">
-                    <a class="page-link" href="#" aria-label="Last"><i class="fa fa-angle-double-left"></i></a>
+                    <a class="page-link" href="#" aria-label="Last"><i class="fa fa-angle-left"></i></a>
                 </li>
             @endif
         </ul>
