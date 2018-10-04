@@ -88,8 +88,9 @@ class AdminController extends Controller
 
         $adminPermissions = $admin->permissions->pluck('id')->toArray();
         $permissions = Permission::all()->mapToGroups(function ($item) use($adminPermissions){
+            $key = is_null($item['parent']) ? '0' : $item['parent'];
             return [
-                $item['parent'] => [
+                $key => [
                     'id' => $item['id'],
                     'fa_title' => $item['fa_title'],
                     'en_title' => $item['en_title'],
@@ -98,24 +99,53 @@ class AdminController extends Controller
             ];
         });
 
-        return view('dashboard::admins.permissions')->with(['permissions' => $permissions]);
+        return view('dashboard::admins.permissions')->with(['admin' => $admin, 'permissions' => $permissions]);
     }
 
     public function updatePermissions(Request $request, $adminId)
     {
-        $this->validate($request, [
-            'permissions' => 'nullable|array',
-            'permissions.*' => 'required|array',
-            'permissions.*.*' => 'required|integer|min:1'
-        ]);
-        return $request;
         $admin = User::admins()->where('id', $adminId)->firstOrFail();
 
-        $permissions = Permission::all()->mapToGroups(function ($item){
-            return [$item['parent'] => $item['id']];
+        $this->validate($request, [
+            'main-permissions' => 'required|array',
+            'main-permissions.*' => 'required|integer|min:1',
+            'sub-permissions' => 'nullable|array',
+            'sub-permissions.*' => 'nullable|array',
+            'sub-permissions.*.*' => 'nullable|integer|min:1',
+        ]);
+
+        $permissions = Permission::with('parentItem')->get()->mapToGroups(function ($item){
+            $key = is_null($item['parentItem']) ? '0' : $item['parentItem']['id'];
+            return [$key => $item['id']];
         });
 
-        return redirect()->back()->withInput($request->all());
+        //validate inputs
+        $mainPermissions = $permissions['0']->toArray();
+        $permissionIds = [];
+
+        if (count(array_diff($request['main-permissions'],$mainPermissions)) > 1){
+            return redirect()->back()->withErrors(['اطلاعات ارسالی نامعتبر می باشد.'])->withInput($request->all());
+        }
+
+        foreach ($request['main-permissions'] as $requestMainPermission){
+            $permissionIds[] = $requestMainPermission;
+
+            if (isset($permissions[$requestMainPermission])){
+                $subPermissions = $permissions[$requestMainPermission]->toArray();
+                $requestSubPermissions = $request['sub-permissions'][$requestMainPermission];
+
+                if (count($requestSubPermissions) == 0 || count(array_diff($requestSubPermissions,$subPermissions)) > 1){
+                    return redirect()->back()->withErrors(['اطلاعات ارسالی نامعتبر می باشد.'])->withInput($request->all());
+                }
+
+                $permissionIds = array_merge($permissionIds,$requestSubPermissions);
+            }
+        }
+
+        //update admin permissions
+        $admin->permissions()->sync($permissionIds);
+        session()->flash('success','تغییرات ذخیره گردید.');
+        return redirect()->back();
     }
 
     public function active($adminId)
