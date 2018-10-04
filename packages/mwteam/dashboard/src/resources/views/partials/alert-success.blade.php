@@ -1,6 +1,6 @@
 <div class="alert alert-success">
     @if(count($messages) > 1)
-        <ul>
+        <ul class="ul-error">
             @foreach($messages as $message)
                 <li>{{$message}}</li>
             @endforeach

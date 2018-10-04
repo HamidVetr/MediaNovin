@@ -1,5 +1,5 @@
 <div class="alert alert-danger">
-    <ul>
+    <ul class="ul-error">
         @foreach($messages as $message)
             <li>{{$message}}</li>
         @endforeach

@@ -62233,7 +62233,7 @@ table.jambo_table{
 }
 
 
-.icon .fa-bars{
+.icon .fa-plus{
   font-size:15px!important;
   color:#fff;
 }
@@ -62557,4 +62557,8 @@ h6.panel-title, .h6.panel-title {
 
 .display-block, label.display-block {
   display: block;
+}
+
+.ul-error{
+  margin-bottom: 0!important;
 }

@@ -34,7 +34,7 @@
                      <div class="ht-40 justify-content-between">
                         <span class="ht-58 justify-content-between pd-r-20 pd-l-20">افزودن مدیر</span>
                          <span class="icon wd-40">
-                             <i class="fa  fa-bars"></i>
+                             <i class="fa fa-plus"></i>
                          </span>
                      </div>
                  </a>

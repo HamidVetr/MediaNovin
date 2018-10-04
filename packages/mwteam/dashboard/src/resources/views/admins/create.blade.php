@@ -103,62 +103,62 @@
 @endsection
 
 @section('bottom-assets')
-    <script type="text/javascript" src="../assets/dashboard/js/bootstrapValidator.min.js"></script>
-    <script>
-        $('#adminadd').bootstrapValidator({
-            fields: {
-                first_name: {
-                    validators: {
-                        notEmpty: {
-                            message: 'لطفا نام را وارد کنید'
-                        }
-                    }
-                },
-                last_name: {
-                    validators: {
-                        notEmpty: {
-                            message: 'لطفا نام خانوادگی را وارد کنید'
-                        }
-                    }
-                },
-                username: {
-                    validators: {
-                        notEmpty: {
-                            message: 'لطفا نام کاربری را وارد کنید'
-                        }
-                    }
-                },
-                email: {
-                    validators: {
-                        notEmpty: {
-                            message: 'لطفا آدرس پست الکترونیکی را وارد کنید'
-                        }
-                    }
-                },
-                password: {
-                    validators: {
-                        notEmpty: {
-                            message: 'رمز عبور را وارد کنید'
-                        },
-                        identical: {
-                            field: 'password_confirmation',
-                            message: 'رمز عبور و تکرار آن یکسان نیست'
-                        }
-                    }
-                },
-                password_confirmation: {
-                    validators: {
-                        notEmpty: {
-                            message: 'تکرار گذرواژه را لطفا وارد کنید'
-                        },
-                        identical: {
-                            field: 'password',
-                            message: 'رمز عبور و تکرار آن یکسان نیست'
-                        }
-                    }
-                }
-            }
-        })
-    </script>
+    {{--<script type="text/javascript" src="../assets/dashboard/js/bootstrapValidator.min.js"></script>--}}
+    {{--<script>--}}
+        {{--$('#adminadd').bootstrapValidator({--}}
+            {{--fields: {--}}
+                {{--first_name: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: 'لطفا نام را وارد کنید'--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--},--}}
+                {{--last_name: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: 'لطفا نام خانوادگی را وارد کنید'--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--},--}}
+                {{--username: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: 'لطفا نام کاربری را وارد کنید'--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--},--}}
+                {{--email: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: 'لطفا آدرس پست الکترونیکی را وارد کنید'--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--},--}}
+                {{--password: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: 'رمز عبور را وارد کنید'--}}
+                        {{--},--}}
+                        {{--identical: {--}}
+                            {{--field: 'password_confirmation',--}}
+                            {{--message: 'رمز عبور و تکرار آن یکسان نیست'--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--},--}}
+                {{--password_confirmation: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: 'تکرار گذرواژه را لطفا وارد کنید'--}}
+                        {{--},--}}
+                        {{--identical: {--}}
+                            {{--field: 'password',--}}
+                            {{--message: 'رمز عبور و تکرار آن یکسان نیست'--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--}--}}
+            {{--}--}}
+        {{--})--}}
+    {{--</script>--}}
 @endsection
 
