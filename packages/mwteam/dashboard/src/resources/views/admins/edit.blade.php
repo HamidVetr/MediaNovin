@@ -133,10 +133,10 @@
                 email: {
                     validators: {
                         notEmpty: {
-                            message: 'ایمیل را وارد کنید'
+                            message: ' ایمیل را وارد کنید '
                         },
                         emailAddress: {
-                            message: 'فرمت ایمیل صحیح نمی باشد'
+                            message: ' فرمت ایمیل صحیح نمی باشد '
                         }
                     }
                 },
@@ -144,11 +144,11 @@
                     validators: {
                         identical: {
                             field: 'password_confirmation',
-                            message: 'رمز عبور و تکرار آن یکسان نیست'
+                            message: ' رمز عبور و تکرار آن یکسان نیست '
                         },
                         stringLength: {
                             min: 6,
-                            message: 'رمز عبور باید حداقل 6 کارکتر باشد'
+                            message: ' رمز عبور باید حداقل 6 کارکتر باشد '
                         }
                     }
                 },
@@ -156,11 +156,11 @@
                     validators: {
                         identical: {
                             field: 'password',
-                            message: 'رمز عبور و تکرار آن یکسان نیست'
+                            message: ' رمز عبور و تکرار آن یکسان نیست '
                         },
                         stringLength: {
                             min: 6,
-                            message: 'تکرار رمز عبور باید حداقل 6 کارکتر باشد'
+                            message: ' تکرار رمز عبور باید حداقل 6 کارکتر باشد '
                         }
                     }
                 }

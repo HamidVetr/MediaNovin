@@ -62562,3 +62562,13 @@ h6.panel-title, .h6.panel-title {
 .ul-error{
   margin-bottom: 0!important;
 }
+
+.font-ban .fa-check-square-o{
+  font-size: 20px;
+  color: green;
+}
+
+.ion-ios-checkmark{
+  color:green;
+}
+

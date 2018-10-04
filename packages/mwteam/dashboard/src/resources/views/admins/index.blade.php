@@ -116,7 +116,7 @@
                                                 @else
                                                     <a href="" data-toggle="modal" data-target="#modal-active-{{$admin->id}}">
                                                         <span class="font-ban">
-                                                            <i class="fa fa-check-circle" data-toggle="tooltip" title="غیر فعال کردن"></i>
+                                                            <i class="fa  fa-check-square-o" data-toggle="tooltip" title="غیر فعال کردن"></i>
                                                         </span>
                                                     </a>
 
