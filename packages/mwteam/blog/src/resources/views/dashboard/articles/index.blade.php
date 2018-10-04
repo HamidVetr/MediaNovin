@@ -6,6 +6,11 @@
 
 @section('top-assets')
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/persian-datepicker-0.4.5.css') }}">
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -25,35 +30,26 @@
                 <button type="button" class="bg-teal-400 searchbtn searchbtn-store btn-icon btn-rounded"  data-toggle="tooltip" title="جستجو پیشرفته"><img src="{{ asset('assets/dashboard/images/search.svg') }}" width="18"></button>
                 <div id="searchboxpage" class="searchboxpage-vendor">
                     <br><br>
-                    <form action="">
+                    {!! Form::open(['method'=>'GET', 'route' => 'dashboard.blog.articles.index']) !!}
                         <div class="row">
                             <div class="col-md-2 col-xs-6">
-                                <div class="text-right">شناسه سفارش</div>
-                                <input type="text" class="form-control">
+                                <div class="text-right">عنوان</div>
+                                {!! Form::text('title', null, ['class' => 'form-control']) !!}
                             </div>
 
                             <div class="col-md-2 col-xs-6">
                                 <div class="text-right">کاربر</div>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="col-md-2 col-xs-6">
-                                <div class="text-right">وضعیت</div>
-                                <select class="form-control select-store">
-                                    <option>همه</option>
-                                    <option>تکمیل شده</option>
-                                    <option>تکمیل نشده</option>
-                                </select>
+                                {!! Form::text('user', null, ['class' => 'form-control']) !!}
                             </div>
 
                             <div class="col-md-3 col-xs-6">
                                 <div class="text-right">از تاریخ</div>
-                                <input type="text" class="form-control persianDatePricker text-left" name="from-date"  id="from-date" value>
+                                {!! Form::text('fromDate', null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'from-date']) !!}
                             </div>
 
                             <div class="col-md-3 col-xs-6">
                                 <div class="text-right">تا تاریخ</div>
-                                <input type="text" class="form-control persianDatePricker text-left" name="to-date"  id="to-date" value>
+                                {!! Form::text('toDate', null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'to-date']) !!}
                             </div>
                         </div>
                         <div class="row justify-content-center">
@@ -63,135 +59,45 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
                 <div class="rounded table-responsive">
-                    <table class="table mg-b-0 table-tickets">
+                    <table class="table table-striped mg-b-0 table-tickets">
                         <thead>
                         <tr>
-                            <th>شماره تیکت</th>
+                            <th>ردیف</th>
+                            <th>تصویر</th>
                             <th>عنوان</th>
-                            <th>نام کاربر</th>
-                            <th>سمت</th>
-                            <th>به روز شده</th>
-                            <th>وضعیت</th>
-                            <th>جزئیات</th>
+                            <th>خلاصه مقاله</th>
+                            <th>تعداد نظرات</th>
+                            <th>تاریخ ساخت</th>
+                            <th>ساخته شده توسط</th>
+                            <th>آخرین بروزرسانی</th>
+                            <th>بروزرسانی توسط</th>
+                            <th>ویرایش</th>
+                            <th>حذف</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>41</td>
-                            <td>تبریک، برنده مزایده شده اید</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-warning pd-5">پاسخ مشتری</span>
-                            </td>
-                            <td>
-                                <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>47</td>
-                            <td>حذف پیام ارسال شده</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-warning pd-5">پاسخ مشتری</span>
-                            </td>
-                            <td>
-                                <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>52</td>
-                            <td>تبریک، برنده مزایده شده اید</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-primary pd-5">بسته شده</span>
-                            </td>
-                            <td>
-                                <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>68</td>
-                            <td>	حذف دیدگاه</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-primary pd-5">بسته شده</span>
-                            </td>
-                            <td>
-                                <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>66</td>
-                            <td>	حذف دیدگاه</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-info pd-5"> در حال بررسی</span>
-                            </td>
-                            <td>
-                                <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach($articles as $article)
+                            <tr>
+                                <td>{{ $article->id }}</td>
+                                <td><img style="border-radius: 25px" src="{{ is_null($article->image) ? 'https://api.adorable.io/avatars/50/' . $article->id . '@adorable.png' : $article->image }}"></td>
+                                <td>{{ $article->fa_title }}</td>
+                                <td>{{ $article->fa_description }}</td>
+                                <td>{{ $article->comments }}</td>
+                                <td>{{ $article->jalalianCreatedAt() }}</td>
+                                <td>{{ $article->author->full_name }}</td>
+                                <td>{{ $article->jalalianUpdatedAt() }}</td>
+                                <td>{{ is_null($article->editor_id) ? $article->author->full_name : $article->editor->full_name }}</td>
+                                <td><button class="btn btn-warning">ویرایش</button></td>
+                                <td><button class="btn btn-danger">حذف </button></td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
-
-                <div class="ht-80 d-flex align-items-center justify-content-center mg-t-20 rtl">
-                    <ul class="pagination pagination-circle mg-b-0">
-                        <li class="page-item hidden-xs-down">
-                            <a class="page-link" href="#" aria-label="First"><i class="fa fa-angle-double-right"></i></a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous"><i class="fa fa-angle-right"></i></a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item hidden-xs-down"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item hidden-xs-down"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item disabled"><span class="page-link">...</span></li>
-                        <li class="page-item"><a class="page-link" href="#">10</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next"><i class="fa fa-angle-left"></i></a>
-                        </li>
-                        <li class="page-item hidden-xs-down">
-                            <a class="page-link" href="#" aria-label="Last"><i class="fa fa-angle-double-left"></i></a>
-                        </li>
-                    </ul>
-                </div>
-
-
+                {{ $articles->appends($_GET)->links('dashboard::partials.pagination') }}
             </div>
         </div>
     </div>

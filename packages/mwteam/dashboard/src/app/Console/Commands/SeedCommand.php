@@ -3,6 +3,7 @@
 namespace Mwteam\Dashboard\App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class SeedCommand extends Command
 {
@@ -49,7 +50,7 @@ class SeedCommand extends Command
 
                 if (isset($config['seed'])){
                     foreach ($config['seed'] as $table => $seed){
-                        if (is_null($this->option('package')) || ($this->option('package') == $package && $this->option('table') == $table)){
+                        if (is_null($this->option('table')) || $this->option('table') == $table){
                             $this->call('db:seed', ['--class' => $seed]);
                         }
                     }

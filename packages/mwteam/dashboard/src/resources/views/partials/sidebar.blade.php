@@ -1,4 +1,3 @@
-<?php global $notifications;?>
 <div class="br-sideleft overflow-y-auto">
     <label class="sidebar-label pd-x-10 mg-t-20 op-3"></label>
     <ul class="br-sideleft-menu">
@@ -9,13 +8,13 @@
             </a><!-- br-menu-link -->
         </li><!-- br-menu-item -->
 
-        @foreach($menus as $menu_name => $menu)
+        @foreach($menus as $menuName => $menu)
             <li class="br-menu-item">
                 <a href="" class="br-menu-link with-sub @yield($menu['yield'])">
                     <i class="menu-item-icon icon {{$menu['icon']}}"></i>
                     <span class="menu-item-label">{{$menu['title']}}
-                        @if(isset(${$menu_name . '_notification_count'}))
-                            <span class="badge badge-danger">{{ ${$menu_name . '_notification_count'}['total'] }}</span>
+                        @if(isset(${$menuName . 'NotificationsCount'}))
+                            <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}['total'] }}</span>
                         @endif
                     </span>
                 </a><!-- br-menu-link -->
@@ -24,8 +23,8 @@
                     @foreach($menu['subMenus'] as $subMenu)
                         <li class="sub-item">
                             <a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}
-                                @if(isset(${$menu_name . '_notification_count'}) && isset(${$menu_name . '_notification_count'}[$subMenu['yield']]))
-                                    <span class="badge badge-danger">{{ ${$menu_name . '_notification_count'}[$subMenu['yield']] }}</span>
+                                @if(isset(${$menuName . 'NotificationsCount'}) && isset(${$menuName . 'NotificationsCount'}[$subMenu['yield']]))
+                                    <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}[$subMenu['yield']] }}</span>
                                 @endif
                             </a>
                         </li>

@@ -3,7 +3,10 @@
 namespace Mwteam\Blog\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Morilog\Jalali\CalendarUtils;
 use Mwteam\Blog\App\Models\BlogArticle;
 
 class BlogArticleController extends Controller
@@ -22,7 +25,27 @@ class BlogArticleController extends Controller
     public function index()
     {
         $this->authorize('index', BlogArticle::class);
-        return view('Blog::dashboard.articles.index');
+
+        if (isset($_GET['title']) || isset($_GET['user']) || isset($_GET['formDate']) || isset($_GET['toDate'])){
+            if (isset($_GET['fromDate'])) {
+                dd(CalendarUtils::isValidateJalaliDate(...explode('/', $_GET['fromDate'])));
+                $fromDate = implode('-', CalendarUtils::toGregorian(...explode('/', $_GET['fromDate']))) . ' 00:00:00';
+            }
+
+            if (isset($_GET['toDate'])) {
+                $toDate = implode('-', CalendarUtils::toGregorian(...explode('/', $_GET['toDate']))) . ' 23:59:59';
+            }
+
+            if (isset($_GET['user'])){
+                $user_ids = User::whereRaw("CONCAT_WS (' ', first_name, last_name) like '%{$_GET['user']}%'")->select('id')->get();
+                dd($user_ids);
+            }
+
+        }else {
+            $articles = BlogArticle::with(['author', 'editor'])->paginate(10);
+        }
+
+        return view('Blog::dashboard.articles.index', compact('articles'));
     }
 
     /**

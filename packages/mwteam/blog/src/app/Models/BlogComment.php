@@ -13,6 +13,7 @@ class BlogComment extends Model
         'email',
         'mobile',
         'body',
+        'approved',
     ];
 
     public function article()

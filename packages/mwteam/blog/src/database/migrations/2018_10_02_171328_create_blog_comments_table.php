@@ -21,6 +21,7 @@ class CreateBlogCommentsTable extends Migration
             $table->string('email')->nullable(true);
             $table->string('mobile', 15)->nullable(true);
             $table->text('body')->nullable(false);
+            $table->boolean('approved')->nullable(false)->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
