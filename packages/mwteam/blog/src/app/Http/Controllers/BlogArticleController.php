@@ -4,6 +4,7 @@ namespace Mwteam\Blog\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Morilog\Jalali\CalendarUtils;
@@ -25,8 +26,10 @@ class BlogArticleController extends Controller
     public function index()
     {
         $this->authorize('index', BlogArticle::class);
-        if ($this->search($_GET)){
-            return $this->search($_GET);
+
+        $search = $this->search($_GET);
+        if ($search){
+            $articles = $search;
         }else{
             $articles = BlogArticle::with(['author', 'editor'])->paginate(10);
         }
@@ -118,16 +121,37 @@ class BlogArticleController extends Controller
             }
 
             if ($data['user'] != '') {
-                $userIDs = User::adminOrSuperAdmin()->whereRaw("CONCAT_WS (' ', first_name, last_name) like '%{$data['user']}%'")->select('id')->get();
-                return $userIDs;
+                $users = [];
+                $userIDs = User::adminOrSuperAdmin()->whereRaw("CONCAT_WS (' ', first_name, last_name) like '%{$data['user']}%'")->select('id')->get()->toArray();
+
+                $users = array_map(function($userID){
+                    return $userID['id'];
+                }, $userIDs);
             }
 
             if ($data['title'] != '') {
                 $title = $data['title'];
             }
 
+            $articles = BlogArticle::with(['author', 'editor']);
 
-            $articles = BlogArticle::with(['author', 'editor'])->whereBetween('created_at', [$fromDate, $toDate])->paginate(10);
+            if (isset($title)){
+                $articles->where('fa_title', 'like', "%{$title}%");
+            }
+
+            if (isset($fromDate) && isset($toDate)) {
+                $articles->whereBetween('created_at', [$fromDate, $toDate]);
+            }elseif (isset($fromDate)){
+                $articles->where('created_at', '>=', $fromDate);
+            }elseif (isset($toDate)){
+                $articles->where('created_at', '<=', $toDate);
+            }
+
+            if (isset($users)) {
+                $articles->whereIn('author_id', $users);
+            }
+
+            return $articles->paginate(10);
         }else{
             return false;
         }
