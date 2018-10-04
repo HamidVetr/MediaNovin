@@ -54,6 +54,10 @@ class User extends Authenticatable
     //****************************** methods ************************************
     public function hasPermission($permission)
     {
+        if($this->isSuperAdmin()){
+            return true;
+        }
+
         if (is_null($this->permissions)) {
             $this->permissions = $this->permissions()->pluck('id','en_title');
         }
@@ -61,8 +65,16 @@ class User extends Authenticatable
         return isset($this->permissions[$permission]) ? true : false;
     }
 
+    public function isAdminOrSuperAdmin(){
+        return $this->isAdmin() || $this->isSuperAdmin() ? true:false;
+    }
+
+    public function isSuperAdmin(){
+        return $this->role == 'super-admin' ? true:false;
+    }
+
     public function isAdmin(){
-        return $this->role == 'admin' || $this->role == 'super-admin' ? true:false;
+        return $this->role == 'admin' ? true:false;
     }
 
     public function isUser(){

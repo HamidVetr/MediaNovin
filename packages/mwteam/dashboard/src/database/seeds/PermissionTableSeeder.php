@@ -19,18 +19,7 @@ class PermissionTableSeeder extends Seeder
             [
                 'fa_title' => 'مدیران',
                 'en_title' => 'admins',
-            ],
-            [
-                'fa_title' => 'ایجاد مدیر',
-                'en_title' => 'admins-create',
-            ],
-            [
-                'fa_title' => 'ویرایش مدیر',
-                'en_title' => 'admins-edit',
-            ],
-            [
-                'fa_title' => 'حذف مدیر',
-                'en_title' => 'admins-delete',
+                'parent' => null
             ],
         ];
 
@@ -38,6 +27,7 @@ class PermissionTableSeeder extends Seeder
             $newPermission = Permission::create([
                 'fa_title' => $permission['fa_title'],
                 'en_title' => $permission['en_title'],
+                'parent' => $permission['parent'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

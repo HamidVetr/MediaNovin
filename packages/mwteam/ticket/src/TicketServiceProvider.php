@@ -3,9 +3,15 @@
 namespace Mwteam\Ticket;
 
 use Mwteam\Dashboard\PackageServiceProvider as ServiceProvider;
+use Mwteam\Ticket\App\Models\Ticket;
+use Mwteam\Ticket\App\Policies\TicketPolicy;
 
 class TicketServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        Ticket::class => TicketPolicy::class,
+    ];
+
     /**
      * Bootstrap the application services.
      *
@@ -13,9 +19,7 @@ class TicketServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        global $notifications;
-
-        $notifications['ticketCount'] = 2;
+        $this->registerPolicies();
 
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'ticket');
         $this->loadRoutesFrom(__DIR__.'/routes.php');

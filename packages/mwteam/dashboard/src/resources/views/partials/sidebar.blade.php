@@ -9,42 +9,33 @@
         </li><!-- br-menu-item -->
 
         @foreach($menus as $menuName => $menu)
-            <li class="br-menu-item">
-                <a href="" class="br-menu-link with-sub @yield($menu['yield'])">
-                    <i class="menu-item-icon icon {{$menu['icon']}}"></i>
-                    <span class="menu-item-label">{{$menu['title']}}
-                        @if(isset(${$menuName . 'NotificationsCount'}))
-                            <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}['total'] }}</span>
-                        @endif
-                    </span>
-                </a><!-- br-menu-link -->
+            @can($menu['permission'], $menu['model'])
+                <li class="br-menu-item">
+                    <a href="" class="br-menu-link with-sub @yield($menu['yield'])">
+                        <i class="menu-item-icon icon {{$menu['icon']}}"></i>
+                        <span class="menu-item-label">{{$menu['title']}}
+                            @if(isset(${$menuName . 'NotificationsCount'}))
+                                <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}['total'] }}</span>
+                            @endif
+                        </span>
+                    </a><!-- br-menu-link -->
 
-                <ul class="br-menu-sub">
-                    @foreach($menu['subMenus'] as $subMenu)
-                        <li class="sub-item">
-                            <a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}
-                                @if(isset(${$menuName . 'NotificationsCount'}) && isset(${$menuName . 'NotificationsCount'}[$subMenu['yield']]))
-                                    <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}[$subMenu['yield']] }}</span>
-                                @endif
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </li><!-- br-menu-item -->
+                    <ul class="br-menu-sub">
+                        @foreach($menu['subMenus'] as $subMenu)
+                            @can($subMenu['permission'], $subMenu['model'])
+                                <li class="sub-item">
+                                    <a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}
+                                        @if(isset(${$menuName . 'NotificationsCount'}) && isset(${$menuName . 'NotificationsCount'}[$subMenu['yield']]))
+                                            <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}[$subMenu['yield']] }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                            @endcan
+                        @endforeach
+                    </ul>
+                </li><!-- br-menu-item -->
+            @endcan
         @endforeach
-
-        @can('has-permission', 'admins')
-            <li class="br-menu-item">
-                <a href="#" class="br-menu-link with-sub @yield('admins')">
-                    <i class="menu-item-icon icon ion-ios-contact-outline tx-24"></i>
-                    <span class="menu-item-label">بخش مدیران</span>
-                </a><!-- br-menu-link -->
-                <ul class="br-menu-sub">
-                    <li class="sub-item"><a href="{{route('dashboard.admins.create')}}" class="sub-link @yield('admins-create')">اضافه کردن مدیر جدید</a></li>
-                    <li class="sub-item"><a href="{{route('dashboard.admins.index')}}" class="sub-link @yield('admins-index')">لیست مدیران</a></li>
-                </ul>
-            </li>
-        @endcan
 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link">
