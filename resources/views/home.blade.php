@@ -69,7 +69,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        @if(auth()->user()->isAdmin())
+                        @if(auth()->user()->isAdminOrSuperAdmin())
                             <a href="{{ route('dashboard.home') }}">Dashboard</a>
                         @endif
                         <a href="javascript:{}"

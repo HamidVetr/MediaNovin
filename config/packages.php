@@ -2,7 +2,8 @@
 
 return [
     'packages' => [
+        'dashboard',
         'ticket',
-//        'blog',
+        'blog',
     ]
 ];

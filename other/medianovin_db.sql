@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 03, 2018 at 12:40 PM
+-- Generation Time: Oct 04, 2018 at 09:59 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -25,15 +25,92 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_logs`
+-- Table structure for table `blog_articles`
 --
 
-DROP TABLE IF EXISTS `admin_logs`;
-CREATE TABLE IF NOT EXISTS `admin_logs` (
+DROP TABLE IF EXISTS `blog_articles`;
+CREATE TABLE IF NOT EXISTS `blog_articles` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `admin_id` int(10) UNSIGNED NOT NULL,
-  `activity` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `blog_category_id` int(10) UNSIGNED NOT NULL,
+  `author_id` int(10) UNSIGNED NOT NULL,
+  `editor_id` int(10) UNSIGNED DEFAULT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fa_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `en_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fa_slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `en_slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fa_description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `en_description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fa_body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `en_body` text COLLATE utf8mb4_unicode_ci,
+  `comments` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_article_blog_tag`
+--
+
+DROP TABLE IF EXISTS `blog_article_blog_tag`;
+CREATE TABLE IF NOT EXISTS `blog_article_blog_tag` (
+  `blog_article_id` int(10) UNSIGNED NOT NULL,
+  `blog_tag_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_categories`
+--
+
+DROP TABLE IF EXISTS `blog_categories`;
+CREATE TABLE IF NOT EXISTS `blog_categories` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `fa_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `en_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_comments`
+--
+
+DROP TABLE IF EXISTS `blog_comments`;
+CREATE TABLE IF NOT EXISTS `blog_comments` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `blog_article_id` int(10) UNSIGNED NOT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_tags`
+--
+
+DROP TABLE IF EXISTS `blog_tags`;
+CREATE TABLE IF NOT EXISTS `blog_tags` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `fa_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `en_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -51,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -62,9 +139,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2018_09_27_103215_create_permissions_table', 1),
 (4, '2018_09_27_103250_create_permission_user_table', 1),
-(5, '2018_09_27_103614_create_admin_logs_table', 1),
-(6, '2018_09_29_090033_create_settings_table', 1),
-(7, '2018_10_01_094311_create_tickets_table', 2);
+(5, '2018_09_29_090033_create_settings_table', 1),
+(6, '2018_10_01_094311_create_tickets_table', 1),
+(7, '2018_10_02_164748_create_blog_articles_table', 1),
+(8, '2018_10_02_171254_create_blog_tags_table', 1),
+(9, '2018_10_02_171312_create_blog_categories_table', 1),
+(10, '2018_10_02_171328_create_blog_comments_table', 1),
+(11, '2018_10_02_171443_create_blog_article_blog_tag_table', 1);
 
 -- --------------------------------------------------------
 
@@ -95,21 +176,31 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `parent`, `created_at`, `updated_at`) VALUES
-(1, 'مدیران', 'admins', NULL, '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(2, 'ایجاد مدیر', 'admins-create', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(3, 'ویرایش مدیر', 'admins-edit', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(4, 'حذف مدیر', 'admins-delete', 'admins', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(5, 'تیکت ها', 'tickets', NULL, '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(6, 'ایجاد تیکت', 'tickets-create', 'tickets', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(7, 'حذف تیکت', 'tickets-delete', 'tickets', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(11, 'تنظیمات', 'settings', NULL, '2018-10-02 20:30:00', '2018-10-02 20:30:00');
+(1, 'مدیران', 'admins', NULL, '2018-10-04 09:35:32', '2018-10-04 09:35:32'),
+(2, 'تیکت ها', 'tickets', NULL, '2018-10-04 09:35:39', '2018-10-04 09:35:39'),
+(3, 'ارسال تیکت', 'tickets-send', 'tickets', '2018-10-04 09:35:39', '2018-10-04 09:35:39'),
+(4, 'حذف تیکت', 'tickets-delete', 'tickets', '2018-10-04 09:35:39', '2018-10-04 09:35:39'),
+(5, 'وبلاگ', 'blog', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(6, 'ایجاد مقاله', 'blog-articles-create', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(7, 'ویرایش مقاله', 'blog-articles-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(8, 'حذف مقاله', 'blog-articles-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(9, 'ایجاد دسته بندی', 'blog-categories-create', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(10, 'ویرایش دسته بندی', 'blog-categories-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(11, 'حذف دسته بندی', 'blog-categories-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(12, 'ایجاد تگ', 'blog-tags-create', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(13, 'ویرایش تگ', 'blog-tags-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(14, 'حذف تگ', 'blog-tags-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(15, 'تایید نظر', 'blog-comments-approve', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(16, 'ویرایش نظر', 'blog-comments-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(17, 'حذف نظر', 'blog-comments-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(18, 'پاسخ به نظر', 'blog-comments-reply', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11');
 
 -- --------------------------------------------------------
 
@@ -120,8 +211,7 @@ INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `parent`, `created_at`,
 DROP TABLE IF EXISTS `permission_user`;
 CREATE TABLE IF NOT EXISTS `permission_user` (
   `permission_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`,`user_id`)
+  `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -130,15 +220,26 @@ CREATE TABLE IF NOT EXISTS `permission_user` (
 
 INSERT INTO `permission_user` (`permission_id`, `user_id`) VALUES
 (1, 1),
-(1, 3),
 (2, 1),
-(2, 3),
 (3, 1),
-(3, 3),
 (4, 1),
+(2, 3),
+(3, 3),
+(4, 3),
 (5, 1),
 (6, 1),
-(7, 1);
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1);
 
 -- --------------------------------------------------------
 
@@ -170,16 +271,15 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tickets`
 --
 
 INSERT INTO `tickets` (`id`, `user_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'تست', 'closed', '2018-10-02 11:30:25', '2018-10-02 11:30:25'),
-(2, 2, 'تست', 'closed', '2018-10-02 11:41:10', '2018-10-02 11:41:10'),
-(3, 2, 'تست', 'closed', '2018-10-03 07:42:52', '2018-10-03 07:42:52');
+(1, 2, 'تست', 'closed', '2018-10-04 09:23:53', '2018-10-04 09:23:53'),
+(2, 2, 'تست', 'closed', '2018-10-04 09:35:39', '2018-10-04 09:35:39');
 
 -- --------------------------------------------------------
 
@@ -210,11 +310,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', 'super-admin', 'LoChFzzl3rBO4qt3hDVv19UYCaMHUKEXsNNwOLxhEZoB8c7FT3Y3QK61gySV', NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
-(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$NC8rgQrTh8sLujCXsRULUuJr5NXES.QrfZ0OCjCmsd8Pov.wH/GB6', 'user', NULL, NULL, '2018-09-29 05:49:14', '2018-09-29 05:49:14'),
-(3, 'sfdfsfsdfsdfsd', 'c', 'admin2', 'admin2@email.com', '$2y$10$QgVr/8cnd4/KN6buZjAGG.Hgq21IHAVtFhZtOuaPjqRQ3u1z63iBW', 'admin', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 05:49:14', '2018-10-01 11:53:20'),
-(4, 'd', 'd', 'admin3', 'admin3@email.com', '$2y$10$D7ZlJNFcBdsytQVmY/sH7.zQy0SAnYdbGJztNRB.Rknq3t3GwdUl.', 'admin', 'iIa5eFO8WmLNIKxiSYyDSsRPNHS063ZH98yjVDVHhsH02Hc7SVEbHoNzTSQR', NULL, '2018-10-01 09:49:00', '2018-10-01 09:49:00'),
-(5, 'e', 'e', 'admin4', 'admin4@email.com', '$2y$10$gzpeCfmI1fXICFgrlexF2e4l6RrPUJFBZ72b51xBdK729Eq1oPVhu', 'admin', NULL, NULL, '2018-10-01 10:43:39', '2018-10-01 10:43:39');
+(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$d.hu9UIgZEOW1UIMvq30bOZrtKHzIyT8FCIL4oYKMjDPjXN1BgDNm', 'super-admin', NULL, NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
+(2, 'b', 'b', 'user', 'user@email.com', '$2y$10$DACkkdXdeky2u2qerYO2R.cPZCAQsdJHRHMniI4neEd4W70UhYzX6', 'user', NULL, NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
+(3, 'c', 'c', 'admin2', 'admin2@email.com', '$2y$10$kacDG0ZBJvSNVw2kcRf/v.A7peFmctdOTDQ76laItVgjKOJITxL1K', 'admin', NULL, NULL, '2018-10-04 09:30:09', '2018-10-04 09:50:19'),
+(5, 'd', 'd', 'admin3', 'admin3@email.com', '$2y$10$hOejHwtXUcSL9Gp2JmBZHuYDKSnfN9nV/Ws0zKorgxXo.VOSBTaCu', 'admin', NULL, NULL, '2018-10-04 09:40:59', '2018-10-04 09:40:59');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
