@@ -36,22 +36,6 @@
                         </div>
                         <div class="form-group row mg-t-20">
                             <label for="" class="col-sm-2 form-control-label">
-                                وضعیت تیکت:
-                                <span class="tx-danger">*</span>
-                            </label>
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <select data-placeholder="انتخاب کنید..." class="form-control js-example-placeholder-single" name="status"  id="e9">
-                                    <option value=""></option>
-                                    <option value="1">پاسخ داده شده</option>
-                                    <option value="2">بسته شده</option>
-                                    <option value="3">در انتظار پاسخ  </option>
-                                    <option value="4">در حال بررسی</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
                                 متن پیام:
                                 <span class="tx-danger">*</span>
                             </label>

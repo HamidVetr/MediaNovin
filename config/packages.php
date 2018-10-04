@@ -3,6 +3,6 @@
 return [
     'packages' => [
         'ticket',
-//        'blog',
+        'blog',
     ]
 ];

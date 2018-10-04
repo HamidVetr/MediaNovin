@@ -20,10 +20,28 @@
             <span class="breadcrumb-item active">مقالات</span>
         </nav>
     </div>
-    <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">لیست مقالات</h4>
+    <div class="br-pagetitle row">
+
+        <div class="col-lg-6">
+            <div class="title-add">
+                <i class="icon icon ion-android-exit"></i>
+                <h4 class="pd-r-10">لیست مقالات</h4>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="heading-elements pd-l-20">
+                <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
+                    <div class="ht-40 justify-content-between">
+                        <span class="ht-58 justify-content-between pd-r-20 pd-l-20"> ایجاد مقاله جدید</span>
+                        <span class="icon wd-40">
+                             <i class="fa fa-plus"></i>
+                         </span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
+
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
             <div class="search-advance search-advance-vendor">
