@@ -110,28 +110,31 @@
                 first_name: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا نام را وارد کنید'
+                            message: 'نام را وارد کنید'
                         }
                     }
                 },
                 last_name: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا نام خانوادگی را وارد کنید'
+                            message: 'نام خانوادگی را وارد کنید'
                         }
                     }
                 },
                 username: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا نام کاربری را وارد کنید'
+                            message: 'نام کاربری را وارد کنید'
                         }
                     }
                 },
                 email: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا آدرس پست الکترونیکی را وارد کنید'
+                            message: 'ایمیل را وارد کنید'
+                        },
+                        emailAddress: {
+                            message: 'فرمت ایمیل صحیح نمی باشد'
                         }
                     }
                 },
@@ -143,17 +146,25 @@
                         identical: {
                             field: 'password_confirmation',
                             message: 'رمز عبور و تکرار آن یکسان نیست'
+                        },
+                        stringLength: {
+                            min: 6,
+                            message: 'رمز عبور باید حداقل 6 کارکتر باشد'
                         }
                     }
                 },
                 password_confirmation: {
                     validators: {
                         notEmpty: {
-                            message: 'تکرار گذرواژه را لطفا وارد کنید'
+                            message: 'تکرار رمز عبور را وارد کنید'
                         },
                         identical: {
                             field: 'password',
                             message: 'رمز عبور و تکرار آن یکسان نیست'
+                        },
+                        stringLength: {
+                            min: 6,
+                            message: 'تکرار رمز عبور باید حداقل 6 کارکتر باشد'
                         }
                     }
                 }

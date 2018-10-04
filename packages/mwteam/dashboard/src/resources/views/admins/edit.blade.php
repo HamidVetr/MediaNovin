@@ -76,7 +76,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row form-group">
-                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    <span class="tx-danger" style="margin-top: 12px;">&nbsp;</span>
                                     {!! Form::label('password', 'رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
 
                                     <div class="col-sm-9 mg-t-10 mg-sm-t-0">
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row form-group">
-                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    <span class="tx-danger" style="margin-top: 12px;">&nbsp;</span>
                                     {!! Form::label('password_confirmation', 'تکرار رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
 
                                     <div class="col-sm-9 mg-t-10 mg-sm-t-0">
@@ -112,54 +112,59 @@
                 first_name: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا نام را وارد کنید'
+                            message: 'نام را وارد کنید'
                         }
                     }
                 },
                 last_name: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا نام خانوادگی را وارد کنید'
+                            message: 'نام خانوادگی را وارد کنید'
                         }
                     }
                 },
                 username: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا نام کاربری را وارد کنید'
+                            message: 'نام کاربری را وارد کنید'
                         }
                     }
                 },
                 email: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا آدرس پست الکترونیکی را وارد کنید'
+                            message: 'ایمیل را وارد کنید'
+                        },
+                        emailAddress: {
+                            message: 'فرمت ایمیل صحیح نمی باشد'
                         }
                     }
                 },
                 password: {
                     validators: {
-                        notEmpty: {
-                            message: 'رمز عبور را وارد کنید'
-                        },
                         identical: {
                             field: 'password_confirmation',
                             message: 'رمز عبور و تکرار آن یکسان نیست'
+                        },
+                        stringLength: {
+                            min: 6,
+                            message: 'رمز عبور باید حداقل 6 کارکتر باشد'
                         }
                     }
                 },
                 password_confirmation: {
                     validators: {
-                        notEmpty: {
-                            message: 'تکرار گذرواژه را لطفا وارد کنید'
-                        },
                         identical: {
                             field: 'password',
                             message: 'رمز عبور و تکرار آن یکسان نیست'
+                        },
+                        stringLength: {
+                            min: 6,
+                            message: 'تکرار رمز عبور باید حداقل 6 کارکتر باشد'
                         }
                     }
                 }
             }
-        })
+        });
     </script>
 @endsection

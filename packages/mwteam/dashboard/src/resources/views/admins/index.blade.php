@@ -84,19 +84,58 @@
                                 <td>
                                     <ul class="img-edit">
                                         <li class="pd-l-10">
-                                            <form id="form-status" method="post" action="{{is_null($admin->deleted_at) ?
+                                            <form method="post" action="{{is_null($admin->deleted_at) ?
                                                 route('dashboard.admins.deactive' , ['adminId' => $admin->id]):
                                                 route('dashboard.admins.active' , ['adminId' => $admin->id])}}">
 
                                                 {{csrf_field()}}
                                             </form>
                                             @if(is_null($admin->deleted_at))
-                                                <a data-toggle="modal" data-target="#modaldemo6" href="javascript:{}"  onclick="document.getElementById('form-status').submit();">
+                                                <a data-toggle="modal" data-target="#modal-deactive-{{$admin->id}}">
                                                     <span class="font-ban">
                                                         <i class="fa fa-minus-circle" data-toggle="tooltip" title="غیر فعال کردن"></i>
                                                     </span>
                                                 </a>
+
+                                                <div id="modal-deactive-{{$admin->id}}" class="modal fade">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content tx-size-sm">
+                                                            <div class="modal-body tx-center pd-y-20 pd-x-20">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                                                                <h6 class="tx-black  tx-semibold mg-b-20">مدیر غیر فعال شود؟</h6>
+                                                                <p class="pd-x-100"></p>
+                                                                <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">تایید</button>
+                                                                <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                                                            </div><!-- modal-body -->
+                                                        </div><!-- modal-content -->
+                                                    </div><!-- modal-dialog -->
+                                                </div><!-- modal -->
                                             @else
+                                                <a data-toggle="modal" data-target="#modal-active-{{$admin->id}}">
+                                                    <span class="font-ban">
+                                                        <i class="fa fa-check-circle" data-toggle="tooltip" title="غیر فعال کردن"></i>
+                                                    </span>
+                                                </a>
+
+                                                <div id="modal-active-{{$admin->id}}" class="modal fade">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content tx-size-sm">
+                                                            <div class="modal-body tx-center pd-y-20 pd-x-20">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                                                                <h6 class="tx-black  tx-semibold mg-b-20">مدیر فعال شود؟</h6>
+                                                                <p class="pd-x-100"></p>
+                                                                <button type="button" class="btn btn-sucess tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">تایید</button>
+                                                                <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                                                            </div><!-- modal-body -->
+                                                        </div><!-- modal-content -->
+                                                    </div><!-- modal-dialog -->
+                                                </div><!-- modal -->
                                             @endif
                                         </li>
                                         <li>
@@ -123,24 +162,6 @@
             </div>
         </div>
     </div>
-    <div id="modaldemo5" class="modal fade">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content tx-size-sm">
-                <div class="modal-body tx-center pd-y-20 pd-x-20">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                    <h6 class="tx-black  tx-semibold mg-b-20">آیا مایلید شناسه مدیر را غیرفعال کنید؟</h6>
-                    <p class="pd-x-100"></p>
-                    <button type="button" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
-                        حذف</button>
-                    <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">
-                        انصراف</button>
-                </div><!-- modal-body -->
-            </div><!-- modal-content -->
-        </div><!-- modal-dialog -->
-    </div><!-- modal -->
 @endsection
 
 @section('bottom-assets')
