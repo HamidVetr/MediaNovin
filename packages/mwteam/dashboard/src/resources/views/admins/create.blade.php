@@ -27,51 +27,69 @@
                 <div class="col-xl-12">
                     <div class="form-layout form-layout-4">
                         <div class="row mg-t-20">
-                            <span class="tx-danger" style="margin-top: 12px;">*</span>
-                            {!! Form::label('first_name', 'نام:', ['class' => 'col-sm-2 form-control-label']) !!}
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    {!! Form::label('first_name', '  نام:', ['class' => 'col-sm-2 form-control-label']) !!}
 
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+                                    <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                                        {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    {!! Form::label('last_name', 'نام خانوادگی:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                    <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                                        {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row mg-t-20">
-                            <span class="tx-danger" style="margin-top: 12px;">*</span>
-                            {!! Form::label('last_name', 'نام خانوادگی:', ['class' => 'col-sm-2 form-control-label']) !!}
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    {!! Form::label('username', 'نام کاربری:', ['class' => 'col-sm-2 form-control-label']) !!}
 
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+                                    <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                                        {!! Form::text('username', null, ['class' => 'form-control text-LEft']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    {!! Form::label('email', 'ایمیل:', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                    <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                                        {!! Form::text('email', null, ['class' => 'form-control text-LEft']) !!}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row mg-t-20">
-                            <span class="tx-danger" style="margin-top: 12px;">*</span>
-                            {!! Form::label('username', 'نام کاربری:', ['class' => 'col-sm-2 form-control-label']) !!}
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    {!! Form::label('password', 'رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
 
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::text('username', null, ['class' => 'form-control text-LEft']) !!}
+                                    <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                                        {!! Form::password('password', ['class' => 'form-control text-LEft']) !!}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mg-t-20">
-                            <span class="tx-danger" style="margin-top: 12px;">*</span>
-                            {!! Form::label('email', 'ایمیل:', ['class' => 'col-sm-2 form-control-label']) !!}
+                            <div class="col-md-6">
+                                <div class="row form-group">
+                                    <span class="tx-danger" style="margin-top: 12px;">*</span>
+                                    {!! Form::label('password_confirmation', 'تکرار رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
 
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::text('email', null, ['class' => 'form-control text-LEft']) !!}
-                            </div>
-                        </div>
-                        <div class="row mg-t-20">
-                            <span class="tx-danger" style="margin-top: 12px;">*</span>
-                            {!! Form::label('password', 'رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
-
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::password('password', ['class' => 'form-control text-LEft']) !!}
-                            </div>
-                        </div>
-                        <div class="row mg-t-20">
-                            <span class="tx-danger" style="margin-top: 12px;">*</span>
-                            {!! Form::label('password_confirmation', 'تکرار رمز عبور:', ['class' => 'col-sm-2 form-control-label']) !!}
-
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                {!! Form::password('password_confirmation', ['class' => 'form-control text-LEft']) !!}
+                                    <div class="col-sm-9 mg-t-10 mg-sm-t-0">
+                                        {!! Form::password('password_confirmation', ['class' => 'form-control text-LEft']) !!}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-layout-footer mg-t-30 text-center">

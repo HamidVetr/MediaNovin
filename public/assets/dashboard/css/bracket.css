@@ -62439,8 +62439,8 @@ img {
   font-size: 20px;
 }
 .tooltip .tooltip-inner {
-  background-color: #ffc;
-  color: #c00;
+  background-color: #000000;
+  color: #ffffff;
   min-width: 100px;
   font-family: iranSans!important;
 }
