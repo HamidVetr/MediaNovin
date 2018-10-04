@@ -7,11 +7,15 @@ return [
         'path' => 'dashboard/tickets',
         'yield' => 'tickets',
         'notification' => 'ticketCount',
+        'method' => 'tickets',
+        'model' => Mwteam\Ticket\App\Models\Ticket::class,
         'subMenus' => [
             [
                 'title' => 'ارسال تیکت',
                 'url' => route('dashboard.tickets.create'),
-                'yield' => 'tickets-create'
+                'yield' => 'tickets-create',
+                'method' => 'tickets',
+                'model' => Mwteam\Ticket\App\Models\Ticket::class,
             ],
             [
                 'title' => 'لیست تیکت ها',

@@ -2,11 +2,17 @@
 
 namespace Mwteam\Dashboard;
 
+use App\Models\User;
+use Mwteam\Dashboard\App\Policies\AdminPolicy;
 use Mwteam\Dashboard\PackageServiceProvider as ServiceProvider;
 use Mwteam\Dashboard\App\Console\Commands\SeedCommand;
 
 class DashboardServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        User::class => AdminPolicy::class,
+    ];
+
     /**
      * Bootstrap the application services.
      *
@@ -14,8 +20,7 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        global $notifications;
-        $notifications = [];
+        $this->registerPolicies();
 
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'dashboard');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
