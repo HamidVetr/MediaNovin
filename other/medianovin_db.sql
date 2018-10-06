@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 04, 2018 at 09:59 AM
+-- Generation Time: Oct 06, 2018 at 05:18 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -188,19 +188,20 @@ INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `parent`, `created_at`,
 (3, 'ارسال تیکت', 'tickets-send', 'tickets', '2018-10-04 09:35:39', '2018-10-04 09:35:39'),
 (4, 'حذف تیکت', 'tickets-delete', 'tickets', '2018-10-04 09:35:39', '2018-10-04 09:35:39'),
 (5, 'وبلاگ', 'blog', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(6, 'ایجاد مقاله', 'blog-articles-create', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(7, 'ویرایش مقاله', 'blog-articles-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(8, 'حذف مقاله', 'blog-articles-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(9, 'ایجاد دسته بندی', 'blog-categories-create', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(10, 'ویرایش دسته بندی', 'blog-categories-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(11, 'حذف دسته بندی', 'blog-categories-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(12, 'ایجاد تگ', 'blog-tags-create', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(13, 'ویرایش تگ', 'blog-tags-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(14, 'حذف تگ', 'blog-tags-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(15, 'تایید نظر', 'blog-comments-approve', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(16, 'ویرایش نظر', 'blog-comments-edit', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(17, 'حذف نظر', 'blog-comments-delete', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
-(18, 'پاسخ به نظر', 'blog-comments-reply', NULL, '2018-10-04 09:56:11', '2018-10-04 09:56:11');
+(6, 'ایجاد مقاله', 'blog-articles-create', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(7, 'ویرایش مقاله', 'blog-articles-edit', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(8, 'حذف مقاله', 'blog-articles-delete', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(9, 'ایجاد دسته بندی', 'blog-categories-create', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(10, 'ویرایش دسته بندی', 'blog-categories-edit', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(11, 'حذف دسته بندی', 'blog-categories-delete', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(12, 'ایجاد تگ', 'blog-tags-create', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(13, 'ویرایش تگ', 'blog-tags-edit', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(14, 'حذف تگ', 'blog-tags-delete', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(15, 'تایید نظر', 'blog-comments-approve', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(16, 'ویرایش نظر', 'blog-comments-edit', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(17, 'حذف نظر', 'blog-comments-delete', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(18, 'پاسخ به نظر', 'blog-comments-reply', 'blog', '2018-10-04 09:56:11', '2018-10-04 09:56:11'),
+(19, 'تنظیمات', 'settings', NULL, '2018-10-05 20:30:00', '2018-10-05 20:30:00');
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,8 @@ INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `parent`, `created_at`,
 DROP TABLE IF EXISTS `permission_user`;
 CREATE TABLE IF NOT EXISTS `permission_user` (
   `permission_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL
+  `user_id` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`permission_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -221,10 +223,10 @@ CREATE TABLE IF NOT EXISTS `permission_user` (
 INSERT INTO `permission_user` (`permission_id`, `user_id`) VALUES
 (1, 1),
 (2, 1),
-(3, 1),
-(4, 1),
 (2, 3),
+(3, 1),
 (3, 3),
+(4, 1),
 (4, 3),
 (5, 1),
 (6, 1),
@@ -239,7 +241,8 @@ INSERT INTO `permission_user` (`permission_id`, `user_id`) VALUES
 (15, 1),
 (16, 1),
 (17, 1),
-(18, 1);
+(18, 1),
+(19, 1);
 
 -- --------------------------------------------------------
 
@@ -271,15 +274,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `tickets`
---
-
-INSERT INTO `tickets` (`id`, `user_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'تست', 'closed', '2018-10-04 09:23:53', '2018-10-04 09:23:53'),
-(2, 2, 'تست', 'closed', '2018-10-04 09:35:39', '2018-10-04 09:35:39');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -310,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$d.hu9UIgZEOW1UIMvq30bOZrtKHzIyT8FCIL4oYKMjDPjXN1BgDNm', 'super-admin', NULL, NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
+(1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$d.hu9UIgZEOW1UIMvq30bOZrtKHzIyT8FCIL4oYKMjDPjXN1BgDNm', 'super-admin', '3cJ6q1Cl9lmiCYhdSGMadJrxDK9PgqwLdrsUxrjs77mH9RemHwLQwDiqgr6d', NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
 (2, 'b', 'b', 'user', 'user@email.com', '$2y$10$DACkkdXdeky2u2qerYO2R.cPZCAQsdJHRHMniI4neEd4W70UhYzX6', 'user', NULL, NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
 (3, 'c', 'c', 'admin2', 'admin2@email.com', '$2y$10$kacDG0ZBJvSNVw2kcRf/v.A7peFmctdOTDQ76laItVgjKOJITxL1K', 'admin', NULL, NULL, '2018-10-04 09:30:09', '2018-10-04 09:50:19'),
 (5, 'd', 'd', 'admin3', 'admin3@email.com', '$2y$10$hOejHwtXUcSL9Gp2JmBZHuYDKSnfN9nV/Ws0zKorgxXo.VOSBTaCu', 'admin', NULL, NULL, '2018-10-04 09:40:59', '2018-10-04 09:40:59');
