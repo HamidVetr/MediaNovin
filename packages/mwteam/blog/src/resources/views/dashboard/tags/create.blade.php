@@ -12,13 +12,13 @@
     <div class="br-pageheader">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
             <a href="{{ route('dashboard.home') }}" class="breadcrumb-item">خانه</a>
-            <a href="{{ route('dashboard.blog.articles.index') }}" class="breadcrumb-item">مقالات</a>
-            <span class="breadcrumb-item active">ساخت مقاله</span>
+            <a href="{{ route('dashboard.blog.articles.index') }}" class="breadcrumb-item">برچسب ها</a>
+            <span class="breadcrumb-item active">افزودن برچسب</span>
         </nav>
     </div>
     <div class="br-pagetitle">
         <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">ساخت مقاله</h4>
+        <h4 class="pd-r-10">افزودن برچسب</h4>
     </div>
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
@@ -27,7 +27,7 @@
                     <div class="col-xl-12">
                         <div class="form-group row mg-t-20">
                             <label for="" class="col-sm-2 form-control-label">
-                                عنوان :
+                                نام :
                                 <span class="tx-danger">*</span>
                             </label>
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -36,57 +36,16 @@
                         </div>
                         <div class="form-group row mg-t-20">
                             <label for="" class="col-sm-2 form-control-label">
-                                وضعیت تیکت:
+                               نام انگلیسی:
                                 <span class="tx-danger">*</span>
                             </label>
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <select data-placeholder="انتخاب کنید..." class="form-control js-example-placeholder-single" name="status"  id="e9">
-                                    <option value=""></option>
-                                    <option value="1">پاسخ داده شده</option>
-                                    <option value="2">بسته شده</option>
-                                    <option value="3">در انتظار پاسخ  </option>
-                                    <option value="4">در حال بررسی</option>
-                                </select>
+                                <input type="text" class="form-control"  name="first_name">
                             </div>
                         </div>
-
-                        <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
-                                متن پیام:
-                                <span class="tx-danger">*</span>
-                            </label>
-                            <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <textarea name="" id="" cols="30" rows="6" class="form-control"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
-                                انتخاب فایل:
-                                <span class="tx-danger">*</span>
-                            </label>
-                            <div class="col-lg-8 col-md-10">
-                                <form class="md-form" action="#">
-                                    <div class="file-field">
-                                        <div class="btn btn-primary btn-md float-left">
-
-                                        <span>
-                                            <i class="fa fa-cloud-upload"></i>
-                                        </span>
-                                            <span class="pd-r-5">انتخاب فایل</span>
-                                            <input type="file" multiple>
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text" placeholder="یک یا چند فایل را آپلود کنید">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
                         <div class="row justify-content-center">
                             <div class="btn-demo">
-                                <button class="btn btn-info btn-block mg-b-10">ارسال تیکت </button>
+                                <button class="btn btn-info btn-block mg-b-10">ایجاد برچسب </button>
                             </div>
                         </div>
                     </div>

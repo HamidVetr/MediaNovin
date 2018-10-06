@@ -12,12 +12,28 @@
     <div class="br-pageheader">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
             <a href="{{ route('dashboard.home') }}" class="breadcrumb-item">خانه</a>
-            <span class="breadcrumb-item active">مقالات</span>
+            <span class="breadcrumb-item active">برچسب ها</span>
         </nav>
     </div>
-    <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">لیست مقالات</h4>
+    <div class="br-pagetitle row">
+        <div class="col-lg-6">
+            <div class="title-add">
+                <i class="icon icon ion-android-exit"></i>
+                <h4 class="pd-r-10">برچسب ها</h4>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="heading-elements pd-l-20">
+                <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
+                    <div class="ht-40 justify-content-between">
+                        <span class="ht-58 justify-content-between pd-r-20 pd-l-20">افزودن برچسب</span>
+                        <span class="icon wd-40">
+                             <i class="fa fa-plus"></i>
+                         </span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
@@ -27,25 +43,15 @@
                     <br><br>
                     <form action="">
                         <div class="row">
-                            <div class="col-md-2 col-xs-6">
-                                <div class="text-right">شناسه سفارش</div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="text-right">عنوان برچسب</div>
                                 <input type="text" class="form-control">
                             </div>
 
-                            <div class="col-md-2 col-xs-6">
-                                <div class="text-right">کاربر</div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="text-right">تعداد</div>
                                 <input type="text" class="form-control">
                             </div>
-
-                            <div class="col-md-2 col-xs-6">
-                                <div class="text-right">وضعیت</div>
-                                <select class="form-control select-store">
-                                    <option>همه</option>
-                                    <option>تکمیل شده</option>
-                                    <option>تکمیل نشده</option>
-                                </select>
-                            </div>
-
                             <div class="col-md-3 col-xs-6">
                                 <div class="text-right">از تاریخ</div>
                                 <input type="text" class="form-control persianDatePricker text-left" name="from-date"  id="from-date" value>
@@ -68,99 +74,65 @@
                 <div class="rounded table-responsive">
                     <table class="table mg-b-0 table-tickets">
                         <thead>
-                        <tr>
-                            <th>شماره تیکت</th>
-                            <th>عنوان</th>
-                            <th>نام کاربر</th>
-                            <th>سمت</th>
-                            <th>به روز شده</th>
-                            <th>وضعیت</th>
-                            <th>جزئیات</th>
-                        </tr>
+                            <tr>
+                                <th>عنوان برچسب</th>
+                                <th>تعداد</th>
+                                <th>عملیات</th>
+                            </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>41</td>
-                            <td>تبریک، برنده مزایده شده اید</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-warning pd-5">پاسخ مشتری</span>
-                            </td>
+                            <td>فروش محصولات</td>
+                            <td>15</td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                   <span>
+                                       <i class="fa fa-pencil-square-o"></i>
+                                   </span>
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td>47</td>
                             <td>حذف پیام ارسال شده</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-warning pd-5">پاسخ مشتری</span>
-                            </td>
+                            <td>3</td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                   <span>
+                                       <i class="fa fa-pencil-square-o"></i>
+                                   </span>
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td>52</td>
                             <td>تبریک، برنده مزایده شده اید</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-primary pd-5">بسته شده</span>
-                            </td>
+                            <td>5</td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                   <span>
+                                       <i class="fa fa-pencil-square-o"></i>
+                                   </span>
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td>68</td>
                             <td>	حذف دیدگاه</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-primary pd-5">بسته شده</span>
-                            </td>
+                            <td>10</td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                   <span>
+                                       <i class="fa fa-pencil-square-o"></i>
+                                   </span>
                                 </a>
                             </td>
                         </tr>
                         <tr>
+                            <td>	حذف دیدگاه</td>
                             <td>66</td>
-                            <td>	حذف دیدگاه</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-info pd-5"> در حال بررسی</span>
-                            </td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                   <span>
+                                       <i class="fa fa-pencil-square-o"></i>
+                                   </span>
                                 </a>
                             </td>
                         </tr>

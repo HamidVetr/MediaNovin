@@ -1359,7 +1359,7 @@ pre code {
 }
 .table th,
 .table td {
-  padding: 0.25rem;
+  padding: 0.55rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
@@ -62572,3 +62572,113 @@ h6.panel-title, .h6.panel-title {
   color:green;
 }
 
+.category-title {
+  position: relative;
+  margin: 0;
+  padding: 12px 20px;
+  padding-left: 46px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(to right, #1CAF9A 0%, #17A2B8 100%);
+  color: #ffffff;
+}
+.br-section-wrapper-category{
+  background: #ffffff;
+}
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox] + label:before {
+    letter-spacing: 5px;
+}
+
+input[type=checkbox] + label:before {
+    content: "\f096";
+}
+input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+input[type=checkbox]:checked + label:before {
+    content: "\f046";
+    letter-spacing: 5px;
+}
+.category-content ul{
+    list-style: none;
+}
+
+
+
+
+
+.wrap{
+  width:300px;
+  margin:0 auto;
+  text-align:center;
+  overflow: hidden;
+}
+label[for=upload]{
+  display:inline-block;
+  border:3px solid #ccc;
+  color:#666;
+  font-weight:bold;
+  background:#eee;
+  padding:8px 15px;
+  border-radius:5px;
+  cursor:pointer
+}
+label[for=upload]:hover{
+  background:#ddd
+}
+label[for=upload] input{ display:none }
+.thumb{
+  position:relative;
+  height:300px;
+  width:300px;
+  overflow:hidden;
+  margin:40px 0;
+  cursor:move;
+
+}
+.thumb:before{
+  content:"";
+  display:block;
+  position:absolute;
+  width:99%;
+  height:99%;
+  border:3px dashed #1aaba4;
+  z-index:9;
+  top:1%;
+  left:1%;
+  opacity:0;
+  transition:all 0.2s;
+  pointer-events:none
+}
+.thumb:hover::before{
+  opacity:0.6
+}
+.thumb img{
+  width:100%;
+  max-width:800px;
+  max-height:800px;
+  transition:all 0.4s;
+}
+.treegrid-expander-expanded {
+    background-image: url(/assets/dashboard/images/down-arrow.png);
+}
+
+.treegrid-expander {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+.tree-table tbody tr td{
+    text-align:center;
+}
+.tree-table thead tr th{
+  text-align: center;
+}

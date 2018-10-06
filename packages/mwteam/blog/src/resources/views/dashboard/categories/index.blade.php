@@ -12,12 +12,29 @@
     <div class="br-pageheader">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
             <a href="{{ route('dashboard.home') }}" class="breadcrumb-item">خانه</a>
-            <span class="breadcrumb-item active">مقالات</span>
+            <span class="breadcrumb-item active">دسته بندی</span>
         </nav>
     </div>
-    <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">لیست مقالات</h4>
+
+    <div class="br-pagetitle row">
+        <div class="col-lg-6">
+            <div class="title-add">
+                <i class="icon icon ion-android-exit"></i>
+                <h4 class="pd-r-10">دسته بندی</h4>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="heading-elements pd-l-20">
+                <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
+                    <div class="ht-40 justify-content-between">
+                        <span class="ht-58 justify-content-between pd-r-20 pd-l-20">افزودن دسته</span>
+                        <span class="icon wd-40">
+                             <i class="fa fa-plus"></i>
+                         </span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
@@ -27,18 +44,13 @@
                     <br><br>
                     <form action="">
                         <div class="row">
-                            <div class="col-md-2 col-xs-6">
-                                <div class="text-right">شناسه سفارش</div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="text-right">نام دسته :</div>
                                 <input type="text" class="form-control">
                             </div>
 
-                            <div class="col-md-2 col-xs-6">
-                                <div class="text-right">کاربر</div>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="col-md-2 col-xs-6">
-                                <div class="text-right">وضعیت</div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="text-right">دسته مادر</div>
                                 <select class="form-control select-store">
                                     <option>همه</option>
                                     <option>تکمیل شده</option>
@@ -66,108 +78,111 @@
                     </form>
                 </div>
                 <div class="rounded table-responsive">
-                    <table class="table mg-b-0 table-tickets">
+                    <table class="table tree tree-table">
                         <thead>
                         <tr>
-                            <th>شماره تیکت</th>
-                            <th>عنوان</th>
-                            <th>نام کاربر</th>
-                            <th>سمت</th>
-                            <th>به روز شده</th>
-                            <th>وضعیت</th>
-                            <th>جزئیات</th>
+                            <th>نام دسته</th>
+                            <th>دسته مادر</th>
+                            <th>مشاهده صفحه</th>
+                            <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>41</td>
-                            <td>تبریک، برنده مزایده شده اید</td>
+                        <tr class="treegrid-1 treegrid-expanded">
                             <td>
-                                <a href="">user</a>
+                                <span class="treegrid-expander treegrid-expander-expanded"></span>
+                                صنایع دستی
                             </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
+                            <td>-</td>
                             <td>
-                                <span class="btn btn-warning pd-5">پاسخ مشتری</span>
+                                <a href="">
+                                    <span>
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+                                </a>
                             </td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </span>
                                 </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>47</td>
-                            <td>حذف پیام ارسال شده</td>
+                        <tr class="treegrid-2 treegrid-parent-1 treegrid-expanded">
                             <td>
-                                <a href="">user</a>
+                                <span class="treegrid-indent"></span>
+                                <span class="treegrid-expander treegrid-expander-expanded"></span>
+                                - محصولات
                             </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
+                            <td>-</td>
                             <td>
-                                <span class="btn btn-warning pd-5">پاسخ مشتری</span>
+                                <a href="">
+                                    <span>
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+                                </a>
                             </td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </span>
                                 </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>52</td>
-                            <td>تبریک، برنده مزایده شده اید</td>
+                        <tr class="treegrid-3 treegrid-parent-1 treegrid-expanded">
                             <td>
-                                <a href="">user</a>
+                                <span class="treegrid-indent"></span>
+                                <span class="treegrid-indent"></span>
+                                <span class="treegrid-expander treegrid-expander-expanded"></span>
+                                -- پوشاک
                             </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
+                            <td>-</td>
                             <td>
-                                <span class="btn btn-primary pd-5">بسته شده</span>
+                                <a href="">
+                                    <span>
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+                                </a>
                             </td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </span>
                                 </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>68</td>
-                            <td>	حذف دیدگاه</td>
+                        <tr class="treegrid-4 treegrid-parent-3">
                             <td>
-                                <a href="">user</a>
+                                <span class="treegrid-indent"></span>
+                                <span class="treegrid-indent"></span>
+                                <span class="treegrid-indent"></span>
+                                <span class="treegrid-expander"></span>
+                                --- تی شرت مردانه
                             </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
                             <td>
-                                <span class="btn btn-primary pd-5">بسته شده</span>
+                               <span class="badge badge-default">19</span>
                             </td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                    <span>
+                                        <i class="fa fa-eye"></i>
+                                    </span>
                                 </a>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>66</td>
-                            <td>	حذف دیدگاه</td>
-                            <td>
-                                <a href="">user</a>
-                            </td>
-                            <td>کاربر عادی</td>
-                            <td>14:09 1397/6/25</td>
-                            <td>
-                                <span class="btn btn-info pd-5"> در حال بررسی</span>
-                            </td>
                             <td>
                                 <a href="">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png') }}" alt="">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </span>
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-
                 <div class="ht-80 d-flex align-items-center justify-content-center mg-t-20 rtl">
                     <ul class="pagination pagination-circle mg-b-0">
                         <li class="page-item hidden-xs-down">
@@ -190,8 +205,6 @@
                         </li>
                     </ul>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -200,6 +213,7 @@
 @section('bottom-assets')
     <script src="{{ asset('assets/dashboard/js/persian-datepicker-0.4.5.js') }}"></script>
     <script src="{{ asset('assets/dashboard/js/pwt-date.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/jquery.treegrid.bootstrap3.js') }}"></script>
     <script type="text/javascript">
         $('.searchbtn').click(function(){
             $('#searchboxpage').stop().slideToggle();
@@ -215,5 +229,8 @@
         $('#from-date').val('');
 
         $('#to-date').val('');
+    </script>
+    <script>
+        $('.tree').treegrid();
     </script>
 @endsection
