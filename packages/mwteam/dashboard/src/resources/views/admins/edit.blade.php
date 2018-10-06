@@ -12,20 +12,21 @@
         @include('dashboard::partials.alert-success',['messages' => [session()->get('success')]])
     @endif
 
-    <div class="br-pageheader">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
-            <a href="{{route('dashboard.admins.index')}}" class="breadcrumb-item">مدیران سایت</a>
-            <span class="breadcrumb-item active">ویرایش اطلاعات</span>
-        </nav>
-    </div>
+    @include('dashboard::partials.breadcrumb', ['breadcrumbs' => [
+        [
+         'title' => 'لیست مدیران',
+         'url' => route('dashboard.admins.index'),
+        ],
+        [
+         'title' => 'ویرایش اطلاعات',
+         'url' => null,
+        ],
+    ]])
 
-    <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">ویرایش اطلاعات</h4>
-    </div>
+    @include('dashboard::partials.page-title', ['title' => 'ویرایش اطلاعات'])
+
     <div class="pd-t-30">
-        {!! Form::model($admin , ['method'=>'PUT', 'route' => ['dashboard.admins.update','adminId' => $admin->id], 'files' => false ,'id'=>'adminadd']) !!}
+        {!! Form::model($admin , ['method'=>'PUT', 'url' => route('dashboard.admins.update',['adminId' => $admin->id]), 'files' => false ,'id'=>'adminadd']) !!}
             <div class="row">
                 <div class="col-xl-12">
                     <div class="form-layout form-layout-4">

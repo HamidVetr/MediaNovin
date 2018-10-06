@@ -9,20 +9,21 @@
         @include('dashboard::partials.alert-error',['messages' => $errors->all()])
     @endif
 
-    <div class="br-pageheader">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
-            <a href="{{route('dashboard.admins.index')}}" class="breadcrumb-item">مدیران سایت</a>
-            <span class="breadcrumb-item active">افزودن مدیر</span>
-        </nav>
-    </div>
+    @include('dashboard::partials.breadcrumb', ['breadcrumbs' => [
+        [
+         'title' => 'لیست مدیران',
+         'url' => route('dashboard.admins.index'),
+        ],
+        [
+         'title' => 'افزودن مدیر',
+         'url' => null,
+        ],
+    ]])
 
-    <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">افزودن مدیر</h4>
-    </div>
+    @include('dashboard::partials.page-title', ['title' => 'افزودن مدیر'])
+
     <div class="pd-t-30">
-        {!! Form::open(['method'=>'POST', 'route' => ['dashboard.admins.store'], 'files' => false ,'id'=>'adminadd']) !!}
+        {!! Form::open(['method'=>'POST', 'url' => route('dashboard.admins.store'), 'files' => false ,'id'=>'adminadd']) !!}
             <div class="row">
                 <div class="col-xl-12">
                     <div class="form-layout form-layout-4">

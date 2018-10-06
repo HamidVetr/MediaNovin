@@ -3,14 +3,14 @@
 namespace App\Helpers;
 
 use Carbon\Carbon;
-use Morilog\Jalali\jDateTime;
+use Morilog\Jalali\CalendarUtils;
 
 class DatetimeHelper
 {
     public static function toJalaliDate($date)
     {
         $dateParts = explode('-', (new Carbon($date))->toDateString());
-        $persianDate = jDateTime::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
+        $persianDate = CalendarUtils::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
         return $persianDate[0] . '/' . $persianDate[1] . '/' . $persianDate[2];
     }
 
@@ -25,7 +25,7 @@ class DatetimeHelper
 
             $timeParts = explode(':', $persianDatetime[1]);
             $second = isset($timeParts[2]) ? $timeParts[2] : '00';
-            $dateParts = jDateTime::toGregorian($persianYear, $persianMonth, $persianDay);
+            $dateParts = CalendarUtils::toGregorian($persianYear, $persianMonth, $persianDay);
 
             return Carbon::createFromFormat('Y-m-d H:i:s', $dateParts[0] . '-' . $dateParts[1] . '-' . $dateParts[2] . ' '
                 . $timeParts[0] . ':' . $timeParts[1] . ':' . $second);
@@ -38,21 +38,21 @@ class DatetimeHelper
     public static function getJalaliYear()
     {
         $dateParts = explode('-', (Carbon::now())->toDateString());
-        $persianDate = jDateTime::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
+        $persianDate = CalendarUtils::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
         return $persianDate[0];
     }
 
     public static function getJalaliMonth()
     {
         $dateParts = explode('-', (Carbon::now())->toDateString());
-        $persianDate = jDateTime::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
+        $persianDate = CalendarUtils::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
         return in_array($persianDate[1], [10, 11, 12]) ? $persianDate[1] : '0' . $persianDate[1];
     }
 
     public static function getJalaliDay()
     {
         $dateParts = explode('-', (Carbon::now())->toDateString());
-        $persianDate = jDateTime::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
+        $persianDate = CalendarUtils::toJalali($dateParts[0], $dateParts[1], $dateParts[2]);
         return $persianDate[2];
     }
 
@@ -71,7 +71,7 @@ class DatetimeHelper
         $minute = substr($datetime, 14, 2);
         $second = substr($datetime, 17, 2) != false ? substr($datetime, 17, 2) : '00';
 
-        $isJalali = jDateTime::checkDate($year, $month, $day);
+        $isJalali = CalendarUtils::checkDate($year, $month, $day);
         $isTime = preg_match("/^([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/", $hour . ':' . $minute . ':' . $second);
         return $isJalali && $isTime ? true : false;
     }

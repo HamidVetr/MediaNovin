@@ -9,6 +9,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/{ticketId}', 'TicketController@reply')->name('reply');
             Route::delete('/{ticketId}', 'TicketController@destroy')->name('destroy');
             Route::delete('/{ticketId}/{messageId}', 'TicketController@destroyMessage')->name('destroyMessage');
+            Route::post('/status', 'TicketController@status')->name('status');
+            Route::get('/{ticketId}/{fileName}', 'TicketController@file')->name('file');
         });
     });
 });

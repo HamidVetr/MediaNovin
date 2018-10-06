@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 06, 2018 at 05:18 AM
+-- Generation Time: Oct 06, 2018 at 12:48 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -145,7 +145,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2018_10_02_171254_create_blog_tags_table', 1),
 (9, '2018_10_02_171312_create_blog_categories_table', 1),
 (10, '2018_10_02_171328_create_blog_comments_table', 1),
-(11, '2018_10_02_171443_create_blog_article_blog_tag_table', 1);
+(11, '2018_10_02_171443_create_blog_article_blog_tag_table', 1),
+(12, '2018_10_06_085555_create_ticket_messages_table', 2);
 
 -- --------------------------------------------------------
 
@@ -274,7 +275,45 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `user_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 'تست 1', 'closed', '2018-10-06 06:49:50', '2018-10-06 06:49:50'),
+(2, 3, 'تست 2', 'in-queue', '2018-10-06 06:49:51', '2018-10-06 06:49:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_messages`
+--
+
+DROP TABLE IF EXISTS `ticket_messages`;
+CREATE TABLE IF NOT EXISTS `ticket_messages` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ticket_id` int(10) UNSIGNED NOT NULL,
+  `sender` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `seen` tinyint(1) NOT NULL DEFAULT '0',
+  `file` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ticket_messages`
+--
+
+INSERT INTO `ticket_messages` (`id`, `ticket_id`, `sender`, `message`, `seen`, `file`, `created_at`, `updated_at`) VALUES
+(1, 1, 'admin', 'پیام 1 تست 1 ادمین', 1, NULL, '2018-10-06 06:49:51', '2018-10-06 06:49:51'),
+(2, 1, 'user', 'پیام 2 تست 1 کاربر', 1, NULL, '2018-10-06 06:49:51', '2018-10-06 06:49:51'),
+(3, 1, 'admin', 'پیام 3 تست 1 ادمین', 0, NULL, '2018-10-06 06:49:51', '2018-10-06 06:49:51'),
+(4, 2, 'user', 'پیام 1 تست 2 کاربر', 0, NULL, '2018-10-06 06:49:51', '2018-10-06 06:49:51'),
+(6, 2, 'admin', 'تست', 0, 'c399f8ade923afce559bba8ee19c7abfRkNXVkpACm7uhnv.zip', '2018-10-06 12:38:48', '2018-10-06 12:38:48');
 
 -- --------------------------------------------------------
 
@@ -307,8 +346,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'a', 'a', 'admin', 'admin@email.com', '$2y$10$d.hu9UIgZEOW1UIMvq30bOZrtKHzIyT8FCIL4oYKMjDPjXN1BgDNm', 'super-admin', '3cJ6q1Cl9lmiCYhdSGMadJrxDK9PgqwLdrsUxrjs77mH9RemHwLQwDiqgr6d', NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
 (2, 'b', 'b', 'user', 'user@email.com', '$2y$10$DACkkdXdeky2u2qerYO2R.cPZCAQsdJHRHMniI4neEd4W70UhYzX6', 'user', NULL, NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
-(3, 'c', 'c', 'admin2', 'admin2@email.com', '$2y$10$kacDG0ZBJvSNVw2kcRf/v.A7peFmctdOTDQ76laItVgjKOJITxL1K', 'admin', NULL, NULL, '2018-10-04 09:30:09', '2018-10-04 09:50:19'),
-(5, 'd', 'd', 'admin3', 'admin3@email.com', '$2y$10$hOejHwtXUcSL9Gp2JmBZHuYDKSnfN9nV/Ws0zKorgxXo.VOSBTaCu', 'admin', NULL, NULL, '2018-10-04 09:40:59', '2018-10-04 09:40:59');
+(3, 'c', 'c', 'user2', 'user2@email.com', '$2y$10$DACkkdXdeky2u2qerYO2R.cPZCAQsdJHRHMniI4neEd4W70UhYzX6', 'user', NULL, NULL, '2018-10-04 09:24:35', '2018-10-04 09:24:35'),
+(4, 'd', 'd', 'admin2', 'admin2@email.com', '$2y$10$kacDG0ZBJvSNVw2kcRf/v.A7peFmctdOTDQ76laItVgjKOJITxL1K', 'admin', NULL, NULL, '2018-10-04 09:30:09', '2018-10-06 06:37:59'),
+(5, 'e', 'e', 'admin3', 'admin3@email.com', '$2y$10$hOejHwtXUcSL9Gp2JmBZHuYDKSnfN9nV/Ws0zKorgxXo.VOSBTaCu', 'admin', NULL, NULL, '2018-10-04 09:40:59', '2018-10-04 09:40:59');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
