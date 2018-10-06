@@ -34,7 +34,7 @@ return [
         ]
     ],
     'seed' => [
-        'user' => 'Mwteam\\Dashboard\\Database\\Seeds\\UsersTableSeeder',
-        'permission' => 'Mwteam\\Dashboard\\Database\\Seeds\\PermissionTableSeeder',
+        'users' => 'Mwteam\\Dashboard\\Database\\Seeds\\UsersTableSeeder',
+        'permissions' => 'Mwteam\\Dashboard\\Database\\Seeds\\PermissionTableSeeder',
     ]
 ];

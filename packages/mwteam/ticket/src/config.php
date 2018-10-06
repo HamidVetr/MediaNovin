@@ -27,7 +27,21 @@ return [
         ]
     ],
     'seed' => [
-        'permission' => 'Mwteam\\Ticket\\Database\\Seeds\\PermissionTableSeeder',
-        'ticket' => 'Mwteam\\Ticket\\Database\\Seeds\\TicketTableSeeder'
+        'permissions' => 'Mwteam\\Ticket\\Database\\Seeds\\PermissionTableSeeder',
+        'tickets' => 'Mwteam\\Ticket\\Database\\Seeds\\TicketTableSeeder'
+    ],
+    'validation' => [
+        'file' => [
+            'laravel' => [
+                'mimetypes' => 'image/jpeg,image/png,application/pdf,application/zip',
+                'max' => 10240,
+                'file.max' => 'حداکثر سایز فایل 10 مگابایت می باشد'
+            ],
+            'js' => [
+                'type' => 'image/jpeg,image/png,application/pdf,application/x-zip-compressed',
+                'maxSize' => 1024 * 1024 * 10,
+                'message' => 'فرمت قابل قبول: jpg, png, pdf, zip. حداکثر سایز فایل: 10 مگابایت',
+            ]
+        ]
     ]
 ];

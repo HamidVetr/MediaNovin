@@ -33,6 +33,11 @@ class User extends Authenticatable
 
     private $permissions = null;
 
+    public static function roles()
+    {
+        return static::$roles;
+    }
+
     //****************************** relations *************************
 
     public function permissions()
@@ -49,6 +54,11 @@ class User extends Authenticatable
     public function scopeAdminOrSuperAdmin($query)
     {
         return $query->where('role','admin')->orWhere('role', 'super-admin');
+    }
+
+    public function scopeNotSuperAdmin($query)
+    {
+        return $query->where('role','!=','super-admin');
     }
 
     //****************************** methods ************************************

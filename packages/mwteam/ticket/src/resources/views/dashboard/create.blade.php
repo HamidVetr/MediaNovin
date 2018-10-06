@@ -9,102 +9,87 @@
 @endsection
 
 @section('content')
-    <div class="br-pageheader">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a href="" class="breadcrumb-item">خانه</a>
-            <a href="" class="breadcrumb-item">تیکت ها</a>
-            <span class="breadcrumb-item active">ارسال تیکت</span>
-        </nav>
-    </div>
-    <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">ارسال تیکت</h4>
-    </div>
+    @if($errors->any())
+        @include('dashboard::partials.alert-error',['messages' => $errors->all()])
+    @endif
+
+    @include('dashboard::partials.breadcrumb', ['breadcrumbs' => [
+        [
+         'title' => 'لیست تیکت ها',
+         'url' => route('dashboard.tickets.index'),
+        ],
+        [
+         'title' => 'ارسال تیکت',
+         'url' => null,
+        ],
+    ]])
+
+    @include('dashboard::partials.page-title', ['title' => 'ارسال تیکت'])
+
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
-            <form  id="tiketsend">
+            {!! Form::open(['method'=>'POST', 'url' => route('dashboard.tickets.store'), 'files' => true, 'id' => 'tiketsend']) !!}
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
-                                عنوان :
-                                <span class="tx-danger">*</span>
-                            </label>
+                            <span class="tx-danger">*</span>
+                            {!! Form::label(null, 'عنوان :', ['class' => 'col-sm-2 form-control-label']) !!}
+
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <input type="text" class="form-control"  name="title">
+                                {!! Form::text('title', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
-                                نام کاربر:
-                                <span class="tx-danger">*</span>
-                            </label>
+                            <span class="tx-danger">*</span>
+                            {!! Form::label(null, 'نام کاربر :', ['class' => 'col-sm-2 form-control-label']) !!}
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <select data-placeholder="انتخاب کنید..." class="form-control js-example-placeholder-single" name="users"  id="e9">
-                                    <option value=""></option>
-                                    <option value="1">عظیمی</option>
-                                    <option value="2">سلطانی</option>
-                                    <option value="3">محمدی</option>
-                                    <option value="4"></option>
-                                </select>
+                                {!! Form::select('user',$users, null, ['class' => 'form-control select2', 'placeholder' => 'انتخاب کنید...']) !!}
                             </div>
                         </div>
                         <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
-                               وضعیت تیکت:
-                                <span class="tx-danger">*</span>
-                            </label>
+                            <span class="tx-danger">*</span>
+                            {!! Form::label(null, 'وضعیت تیکت :', ['class' => 'col-sm-2 form-control-label']) !!}
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <select data-placeholder="انتخاب کنید..." class="form-control js-example-placeholder-single" name="status"  id="e9">
-                                    <option value=""></option>
-                                    <option value="1">پاسخ داده شده</option>
-                                    <option value="2">بسته شده</option>
-                                    <option value="3">در انتظار پاسخ  </option>
-                                    <option value="4">در حال بررسی</option>
-                                </select>
+                                {!! Form::select('status',\Mwteam\Ticket\App\Models\Ticket::statuses(), null, ['class' => 'form-control select2', 'placeholder' => 'انتخاب کنید...']) !!}
                             </div>
                         </div>
 
                         <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
-                                متن پیام:
-                                <span class="tx-danger">*</span>
-                            </label>
+                            <span class="tx-danger">*</span>
+                            {!! Form::label(null, 'متن پیام :', ['class' => 'col-sm-2 form-control-label']) !!}
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                <textarea name="text" id="" cols="30" rows="6" class="form-control"></textarea>
+                                {!! Form::textarea('message',null,['cols' => 30, 'rows' => 6, 'class' => 'form-control']) !!}
                             </div>
                         </div>
 
                         <div class="form-group row mg-t-20">
-                            <label for="" class="col-sm-2 form-control-label">
-                                انتخاب فایل:
-                                <span class="tx-danger">*</span>
-                            </label>
-                           <div class="col-lg-8 col-md-10">
+                            <span class="tx-danger">*</span>
+                            {!! Form::label(null, 'انتخاب فایل :', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                            <div class="col-lg-8 col-md-10">
                                 <div class="file-field">
                                     <div class="btn btn-primary btn-md float-left">
-
                                         <span>
                                             <i class="fa fa-cloud-upload"></i>
                                         </span>
                                         <span class="pd-r-5">انتخاب فایل</span>
-                                        <input type="file" multiple name="file">
+                                        {!! Form::file('file') !!}
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path validate" type="text" placeholder="یک یا چند فایل را آپلود کنید">
+                                        {!! Form::text(null, null, ['class' => 'file-path validate']) !!}
                                     </div>
                                 </div>
-                           </div>
+                            </div>
                         </div>
 
                         <div class="row justify-content-center">
                             <div class="btn-demo">
-                                <button class="btn btn-info btn-block mg-b-10">ارسال تیکت </button>
+                                {!! Form::submit('ارسال تیکت', ['class'=>'btn btn-info btn-block mg-b-10']) !!}
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection
@@ -114,53 +99,49 @@
     <script type="text/javascript" src="assets/dashboard/js/bootstrapValidator.min.js"></script>
 
     <script type="text/javascript">
-            $('#e9').select2();
+        $('.select2').select2();
 
-            $(".js-example-placeholder-single").select2({
-                placeholder: "انتخاب کنید...",
-                allowClear: true
-            });
-    </script>
-    <script>
         $('#tiketsend').bootstrapValidator({
             excluded: ':disabled',
             fields: {
                 title: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا عنوان را وارد کنید'
+                            message: 'عنوان را وارد کنید'
                         }
                     }
                 },
-               users: {
+                user: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا نام کاربر را انتخاب کنبد'
+                            message: 'کاربر را انتخاب کنید'
                         }
                     }
                 },
                 status: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا وضعیت را انتخاب کنید'
+                            message: 'وضعیت را انتخاب کنید'
                         }
                     }
                 },
-               text: {
+                message: {
                     validators: {
                         notEmpty: {
-                            message: 'لطفا متن  خود   را وارد کنید'
+                            message: 'متن را وارد کنید'
                         },
                     }
                 },
                 file: {
                     validators: {
-                        notEmpty: {
-                            message: 'لطفا آدرس پست الکترونیکی را وارد کنید'
+                        file: {
+                            type: "{{\App\Helpers\PackageHelper::getConfig('ticket')['validation']['file']['js']['type']}}",
+                            maxSize: parseInt("{{\App\Helpers\PackageHelper::getConfig('ticket')['validation']['file']['js']['maxSize']}}"),
+                            message: "{{\App\Helpers\PackageHelper::getConfig('ticket')['validation']['file']['js']['message']}}"
                         }
                     }
                 },
             }
-        })
+        });
     </script>
 @endsection

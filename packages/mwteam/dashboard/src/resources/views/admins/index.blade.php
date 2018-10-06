@@ -4,8 +4,17 @@
 @section('admins') active @endsection
 @section('admins-index') active @endsection
 
-@section('top-assets')
-    <link href="{{ asset('assets/dashboard/css/toggles-full.css') }}" rel="stylesheet" type="text/css">
+@section('page-title')
+    <div class="heading-elements pd-l-20">
+        <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
+            <div class="ht-40 justify-content-between">
+                <span class="ht-58 justify-content-between pd-r-20 pd-l-20">افزودن مدیر</span>
+                <span class="icon wd-40">
+                    <i class="fa fa-plus"></i>
+                </span>
+            </div>
+        </a>
+    </div>
 @endsection
 
 @section('content')
@@ -13,40 +22,20 @@
         @include('dashboard::partials.alert-success',['messages' => [session()->get('success')]])
     @endif
 
-    <div class="br-pageheader">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
-            <span class="breadcrumb-item active">مدیران سایت</span>
-        </nav>
-    </div>
+    @include('dashboard::partials.breadcrumb', ['breadcrumbs' => [
+        [
+         'title' => 'لیست مدیران',
+         'url' => null,
+        ]
+    ]])
 
-    <div class="br-pagetitle row">
-
-        <div class="col-lg-6">
-             <div class="title-add">
-                <i class="icon icon ion-android-exit"></i>
-                <h4 class="pd-r-10">مدیران سایت</h4>
-             </div>
-        </div>
-        <div class="col-lg-6">
-             <div class="heading-elements pd-l-20">
-                 <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
-                     <div class="ht-40 justify-content-between">
-                        <span class="ht-58 justify-content-between pd-r-20 pd-l-20">افزودن مدیر</span>
-                         <span class="icon wd-40">
-                             <i class="fa fa-plus"></i>
-                         </span>
-                     </div>
-                 </a>
-             </div>
-        </div>
-    </div>
+    @include('dashboard::partials.page-title', ['title' => 'لیست مدیران'])
 
     <div class="pd-t-30">
         <div class="br-section-wrapper">
-            <form method="" id="">
-              <div class="row">
-                  <div class=" col-lg-4 col-md-6">
+            {!! Form::open(['method'=>'get', 'url' => route('dashboard.admins.index'), 'files' => false]) !!}
+                <div class="row">
+                    <div class=" col-lg-4 col-md-6">
                          <div id="datatable1_filter" class="dataTables_filter">
                              <label for="">
                               <input type="search" name="search"  placeholder="جستجو ">
@@ -54,9 +43,10 @@
                              <button type="submit" class="btn btn-info">جستجو</button>
                           </div>
                      </div>
-                  </div>
+                </div>
 
-            </form>
+            {!! Form::close() !!}
+
             <div class="rounded table-responsive">
                 <table class="table mg-b-0 table-mananger">
                     <thead>
@@ -84,12 +74,7 @@
                                 <td>
                                     <ul class="img-edit">
                                         <li class="pd-l-10">
-                                            <form method="post" action="{{is_null($admin->deleted_at) ?
-                                                route('dashboard.admins.deactive' , ['adminId' => $admin->id]):
-                                                route('dashboard.admins.active' , ['adminId' => $admin->id])}}">
-
-                                                {{csrf_field()}}
-
+                                            {!! Form::open(['method'=>'POST', 'url' => [(is_null($admin->deleted_at) ? route('dashboard.admins.deactive') : route('dashboard.admins.active')), $admin->id], 'files' => false]) !!}
                                                 @if(is_null($admin->deleted_at))
                                                     <a href="" data-toggle="modal" data-target="#modal-deactive-{{$admin->id}}">
                                                         <span class="font-ban">
@@ -116,7 +101,7 @@
                                                 @else
                                                     <a href="" data-toggle="modal" data-target="#modal-active-{{$admin->id}}">
                                                         <span class="font-ban">
-                                                            <i class="fa  fa-check-square-o" data-toggle="tooltip" title="غیر فعال کردن"></i>
+                                                            <i class="fa  fa-check-square-o" data-toggle="tooltip" title="فعال کردن"></i>
                                                         </span>
                                                     </a>
 
@@ -137,7 +122,7 @@
                                                         </div><!-- modal-dialog -->
                                                     </div><!-- modal -->
                                                 @endif
-                                            </form>
+                                            {!! Form::close() !!}
                                         </li>
                                         <li>
                                             <a  href="{{route('dashboard.admins.edit' , ['adminId' => $admin->id])}}">
@@ -163,13 +148,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('bottom-assets')
-    <script src="{{ asset('assets/dashboard/js/jquery.js') }}"></script>
-    <script src="{{ asset('assets/dashboard/js/bootstrap.js') }}"></script>
-    <script>
-        $('[data-toggle="tooltip"]').tooltip();
-    </script>
-
 @endsection

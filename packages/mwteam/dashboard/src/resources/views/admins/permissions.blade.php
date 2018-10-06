@@ -12,18 +12,18 @@
         @include('dashboard::partials.alert-success',['messages' => [session()->get('success')]])
     @endif
 
-    <div class="br-pageheader">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
-            <a href="{{route('dashboard.admins.index')}}" class="breadcrumb-item">مدیران سایت</a>
-            <span class="breadcrumb-item active">تعیین سطح دسترسی</span>
-        </nav>
-    </div>
+    @include('dashboard::partials.breadcrumb', ['breadcrumbs' => [
+        [
+         'title' => 'لیست مدیران',
+         'url' => route('dashboard.admins.index'),
+        ],
+        [
+         'title' => 'تعیین سطح دسترسی',
+         'url' => null,
+        ],
+    ]])
 
-    <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">تعیین سطح دسترسی</h4>
-    </div>
+    @include('dashboard::partials.page-title', ['title' => 'تعیین سطح دسترسی'])
 
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
@@ -34,7 +34,7 @@
         <div class="table-responsive">
 
 
-            {!! Form::model($permissions , ['method'=>'PUT', 'route' => ['dashboard.admins.updatePermissions', 'adminId' => 3], 'files' => false]) !!}
+            {!! Form::model($permissions , ['method'=>'PUT', 'url' => route('dashboard.admins.updatePermissions',['adminId' => $admin->id]), 'files' => false]) !!}
                 <ul class="notype">
                     @foreach($permissions['0'] as $permission)
                         <li>
