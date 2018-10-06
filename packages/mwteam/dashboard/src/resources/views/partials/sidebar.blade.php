@@ -8,41 +8,38 @@
             </a><!-- br-menu-link -->
         </li><!-- br-menu-item -->
 
-        @foreach($menus as $menuName => $menu)
-            @can($menu['permission'], $menu['model'])
-                <li class="br-menu-item">
-                    <a href="" class="br-menu-link with-sub @yield($menu['yield'])">
-                        <i class="menu-item-icon icon {{$menu['icon']}}"></i>
-                        <span class="menu-item-label">{{$menu['title']}}
-                            @if(isset(${$menuName . 'NotificationsCount'}))
-                                <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}['total'] }}</span>
-                            @endif
+        @foreach($packagesSidebarMenus as $packageName => $sidebarMenus)
+            @foreach($sidebarMenus as $sidebarMenu)
+                @can($sidebarMenu['permission'], $sidebarMenu['model'])
+                    <li class="br-menu-item">
+                        <a href="" class="br-menu-link {{isset($sidebarMenu['subMenus']) && count($sidebarMenu['subMenus']) > 0 ? 'with-sub':''}} @yield($sidebarMenu['yield'])">
+                            <i class="menu-item-icon icon {{$sidebarMenu['icon']}}"></i>
+                            <span class="menu-item-label">{{$sidebarMenu['title']}}
+                                @if(isset(${$packageName . 'NotificationsCount'}) && isset(${$packageName . 'NotificationsCount'}['total']) && ${$packageName . 'NotificationsCount'}['total'] != 0)
+                                    <span class="badge badge-danger">{{ ${$packageName . 'NotificationsCount'}['total'] }}</span>
+                                @endif
                         </span>
-                    </a><!-- br-menu-link -->
+                        </a><!-- br-menu-link -->
 
-                    <ul class="br-menu-sub">
-                        @foreach($menu['subMenus'] as $subMenu)
-                            @can($subMenu['permission'], $subMenu['model'])
-                                <li class="sub-item">
-                                    <a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}
-                                        @if(isset(${$menuName . 'NotificationsCount'}) && isset(${$menuName . 'NotificationsCount'}[$subMenu['yield']]))
-                                            <span class="badge badge-danger">{{ ${$menuName . 'NotificationsCount'}[$subMenu['yield']] }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                            @endcan
-                        @endforeach
-                    </ul>
-                </li><!-- br-menu-item -->
-            @endcan
+                        @if(isset($sidebarMenu['subMenus']) && count($sidebarMenu['subMenus']) > 0)
+                            <ul class="br-menu-sub">
+                                @foreach($sidebarMenu['subMenus'] as $subMenu)
+                                    @can($subMenu['permission'], $subMenu['model'])
+                                        <li class="sub-item">
+                                            <a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}
+                                                @if(isset(${$packageName . 'NotificationsCount'}) && isset(${$packageName . 'NotificationsCount'}[$subMenu['yield']]) && ${$packageName . 'NotificationsCount'}[$subMenu['yield']] != 0)
+                                                    <span class="badge badge-danger">{{ ${$packageName . 'NotificationsCount'}[$subMenu['yield']] }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endcan
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li><!-- br-menu-item -->
+                @endcan
+            @endforeach
         @endforeach
-
-        <li class="br-menu-item">
-            <a href="#" class="br-menu-link">
-                <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-                <span class="menu-item-label">تنظیمات</span>
-            </a>
-        </li>
 
         {{--<li class="br-menu-item">--}}
         {{--<a href="#" class="br-menu-link with-sub">--}}

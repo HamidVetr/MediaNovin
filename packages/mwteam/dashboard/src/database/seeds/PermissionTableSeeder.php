@@ -21,6 +21,11 @@ class PermissionTableSeeder extends Seeder
                 'en_title' => 'admins',
                 'parent' => null
             ],
+            [
+                'fa_title' => 'تنظیمات',
+                'en_title' => 'settings',
+                'parent' => null
+            ],
         ];
 
         foreach ($permissions as $permission){

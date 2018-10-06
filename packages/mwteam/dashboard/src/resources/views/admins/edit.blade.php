@@ -14,8 +14,8 @@
 
     <div class="br-pageheader">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a href="" class="breadcrumb-item">خانه</a>
-            <a href="" class="breadcrumb-item">مدیران سایت</a>
+            <a href="{{route('dashboard.home')}}" class="breadcrumb-item">خانه</a>
+            <a href="{{route('dashboard.admins.index')}}" class="breadcrumb-item">مدیران سایت</a>
             <span class="breadcrumb-item active">ویرایش اطلاعات</span>
         </nav>
     </div>

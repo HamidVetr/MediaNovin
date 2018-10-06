@@ -3,7 +3,9 @@
 namespace Mwteam\Dashboard;
 
 use App\Models\User;
+use Mwteam\Dashboard\App\Models\Setting;
 use Mwteam\Dashboard\App\Policies\AdminPolicy;
+use Mwteam\Dashboard\App\Policies\SettingPolicy;
 use Mwteam\Dashboard\PackageServiceProvider as ServiceProvider;
 use Mwteam\Dashboard\App\Console\Commands\SeedCommand;
 
@@ -11,6 +13,7 @@ class DashboardServiceProvider extends ServiceProvider
 {
     protected $policies = [
         User::class => AdminPolicy::class,
+        Setting::class => SettingPolicy::class,
     ];
 
     /**
@@ -50,17 +53,19 @@ class DashboardServiceProvider extends ServiceProvider
 
         view()->composer('dashboard::partials.sidebar', function ($view) {
             $packages = config('packages.packages');
-            $menus = [];
+            $packagesSidebarMenus = [];
 
             foreach ($packages as $package){
                 $config = include base_path('packages/mwteam/'. $package.'/src/config.php');
 
                 if (isset($config['sidebar'])){
-                    $menus[$package] = $config['sidebar'];
+                    foreach ($config['sidebar'] as $sidebar){
+                        $packagesSidebarMenus[$package][] = $sidebar;
+                    }
                 }
             }
 
-            $view->with(['menus' => $menus]);
+            $view->with(['packagesSidebarMenus' => $packagesSidebarMenus]);
         });
 
         view()->composer('dashboard::partials.sidebar', function ($view) {
