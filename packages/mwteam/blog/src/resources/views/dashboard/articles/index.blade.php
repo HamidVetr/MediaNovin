@@ -30,7 +30,7 @@
         </div>
         <div class="col-lg-6">
             <div class="heading-elements pd-l-20">
-                <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
+                <a href="{{ route('dashboard.blog.articles.create') }}" class="btn btn-info btn-with-icon btn-block">
                     <div class="ht-40 justify-content-between">
                         <span class="ht-58 justify-content-between pd-r-20 pd-l-20"> ایجاد مقاله جدید</span>
                         <span class="icon wd-40">
@@ -62,12 +62,12 @@
 
                             <div class="col-md-3 col-xs-6">
                                 <div class="text-right">از تاریخ</div>
-                                {!! Form::text('fromDate', null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'from-date']) !!}
+                                {!! Form::text('fromDate', isset($_GET['fromDate']) ? $_GET['fromDate'] : null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'from-date', 'autocomplete' => 'off']) !!}
                             </div>
 
                             <div class="col-md-3 col-xs-6">
                                 <div class="text-right">تا تاریخ</div>
-                                {!! Form::text('toDate', null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'to-date']) !!}
+                                {!! Form::text('toDate', isset($_GET['toDate']) ? $_GET['toDate'] : null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'to-date', 'autocomplete' => 'off']) !!}
                             </div>
                         </div>
                         <div class="row justify-content-center">

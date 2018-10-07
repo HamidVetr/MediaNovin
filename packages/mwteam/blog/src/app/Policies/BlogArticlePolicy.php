@@ -19,11 +19,23 @@ class BlogArticlePolicy
         //
     }
 
+    /**
+     * Determine if the user can see blog section in the sidebar.
+     *
+     * @param User $user
+     * @return bool
+     */
     public function blog(User $user)
     {
         return $user->hasPermission('blog');
     }
 
+    /**
+     * Determine if the user can see articles index page.
+     *
+     * @param User $user
+     * @return bool
+     */
     public function index(User $user)
     {
         $blogArticlesCreate = $user->hasPermission('blog-articles-create');
@@ -46,5 +58,27 @@ class BlogArticlePolicy
     public function create(User $user)
     {
         return $user->hasPermission('blog-articles-create');
+    }
+
+    /**
+     * Determine if the user can edit articles.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function edit(User $user)
+    {
+        return $user->hasPermission('blog-articles-edit');
+    }
+
+    /**
+     * Determine if the user can delete articles.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function delete(User $user)
+    {
+        return $user->hasPermission('blog-articles-delete');
     }
 }
