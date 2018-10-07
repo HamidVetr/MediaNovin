@@ -25,58 +25,72 @@ class PermissionTableSeeder extends Seeder
             [
                 'fa_title' => 'وبلاگ',
                 'en_title' => 'blog',
+                'parent' => null,
             ],
             [
                 'fa_title' => 'ایجاد مقاله',
                 'en_title' => 'blog-articles-create',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'ویرایش مقاله',
                 'en_title' => 'blog-articles-edit',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'حذف مقاله',
                 'en_title' => 'blog-articles-delete',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'ایجاد دسته بندی',
                 'en_title' => 'blog-categories-create',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'ویرایش دسته بندی',
                 'en_title' => 'blog-categories-edit',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'حذف دسته بندی',
                 'en_title' => 'blog-categories-delete',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'ایجاد تگ',
                 'en_title' => 'blog-tags-create',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'ویرایش تگ',
                 'en_title' => 'blog-tags-edit',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'حذف تگ',
                 'en_title' => 'blog-tags-delete',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'تایید نظر',
                 'en_title' => 'blog-comments-approve',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'ویرایش نظر',
                 'en_title' => 'blog-comments-edit',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'حذف نظر',
                 'en_title' => 'blog-comments-delete',
+                'parent' => 'blog',
             ],
             [
                 'fa_title' => 'پاسخ به نظر',
                 'en_title' => 'blog-comments-reply',
+                'parent' => 'blog',
             ],
         ];
 
@@ -85,6 +99,7 @@ class PermissionTableSeeder extends Seeder
                 $newPermission = Permission::create([
                     'fa_title' => $permission['fa_title'],
                     'en_title' => $permission['en_title'],
+                    'parent' => $permission['parent'],
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ]);
