@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => bcrypt('123456'),
             'role' => 'super-admin',
+            'avatar' => 'e049d45bf06e72815368e7c8b4c8bcdblGeQk9Uzhz8byKU.png'
         ]);
 
         User::create([
@@ -29,6 +30,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@email.com',
             'password' => bcrypt('123456'),
             'role' => 'user',
+            'mobile' => '09123456789'
         ]);
 
         User::create([
@@ -47,6 +49,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin2@email.com',
             'password' => bcrypt('123456'),
             'role' => 'admin',
+            'avatar' => 'c48990cb680ea65c63d2510d3225b2b6w8yET3hYZhtHks0.png'
         ]);
     }
 }

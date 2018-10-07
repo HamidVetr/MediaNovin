@@ -6,21 +6,21 @@ return [
             'icon' => 'ion-android-chat tx-24',
             'title' => 'تیکتینگ',
             'yield' => 'tickets',
-            'permission' => 'tickets',
+            'policy' => 'tickets',
             'model' => \Mwteam\Ticket\App\Models\Ticket::class,
             'subMenus' => [
                 [
                     'title' => 'ارسال تیکت',
                     'url' => route('dashboard.tickets.create'),
                     'yield' => 'tickets-create',
-                    'permission' => 'tickets-send',
+                    'policy' => 'ticketsSend',
                     'model' => \Mwteam\Ticket\App\Models\Ticket::class,
                 ],
                 [
                     'title' => 'لیست تیکت ها',
                     'url' => route('dashboard.tickets.index'),
                     'yield' => 'tickets-index',
-                    'permission' => 'tickets',
+                    'policy' => 'tickets',
                     'model' => \Mwteam\Ticket\App\Models\Ticket::class,
                 ]
             ]
@@ -35,7 +35,7 @@ return [
             'laravel' => [
                 'mimetypes' => 'image/jpeg,image/png,application/pdf,application/zip',
                 'max' => 10240,
-                'file.max' => 'حداکثر سایز فایل 10 مگابایت می باشد'
+                'file-max' => 'حداکثر سایز فایل 10 مگابایت می باشد'
             ],
             'js' => [
                 'type' => 'image/jpeg,image/png,application/pdf,application/x-zip-compressed',

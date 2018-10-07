@@ -19,7 +19,7 @@ class BlogArticlesTableSeeder extends Seeder
         DB::table('blog_articles')->truncate();
         $faker = Faker::create("fa_IR");
 
-        foreach (range(1,200) as $index) {
+        foreach (range(1,100) as $index) {
             $data = [
                 'blog_category_id' => rand(1, 20),
                 'fa_title' => $faker->firstName,

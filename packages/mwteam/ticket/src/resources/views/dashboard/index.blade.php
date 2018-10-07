@@ -5,16 +5,18 @@
 @section('tickets-index') active @endsection
 
 @section('page-title')
-    <div class="heading-elements pd-l-20">
-        <a href="{{route('dashboard.tickets.create')}}" class="btn btn-info btn-with-icon btn-block">
-            <div class="ht-40 justify-content-between">
-                <span class="ht-58 justify-content-between pd-r-20 pd-l-20">ارسال تیکت جدید</span>
-                <span class="icon wd-40">
-                    <i class="fa fa-plus"></i>
-                </span>
-            </div>
-        </a>
-    </div>
+    @can('tickets-send',\Mwteam\Ticket\App\Models\Ticket::class)
+        <div class="heading-elements pd-l-20">
+            <a href="{{route('dashboard.tickets.create')}}" class="btn btn-info btn-with-icon btn-block">
+                <div class="ht-40 justify-content-between">
+                    <span class="ht-58 justify-content-between pd-r-20 pd-l-20">ارسال تیکت جدید</span>
+                    <span class="icon wd-40">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                </div>
+            </a>
+        </div>
+    @endcan
 @endsection
 
 @section('content')
@@ -111,8 +113,8 @@
                                             @endswitch
                                         </td>
                                         <td>
-                                            {{\App\Helpers\DatetimeHelper::toJalaliDate($ticket->updated_at)}}
                                             {{\App\Helpers\DatetimeHelper::toWithoutSecondsTime($ticket->updated_at)}}
+                                            {{\App\Helpers\DatetimeHelper::toJalaliDate($ticket->updated_at)}}
                                         </td>
                                         <td>
                                             <span class="btn pd-5
@@ -141,30 +143,33 @@
                                             </a>
                                         </td>
                                         <td>
-                                            {!! Form::open(['method'=>'DELETE', 'url' => route('dashboard.tickets.destroy', ['ticketId' => $ticket->id]), 'files' => false]) !!}
-                                                <a href="" data-toggle="modal" data-target="#modal-delete-ticket">
-                                                        <span class="trash-ticket">
-                                                            <i class="fa fa-trash-o" data-toggle="tooltip" title="حذف تیکت"></i>
-                                                        </span>
-                                                </a>
 
-                                                <div id="modal-delete-ticket" class="modal fade">
-                                                    <div class="modal-dialog modal-lg" role="document">
-                                                        <div class="modal-content tx-size-sm">
-                                                            <div class="modal-body tx-center pd-y-20 pd-x-20">
-                                                                <a href="" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </a>
-                                                                <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                                                                <h6 class="tx-black  tx-semibold mg-b-20">تیکت حذف شود؟</h6>
-                                                                <p class="pd-x-100"></p>
-                                                                <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
-                                                                <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
-                                                            </div><!-- modal-body -->
-                                                        </div><!-- modal-content -->
-                                                    </div><!-- modal-dialog -->
-                                                </div><!-- modal -->
-                                            {!! Form::close() !!}
+                                            @can('ticketsDelete',\Mwteam\Ticket\App\Models\Ticket::class)
+                                                {!! Form::open(['method'=>'DELETE', 'url' => route('dashboard.tickets.destroy', ['ticketId' => $ticket->id]), 'files' => false]) !!}
+                                                    <a href="" data-toggle="modal" data-target="#modal-delete-ticket">
+                                                            <span class="trash-ticket">
+                                                                <i class="fa fa-trash-o" data-toggle="tooltip" title="حذف تیکت"></i>
+                                                            </span>
+                                                    </a>
+
+                                                    <div id="modal-delete-ticket" class="modal fade">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body tx-center pd-y-20 pd-x-20">
+                                                                    <a href="" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </a>
+                                                                    <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                                                                    <h6 class="tx-black  tx-semibold mg-b-20">تیکت حذف شود؟</h6>
+                                                                    <p class="pd-x-100"></p>
+                                                                    <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
+                                                                    <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                                                                </div><!-- modal-body -->
+                                                            </div><!-- modal-content -->
+                                                        </div><!-- modal-dialog -->
+                                                    </div><!-- modal -->
+                                                {!! Form::close() !!}
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

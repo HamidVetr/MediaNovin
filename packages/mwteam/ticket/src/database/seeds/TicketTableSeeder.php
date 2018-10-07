@@ -36,7 +36,7 @@ class TicketTableSeeder extends Seeder
 
         TicketMessages::create([
             'ticket_id' => $ticket->id,
-            'sender' => 'admin',
+            'sender' => 'admin2',
             'message' => 'پیام 3 تست 1 ادمین',
             'seen' => 0
         ]);

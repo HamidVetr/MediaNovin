@@ -20,8 +20,8 @@ class BlogCommentsTableSeeder extends Seeder
         DB::table('blog_comments')->truncate();
         $faker = Faker::create("fa_IR");
 
-        foreach (range(1,5000) as $index) {
-            $article_id = rand(1, 200);
+        foreach (range(1,500) as $index) {
+            $article_id = rand(1, 100);
             BlogComment::create([
                 'blog_article_id' => $article_id,
                 'name' => $faker->firstName,

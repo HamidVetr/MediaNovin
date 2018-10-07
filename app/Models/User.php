@@ -18,24 +18,32 @@ class User extends Authenticatable
     use Notifiable, SoftDeletes;
 
     protected $fillable = [
-        'first_name', 'last_name', 'username', 'email', 'password', 'role'
+        'first_name', 'last_name', 'username', 'email', 'password', 'role', 'avatar', 'mobile'
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    protected static $roles = [
-        'super-admin' => 'سوپر ادمین',
-        'admin' => 'ادمین',
-        'user' => 'کاربر',
-    ];
-
     private $permissions = null;
+
+    //****************************** static methods *****************************
 
     public static function roles()
     {
-        return static::$roles;
+        return [
+            'super-admin' => 'سوپر ادمین',
+            'admin' => 'ادمین',
+            'user' => 'کاربر',
+        ];
+    }
+
+    public static function getAvatar($user){
+        if(is_null($user->avatar)){
+            return asset('assets/public/images/avatar.jpg');
+        }
+
+        return asset('avatars/'.$user->avatar);
     }
 
     //****************************** relations *************************

@@ -74,7 +74,10 @@
                                 <td>
                                     <ul class="img-edit">
                                         <li class="pd-l-10">
-                                            {!! Form::open(['method'=>'POST', 'url' => [(is_null($admin->deleted_at) ? route('dashboard.admins.deactive') : route('dashboard.admins.active')), $admin->id], 'files' => false]) !!}
+                                            {!! Form::open(['method'=>'POST', 'url' => [(is_null($admin->deleted_at) ?
+                                                route('dashboard.admins.deactive',['adminId' => $admin->id]) :
+                                                route('dashboard.admins.active',['adminId' => $admin->id]))], 'files' => false]) !!}
+
                                                 @if(is_null($admin->deleted_at))
                                                     <a href="" data-toggle="modal" data-target="#modal-deactive-{{$admin->id}}">
                                                         <span class="font-ban">

@@ -9,15 +9,21 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function home()
     {
-        if (!auth()->user()->isAdminOrSuperAdmin()){
-            abort(404);
-        }
-
         return view('dashboard::home');
+    }
+
+    public function showProfile()
+    {
+        return view('dashboard::profile');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        //
     }
 }

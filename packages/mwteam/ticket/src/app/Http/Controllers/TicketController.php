@@ -46,11 +46,11 @@ class TicketController extends Controller
             'user' => 'required|integer|min:1',
             'status' => 'required|string|in:'. implode(',',array_keys(Ticket::statuses())),
             'message' => 'required|string',
-            'file' => 'nullable|file|mimetypes:'.PackageHelper::getConfig('ticket')['validation']['file']['laravel']['mimetypes']
-                .'|max:'.PackageHelper::getConfig('ticket')['validation']['file']['laravel']['max'],
+            'file' => 'nullable|file|mimetypes:'.PackageHelper::getConfig('ticket.validation.file.laravel.mimetypes')
+                .'|max:'.PackageHelper::getConfig('ticket.validation.file.laravel.max'),
         ],[
             'file.mimetypes' => 'فرمت فایل معتبر نمی باشد',
-            'file.max' => PackageHelper::getConfig('ticket')['validation']['file']['laravel']['file.max'],
+            'file.max' => PackageHelper::getConfig('ticket.validation.file.laravel.file-max'),
         ]);
 
         $user = User::notSuperAdmin()->where('id', $request['user'])->firstOrFail();
@@ -73,15 +73,16 @@ class TicketController extends Controller
 
             TicketMessages::create([
                 'ticket_id' => $ticket->id,
-                'sender' => 'admin',
+                'sender' => auth()->user()->id,
                 'message' => $request['message'],
                 'file' => $fileName,
             ]);
 
             if (!is_null($file)) {
-                $file->move(storage_path(Ticket::$ticketFilePath . $ticket->id), $fileName);
+                $file->move(Ticket::getFilePath($ticket->id), $fileName);
             }
         }catch (\Exception $e){
+            return $e->getMessage();
             DB::rollBack();
             abort(500);
         }
@@ -95,23 +96,23 @@ class TicketController extends Controller
     {
         $this->authorize('tickets', Ticket::class);
 
-        $ticket = Ticket::where('id', $ticketId)->with(['messages','userWithTrashed'])->firstOrFail();
+        $ticket = Ticket::where('id', $ticketId)->with(['messages.senderWithTrashed','userWithTrashed'])->firstOrFail();
         return view('ticket::dashboard.show')->with(['ticket' => $ticket]);
     }
 
     public function reply(Request $request, $ticketId)
     {
-        $this->authorize('tickets', Ticket::class);
+        $this->authorize('tickets-send', Ticket::class);
 
-        $ticket = Ticket::where('id', $ticketId)->firstOrFail();
+        $ticket = Ticket::notClosed()->where('id', $ticketId)->firstOrFail();
 
         $this->validate($request, [
             'message' => 'required|string',
-            'file' => 'nullable|file|mimetypes:'.PackageHelper::getConfig('ticket')['validation']['file']['laravel']['mimetypes']
-                .'|max:'.PackageHelper::getConfig('ticket')['validation']['file']['laravel']['max'],
+            'file' => 'nullable|file|mimetypes:'.PackageHelper::getConfig('ticket.validation.file.laravel.mimetypes')
+                .'|max:'.PackageHelper::getConfig('ticket.validation.file.laravel.max'),
         ],[
             'file.mimetypes' => 'فرمت فایل معتبر نمی باشد',
-            'file.max' => PackageHelper::getConfig('ticket')['validation']['file']['laravel']['file.max'],
+            'file.max' => PackageHelper::getConfig('ticket.validation.file.laravel.file-max'),
         ]);
 
         $file = $request->file('file');
@@ -126,7 +127,7 @@ class TicketController extends Controller
         try{
             TicketMessages::create([
                 'ticket_id' => $ticket->id,
-                'sender' => 'admin',
+                'sender' => auth()->user()->id,
                 'message' => $request['message'],
                 'status' => 'answered',
                 'file' => $fileName,
@@ -135,10 +136,11 @@ class TicketController extends Controller
             $ticket->update(['updated_at' => Carbon::now()]);
 
             if (!is_null($file)) {
-                $file->move(storage_path(Ticket::$ticketFilePath . $ticket->id), $fileName);
+                $file->move(Ticket::getFilePath($ticket->id),$fileName);
             }
         }catch (\Exception $e){
             DB::rollBack();
+            return $e->getMessage();
             abort(500);
         }
 
@@ -152,8 +154,8 @@ class TicketController extends Controller
         $this->authorize('tickets-delete', Ticket::class);
 
         $ticket = Ticket::where('id', $ticketId)->firstOrFail();
-
         DB::beginTransaction();
+
         try{
             TicketMessages::where('ticket_id', $ticketId)->delete();
             $ticket->delete();
@@ -175,6 +177,11 @@ class TicketController extends Controller
         $message = TicketMessages::where('ticket_id', $ticketId)->where('id', $messageId)->firstOrFail();
         $message->delete();
 
+        if (!is_null($message->file)){
+            $file = Ticket::getFilePath($ticketId).$message->file;
+            File::delete($file);
+        }
+
         session()->flash('success','پیام حذف گردید.');
         return redirect()->back();
     }
@@ -182,7 +189,6 @@ class TicketController extends Controller
     public function status(Request $request, $ticketId)
     {
         $this->authorize('tickets', Ticket::class);
-
         $ticket = Ticket::where('id', $ticketId)->firstOrFail();
 
         $this->validate($request, [
@@ -201,7 +207,7 @@ class TicketController extends Controller
     {
         $this->authorize('tickets', Ticket::class);
 
-        $path = storage_path(Ticket::$ticketFilePath . $ticketId . '/' . $fileName);
+        $path = Ticket::getFilePath($ticketId). $fileName;
 
         if (!File::exists($path)) {
             abort(404);

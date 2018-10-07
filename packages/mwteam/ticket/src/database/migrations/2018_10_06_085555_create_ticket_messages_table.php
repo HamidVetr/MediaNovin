@@ -16,7 +16,7 @@ class CreateTicketMessagesTable extends Migration
         Schema::create('ticket_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('ticket_id');
-            $table->string('sender');
+            $table->unsignedInteger('sender');
             $table->text('message');
             $table->boolean('seen')->default(0);
             $table->string('file')->nullable();

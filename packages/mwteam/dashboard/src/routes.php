@@ -2,6 +2,8 @@
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => '/dashboard', 'as' => 'dashboard.', 'namespace' => '\Mwteam\Dashboard\App\Http\Controllers'], function () {
         Route::get('/', 'DashboardController@home')->name('home');
+        Route::get('/profile', 'DashboardController@showProfile')->name('showProfile');
+        Route::post('/profile', 'DashboardController@updateProfile')->name('updateProfile');
 
         Route::group(['prefix' => '/admins', 'as' => 'admins.'], function () {
             Route::get('/', 'AdminController@index')->name('index');

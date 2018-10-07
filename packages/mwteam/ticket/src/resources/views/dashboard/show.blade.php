@@ -39,89 +39,148 @@
                    </div>
                     <div class="panel-body">
                         <ul class="media-list chat-list content-group">
-                            <li class="media">
-                                <div class="media-left">
-                                    <img src="{{ asset('assets/dashboard/images/analytics.png')}} " alt="" class="img-circle img-md">
-                                </div>
+                            @foreach($ticket->messages as $message)
+                                @if($message->sender == $ticket->userWithTrashed->id)
+                                    <li class="media" style="float: left">
+                                        <div class="media-left">
+                                            <img src="{{ \App\Models\User::getAvatar($message->senderWithTrashed) }} " alt="" class="img-circle img-md">
+                                        </div>
 
-                                @foreach($ticket->messages as $message)
-                                    <div class="media-body">
-                                        <div class="media-content">{{$message->message}}</div>
-                                        <span class="media-annotation display-block mt-10">
-                                            <i class="fa fa-calendar position-right text-muted"></i>
-                                            {{\App\Helpers\DatetimeHelper::toJalaliDate($message->updated_at)}}
-                                            {{\App\Helpers\DatetimeHelper::toWithoutSecondsTime($message->updated_at)}}
+                                        <div class="media-body">
+                                            <div class="media-content">
+                                                {{$message->message}}
+                                            </div>
+                                            <span class="media-annotation display-block mt-10">
+                                                <i class="fa fa-calendar position-right text-muted"></i>
+                                                {{\App\Helpers\DatetimeHelper::toWithoutSecondsTime($message->updated_at)}}
+                                                {{\App\Helpers\DatetimeHelper::toJalaliDate($message->updated_at)}}
 
-                                            <a href="" data-toggle="modal" data-target="#modal-delete-message-{{$message->id}}">
-                                                <i class="fa fa-trash position-right text-muted"></i>
-                                            </a>
+                                                @can('ticketsDelete',\Mwteam\Ticket\App\Models\Ticket::class)
+                                                    <a href="" data-toggle="modal" data-target="#modal-delete-message-{{$message->id}}">
+                                                        <i class="fa fa-trash position-right text-muted"></i>
+                                                    </a>
 
-                                            @if(!is_null($message->file))
-                                                <a href="{{route('dashboard.tickets.file',['ticketId' => $ticket->id, 'fileName' => $message->file])}}">
-                                                    <i class="fa fa-download position-right text-muted"></i>
-                                                </a>
-                                            @endif
-                                        </span>
-                                    </div>
+                                                    {!! Form::open(['method'=>'DELETE', 'url' => route('dashboard.tickets.destroyMessage',['ticketId' => $ticket->id, 'messageId' => $message->id]), 'files' => false, 'style' => 'display:inline-block;']) !!}
+                                                    <div id="modal-delete-message-{{$message->id}}" class="modal fade">
+                                                  <div class="modal-dialog modal-lg" role="document">
+                                                      <div class="modal-content tx-size-sm">
+                                                          <div class="modal-body tx-center pd-y-20 pd-x-20">
+                                                              <a href="" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                              </a>
+                                                              <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                                                              <h6 class="tx-black  tx-semibold mg-b-20">پیام حذف شود؟</h6>
+                                                              <p class="pd-x-100"></p>
+                                                              <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
+                                                              <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                                                          </div><!-- modal-body -->
+                                                      </div><!-- modal-content -->
+                                                  </div><!-- modal-dialog -->
+                                                </div><!-- modal -->
+                                                    {!! Form::close() !!}
+                                                @endcan
 
-                                    {!! Form::open(['method'=>'POST', 'url' => route('dashboard.tickets.destroyMessage',['ticketId' => $ticket->id, 'messageId' => $message->id]), 'files' => false]) !!}
-                                        <div id="modal-delete-message-{{$message->id}}" class="modal fade">
-                                          <div class="modal-dialog modal-lg" role="document">
-                                              <div class="modal-content tx-size-sm">
-                                                  <div class="modal-body tx-center pd-y-20 pd-x-20">
-                                                      <a href="" class="close" data-dismiss="modal" aria-label="Close">
-                                                          <span aria-hidden="true">&times;</span>
-                                                      </a>
-                                                      <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                                                      <h6 class="tx-black  tx-semibold mg-b-20">پیام حذف شود؟</h6>
-                                                      <p class="pd-x-100"></p>
-                                                      <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
-                                                      <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
-                                                  </div><!-- modal-body -->
-                                              </div><!-- modal-content -->
-                                          </div><!-- modal-dialog -->
-                                        </div><!-- modal -->
-                                    {!! Form::close() !!}
-                                @endforeach
-                          </li>
+                                                @if(!is_null($message->file))
+                                                    <a href="{{route('dashboard.tickets.file',['ticketId' => $ticket->id, 'fileName' => $message->file])}}">
+                                                        <i class="fa fa-download position-right text-muted"></i>
+                                                    </a>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </li>
+                                @else
+                                    <li class="media">
+                                        <div class="media-left">
+                                            <img src="{{ \App\Models\User::getAvatar($message->senderWithTrashed) }} " alt="" class="img-circle img-md">
+                                        </div>
+
+                                        <div class="media-body">
+                                            <div class="media-content">
+                                                <h6>{{$message->senderWithTrashed->username}}:</h6>
+                                                {{$message->message}}
+                                            </div>
+                                            <span class="media-annotation display-block mt-10">
+                                                <i class="fa fa-calendar position-right text-muted"></i>
+                                                {{\App\Helpers\DatetimeHelper::toWithoutSecondsTime($message->updated_at)}}
+                                                {{\App\Helpers\DatetimeHelper::toJalaliDate($message->updated_at)}}
+
+                                                @can('ticketsDelete',\Mwteam\Ticket\App\Models\Ticket::class)
+                                                    <a href="" data-toggle="modal" data-target="#modal-delete-message-{{$message->id}}">
+                                                        <i class="fa fa-trash position-right text-muted"></i>
+                                                    </a>
+
+                                                    {!! Form::open(['method'=>'DELETE', 'url' => route('dashboard.tickets.destroyMessage',['ticketId' => $ticket->id, 'messageId' => $message->id]), 'files' => false, 'style' => 'display:inline-block;']) !!}
+                                                    <div id="modal-delete-message-{{$message->id}}" class="modal fade">
+                                                  <div class="modal-dialog modal-lg" role="document">
+                                                      <div class="modal-content tx-size-sm">
+                                                          <div class="modal-body tx-center pd-y-20 pd-x-20">
+                                                              <a href="" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                              </a>
+                                                              <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                                                              <h6 class="tx-black  tx-semibold mg-b-20">پیام حذف شود؟</h6>
+                                                              <p class="pd-x-100"></p>
+                                                              <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
+                                                              <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                                                          </div><!-- modal-body -->
+                                                      </div><!-- modal-content -->
+                                                  </div><!-- modal-dialog -->
+                                                </div><!-- modal -->
+                                                    {!! Form::close() !!}
+                                                @endcan
+
+                                                @if(!is_null($message->file))
+                                                    <a href="{{route('dashboard.tickets.file',['ticketId' => $ticket->id, 'fileName' => $message->file])}}">
+                                                        <i class="fa fa-download position-right text-muted"></i>
+                                                    </a>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </li>
+                                @endif
+
+                            @endforeach
                        </ul>
                     </div>
 
-                    {!! Form::open(['method'=>'PUT', 'url' => route('dashboard.tickets.reply',['ticketId' => $ticket->id]), 'files' => true, 'id' => 'form-ticket-reply']) !!}
-                        <div class="form-group row mg-t-20">
-                            <span class="tx-danger">*</span>
-                            {!! Form::label(null, 'متن پیام :', ['class' => 'col-sm-2 form-control-label']) !!}
-                            <div class="col-sm-12 mg-t-10 mg-sm-t-0">
-                                {!! Form::textarea('message',null,['cols' => 30, 'rows' => 6, 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group row mg-t-20">
-                            <span class="tx-danger">*</span>
-                            {!! Form::label(null, 'انتخاب فایل :', ['class' => 'col-sm-2 form-control-label']) !!}
-
-                            <div class="col-lg-8 col-md-10">
-                                <div class="file-field">
-                                    <div class="btn btn-primary btn-md float-left">
-                                        <span>
-                                            <i class="fa fa-cloud-upload"></i>
-                                        </span>
-                                        <span class="pd-r-5">انتخاب فایل</span>
-                                        {!! Form::file('file') !!}
-                                    </div>
-                                    <div class="file-path-wrapper">
-                                        {!! Form::text(null, null, ['class' => 'file-path validate']) !!}
+                    @if(!$ticket->isClosed())
+                        @can('ticketsSend',\Mwteam\Ticket\App\Models\Ticket::class)
+                            {!! Form::open(['method'=>'PUT', 'url' => route('dashboard.tickets.reply',['ticketId' => $ticket->id]), 'files' => true, 'id' => 'form-ticket-reply']) !!}
+                                <div class="form-group row mg-t-20">
+                                    <span class="tx-danger">*</span>
+                                    {!! Form::label(null, 'متن پیام :', ['class' => 'col-sm-2 form-control-label']) !!}
+                                    <div class="col-sm-12 mg-t-10 mg-sm-t-0">
+                                        {!! Form::textarea('message',null,['cols' => 30, 'rows' => 6, 'class' => 'form-control']) !!}
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                    <div class="row justify-content-center">
-                        <div class="btn-demo">
-                            {!! Form::submit('ارسال پیام', ['class'=>'btn btn-info btn-block mg-b-10']) !!}
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
+                                <div class="form-group row mg-t-20">
+                                    {!! Form::label(null, 'انتخاب فایل :', ['class' => 'col-sm-2 form-control-label']) !!}
+
+                                    <div class="col-lg-8 col-md-10">
+                                        <div class="file-field">
+                                            <div class="btn btn-primary btn-md float-left">
+                                                <span>
+                                                    <i class="fa fa-cloud-upload"></i>
+                                                </span>
+                                                <span class="pd-r-5">انتخاب فایل</span>
+                                                {!! Form::file('file') !!}
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                {!! Form::text(null, null, ['class' => 'file-path validate']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div class="row justify-content-center">
+                                <div class="btn-demo">
+                                    {!! Form::submit('ارسال پیام', ['class'=>'btn btn-info btn-block mg-b-10']) !!}
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
+                        @endcan
+                    @endif
                 </div>
             </div>
             <div class="col-md-3">
@@ -137,7 +196,7 @@
                         </div>
                         <div class="list-group-item">
                             <i class="fa fa-mobile"></i>
-                            {{'شماره تماس: '. $ticket->userWithTrashed->id}}
+                            {{'شماره تماس: '. $ticket->userWithTrashed->mobile}}
                         </div>
                         <div class="list-group-item">
                             <i class="fa fa-cog"></i>
@@ -152,31 +211,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="list-group-item">
-                            <div class="row justify-content-center">
-                                <div class="">
-                                    <button class="btn btn-danger active btn-block mg-b-10" data-toggle="modal" data-target="#modal-delete-ticket">حذف</button>
-                                    {!! Form::open(['method'=>'DELETE', 'url' => route('dashboard.tickets.destroy', ['ticketId' => $ticket->id]), 'files' => false]) !!}
-                                        <div id="modal-delete-ticket" class="modal fade">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content tx-size-sm">
-                                                    <div class="modal-body tx-center pd-y-20 pd-x-20">
-                                                        <a href="" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </a>
-                                                        <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                                                        <h6 class="tx-black  tx-semibold mg-b-20">تیکت حذف شود؟</h6>
-                                                        <p class="pd-x-100"></p>
-                                                        <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
-                                                        <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
-                                                    </div><!-- modal-body -->
-                                                </div><!-- modal-content -->
-                                            </div><!-- modal-dialog -->
-                                        </div><!-- modal -->
-                                    {!! Form::close() !!}
+                        @can('ticketsDelete',\Mwteam\Ticket\App\Models\Ticket::class)
+                            <div class="list-group-item">
+                                <div class="row justify-content-center">
+                                    <div class="">
+                                        <button class="btn btn-danger active btn-block mg-b-10" data-toggle="modal" data-target="#modal-delete-ticket">حذف</button>
+                                        {!! Form::open(['method'=>'DELETE', 'url' => route('dashboard.tickets.destroy', ['ticketId' => $ticket->id]), 'files' => false]) !!}
+                                            <div id="modal-delete-ticket" class="modal fade">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content tx-size-sm">
+                                                        <div class="modal-body tx-center pd-y-20 pd-x-20">
+                                                            <a href="" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </a>
+                                                            <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                                                            <h6 class="tx-black  tx-semibold mg-b-20">تیکت حذف شود؟</h6>
+                                                            <p class="pd-x-100"></p>
+                                                            <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
+                                                            <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                                                        </div><!-- modal-body -->
+                                                    </div><!-- modal-content -->
+                                                </div><!-- modal-dialog -->
+                                            </div><!-- modal -->
+                                        {!! Form::close() !!}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -202,9 +263,9 @@
                 file: {
                     validators: {
                         file: {
-                            type: "{{\App\Helpers\PackageHelper::getConfig('ticket')['validation']['file']['js']['type']}}",
-                            maxSize: parseInt("{{\App\Helpers\PackageHelper::getConfig('ticket')['validation']['file']['js']['maxSize']}}"),
-                            message: "{{\App\Helpers\PackageHelper::getConfig('ticket')['validation']['file']['js']['message']}}"
+                            type: "{{\App\Helpers\PackageHelper::getConfig('ticket.validation.file.js.type')}}",
+                            maxSize: parseInt("{{\App\Helpers\PackageHelper::getConfig('ticket.validation.file.js.maxSize')}}"),
+                            message: "{{\App\Helpers\PackageHelper::getConfig('ticket.validation.file.js.message')}}"
                         }
                     }
                 },

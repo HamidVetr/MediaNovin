@@ -7,21 +7,25 @@
         <nav class="nav">
             <div class="dropdown">
                 <a href="#" class="nav-link nav-link-profile" data-toggle="dropdown">
-                    <span class="logged-name hidden-md-down">مریم محمدی</span>
-                    <img src="{{ asset('assets/dashboard/images/img1.jpg') }}" class="wd-32 rounded-circle" alt="">
+                    <span class="logged-name hidden-md-down">{{ auth()->user()->first_name .' '. auth()->user()->last_name }}</span>
+                    <img src="{{ \App\Models\User::getAvatar(auth()->user()) }}" class="wd-32 rounded-circle" alt="">
                     <span class="square-10 bg-success"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-header wd-250">
                     <div class="tx-center">
-                        <a href="#"><img src="{{ asset('assets/dashboard/images/img1.jpg') }}" class="wd-80 rounded-circle" alt=""></a>
-                        <h6 class="logged-fullname">مریم محمدی</h6>
-                        <p>youremail@domain.com</p>
+                        <a href="#"><img src="{{ \App\Models\User::getAvatar(auth()->user()) }}" class="wd-80 rounded-circle" alt=""></a>
+                        <h6 class="logged-fullname">{{ auth()->user()->username }}</h6>
+                        <p>{{ auth()->user()->email }}</p>
                     </div>
                     <hr>
                     <ul class="list-unstyled user-profile-nav">
-                        <li><a href="#"><i class="icon ion-ios-person"></i>ویرایش پروفایل</a></li>
-                        <li><a href="#"><i class="icon ion-ios-gear"></i> تنظیمات</a></li>
-                        <li><a href="#"><i class="icon ion-power"></i> خروج</a></li>
+                        <li><a href="{{ route('dashboard.showProfile') }}"><i class="icon ion-ios-person"></i>ویرایش پروفایل</a></li>
+                        <li><a href="javascript:{}" onclick="document.getElementById('form-admin-logout').submit();">
+                                <i class="icon ion-power"></i> خروج</a>
+
+                            {!! Form::open(['method'=>'POST', 'url' => route('logout'), 'files' => false, 'id' => 'form-admin-logout']) !!}
+                            {!! Form::close() !!}
+                        </li>
                     </ul>
                 </div><!-- dropdown-menu -->
             </div><!-- dropdown -->

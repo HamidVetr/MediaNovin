@@ -63,7 +63,6 @@
                         </div>
 
                         <div class="form-group row mg-t-20">
-                            <span class="tx-danger">*</span>
                             {!! Form::label(null, 'انتخاب فایل :', ['class' => 'col-sm-2 form-control-label']) !!}
 
                             <div class="col-lg-8 col-md-10">
