@@ -2,7 +2,12 @@
 
 namespace Mwteam\Blog;
 
+use Mwteam\Blog\App\Models\BlogCategory;
 use Mwteam\Blog\App\Models\BlogComment;
+use Mwteam\Blog\App\Models\BlogTag;
+use Mwteam\Blog\App\Policies\BlogCategoryPolicy;
+use Mwteam\Blog\App\Policies\BlogCommentPolicy;
+use Mwteam\Blog\App\Policies\BlogTagPolicy;
 use Mwteam\Dashboard\PackageServiceProvider as ServiceProvider;
 use Mwteam\Blog\App\Models\BlogArticle;
 use Mwteam\Blog\App\Policies\BlogArticlePolicy;
@@ -15,7 +20,10 @@ class BlogServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        BlogArticle::class => BlogArticlePolicy::class,
+        BlogArticle::class  => BlogArticlePolicy::class,
+        BlogTag::class      => BlogTagPolicy::class,
+        BlogCategory::class => BlogCategoryPolicy::class,
+        BlogComment::class  => BlogCommentPolicy::class,
     ];
 
     /**

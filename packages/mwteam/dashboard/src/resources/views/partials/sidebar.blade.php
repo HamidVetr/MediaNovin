@@ -10,7 +10,7 @@
 
         @foreach($packagesSidebarMenus as $packageName => $sidebarMenus)
             @foreach($sidebarMenus as $sidebarMenu)
-                @can($sidebarMenu['permission'], $sidebarMenu['model'])
+                @can($sidebarMenu['policy'], $sidebarMenu['model'])
                     <li class="br-menu-item">
                         <a href="" class="br-menu-link {{isset($sidebarMenu['subMenus']) && count($sidebarMenu['subMenus']) > 0 ? 'with-sub':''}} @yield($sidebarMenu['yield'])">
                             <i class="menu-item-icon icon {{$sidebarMenu['icon']}}"></i>
@@ -24,7 +24,7 @@
                         @if(isset($sidebarMenu['subMenus']) && count($sidebarMenu['subMenus']) > 0)
                             <ul class="br-menu-sub">
                                 @foreach($sidebarMenu['subMenus'] as $subMenu)
-                                    @can($subMenu['permission'], $subMenu['model'])
+                                    @can($subMenu['policy'], $subMenu['model'])
                                         <li class="sub-item">
                                             <a href="{{$subMenu['url']}}" class="sub-link @yield($subMenu['yield'])">{{$subMenu['title']}}
                                                 @if(isset(${$packageName . 'NotificationsCount'}) && isset(${$packageName . 'NotificationsCount'}[$subMenu['yield']]) && ${$packageName . 'NotificationsCount'}[$subMenu['yield']] != 0)
