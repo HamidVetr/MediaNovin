@@ -16,13 +16,16 @@
         </nav>
     </div>
     <div class="br-pagetitle row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-xs-6">
             <div class="title-add">
-                <i class="icon icon ion-android-exit"></i>
-                <h4 class="pd-r-10">برچسب ها</h4>
+
+                <h4 class="pd-r-10">
+                    <i class="icon ion-ios-pricetags"></i>
+                    برچسب ها
+                </h4>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-xs-6">
             <div class="heading-elements pd-l-20">
                 <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
                     <div class="ht-40 justify-content-between">
@@ -37,44 +40,23 @@
     </div>
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
-            <div class="search-advance search-advance-vendor">
-                <button type="button" class="bg-teal-400 searchbtn searchbtn-store btn-icon btn-rounded"  data-toggle="tooltip" title="جستجو پیشرفته"><img src="{{ asset('assets/dashboard/images/search.svg') }}" width="18"></button>
-                <div id="searchboxpage" class="searchboxpage-vendor">
-                    <br><br>
-                    <form action="">
+                    <form method="" id="">
                         <div class="row">
-                            <div class="col-md-3 col-xs-6">
-                                <div class="text-right">عنوان برچسب</div>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="col-md-3 col-xs-6">
-                                <div class="text-right">تعداد</div>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <div class="text-right">از تاریخ</div>
-                                <input type="text" class="form-control persianDatePricker text-left" name="from-date"  id="from-date" value>
-                            </div>
-
-                            <div class="col-md-3 col-xs-6">
-                                <div class="text-right">تا تاریخ</div>
-                                <input type="text" class="form-control persianDatePricker text-left" name="to-date"  id="to-date" value>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-sm-5 col-md-2">
-                                <div class="btn-demo">
-                                    <button type="submit" class="btn btn-oblong btn-teal active btn-block mg-b-30 mg-t-30"> جستجو</button>
+                            <div class=" col-lg-4 col-md-6">
+                                <div id="datatable1_filter" class="dataTables_filter">
+                                    <label for="">
+                                        <input type="search" name="search"  placeholder="جستجو عنوان ">
+                                    </label>
+                                    <button type="submit" class="btn btn-info">جستجو</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-                </div>
                 <div class="rounded table-responsive">
                     <table class="table mg-b-0 table-tickets">
                         <thead>
                             <tr>
+                                <th>شناسه</th>
                                 <th>عنوان برچسب</th>
                                 <th>تعداد</th>
                                 <th>عملیات</th>
@@ -82,6 +64,7 @@
                         </thead>
                         <tbody>
                         <tr>
+                            <td>1</td>
                             <td>فروش محصولات</td>
                             <td>15</td>
                             <td>
@@ -93,6 +76,7 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>2</td>
                             <td>حذف پیام ارسال شده</td>
                             <td>3</td>
                             <td>
@@ -104,6 +88,7 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>3</td>
                             <td>تبریک، برنده مزایده شده اید</td>
                             <td>5</td>
                             <td>
@@ -115,6 +100,7 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>4</td>
                             <td>	حذف دیدگاه</td>
                             <td>10</td>
                             <td>
@@ -126,7 +112,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>	حذف دیدگاه</td>
+                            <td>5</td>
+                            <td>حذف دیدگاه</td>
                             <td>66</td>
                             <td>
                                 <a href="">
@@ -162,9 +149,6 @@
                         </li>
                     </ul>
                 </div>
-
-
-            </div>
         </div>
     </div>
 @endsection

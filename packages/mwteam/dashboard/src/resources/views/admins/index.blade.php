@@ -45,8 +45,8 @@
     <div class="pd-t-30">
         <div class="br-section-wrapper">
             <form method="" id="">
-              <div class="row">
-                  <div class=" col-lg-4 col-md-6">
+                <div class="row">
+                    <div class=" col-lg-4 col-md-6">
                          <div id="datatable1_filter" class="dataTables_filter">
                              <label for="">
                               <input type="search" name="search"  placeholder="جستجو ">
@@ -54,8 +54,7 @@
                              <button type="submit" class="btn btn-info">جستجو</button>
                           </div>
                      </div>
-                  </div>
-
+               </div>
             </form>
             <div class="rounded table-responsive">
                 <table class="table mg-b-0 table-mananger">
