@@ -20,6 +20,7 @@ class BlogTagController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', BlogTag::class);
         return view('Blog::dashboard.tags.index');
     }
 
@@ -30,6 +31,7 @@ class BlogTagController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', BlogTag::class);
         return view('Blog::dashboard.tags.create');
     }
 
@@ -41,7 +43,7 @@ class BlogTagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', BlogTag::class);
     }
 
     /**
@@ -63,7 +65,7 @@ class BlogTagController extends Controller
      */
     public function edit(BlogTag $blogTag)
     {
-        //
+        $this->authorize('edit', BlogTag::class);
     }
 
     /**
@@ -75,7 +77,7 @@ class BlogTagController extends Controller
      */
     public function update(Request $request, BlogTag $blogTag)
     {
-        //
+        $this->authorize('edit', BlogTag::class);
     }
 
     /**
@@ -86,6 +88,6 @@ class BlogTagController extends Controller
      */
     public function destroy(BlogTag $blogTag)
     {
-        //
+        $this->authorize('delete', BlogTag::class);
     }
 }

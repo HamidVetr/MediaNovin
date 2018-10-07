@@ -20,6 +20,7 @@ class BlogCommentController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', BlogComment::class);
         return view('Blog::dashboard.comments.index');
     }
 
@@ -63,7 +64,7 @@ class BlogCommentController extends Controller
      */
     public function edit(BlogComment $blogComment)
     {
-        //
+        $this->authorize('edit', BlogComment::class);
     }
 
     /**
@@ -75,7 +76,7 @@ class BlogCommentController extends Controller
      */
     public function update(Request $request, BlogComment $blogComment)
     {
-        //
+        $this->authorize('index', BlogComment::class);
     }
 
     /**
@@ -86,6 +87,16 @@ class BlogCommentController extends Controller
      */
     public function destroy(BlogComment $blogComment)
     {
-        //
+        $this->authorize('delete', BlogComment::class);
+    }
+
+    public function reply(BlogComment $blogComment)
+    {
+        $this->authorize('reply', BlogComment::class);
+    }
+
+    public function approve(BlogComment $blogComment)
+    {
+        $this->authorize('approve', BlogComment::class);
     }
 }

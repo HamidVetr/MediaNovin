@@ -15,6 +15,8 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         Route::group(['prefix' => '/comments', 'as' => 'comments.'], function () {
+            Route::get('/approve/{comment}', 'BlogCommentController@approve');
+            Route::get('/reply/{comment}', 'BlogCommentController@reply');
             Route::resource('/', 'BlogCommentController');
         });
     });

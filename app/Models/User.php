@@ -84,19 +84,19 @@ class User extends Authenticatable
     }
 
     public function isAdminOrSuperAdmin(){
-        return $this->isAdmin() || $this->isSuperAdmin() ? true:false;
+        return $this->isAdmin() || $this->isSuperAdmin() ? true : false;
     }
 
     public function isSuperAdmin(){
-        return $this->role == 'super-admin' ? true:false;
+        return $this->role == 'super-admin' ? true : false;
     }
 
     public function isAdmin(){
-        return $this->role == 'admin' ? true:false;
+        return $this->role == 'admin' ? true : false;
     }
 
     public function isUser(){
-        return $this->role == 'user' ? true:false;
+        return $this->role == 'user' ? true : false;
     }
 
     public function getFullNameAttribute()

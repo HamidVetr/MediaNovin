@@ -62,12 +62,12 @@
 
                             <div class="col-md-3 col-xs-6">
                                 <div class="text-right">از تاریخ</div>
-                                {!! Form::text('fromDate', isset($_GET['fromDate']) ? $_GET['fromDate'] : null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'from-date', 'autocomplete' => 'off']) !!}
+                                <input type="text" name="fromDate" class="form-control persianDatePricker text-left" id="from-date" autocomplete="off" value="{{ isset($_GET['fromDate']) && trim($_GET['fromDate']) != '' ? \App\Helpers\DatetimeHelper::toGregorianDatetime($_GET['fromDate'] . ' 00:00:00') : '' }}">
                             </div>
 
                             <div class="col-md-3 col-xs-6">
                                 <div class="text-right">تا تاریخ</div>
-                                {!! Form::text('toDate', isset($_GET['toDate']) ? $_GET['toDate'] : null, ['class' => 'form-control persianDatePricker text-left', 'id' => 'to-date', 'autocomplete' => 'off']) !!}
+                                <input type="text" name="toDate" class="form-control persianDatePricker text-left" id="to-date" autocomplete="off" value="{{ isset($_GET['toDate']) && trim($_GET['toDate']) != '' ? \App\Helpers\DatetimeHelper::toGregorianDatetime($_GET['toDate'] . ' 00:00:00') : '' }}">
                             </div>
                         </div>
                         <div class="row justify-content-center">
@@ -135,9 +135,18 @@
                 enabled: false
             }
         });
-
-        $('#from-date').val('');
-
-        $('#to-date').val('');
     </script>
+
+    @if(!isset($_GET['fromDate']) || trim($_GET['fromDate']) == '')
+        <script>
+            console.log('here');
+            $('#from-date').val('');
+        </script>
+    @endif
+
+    @if(!(isset($_GET['toDate']) && trim($_GET['toDate']) != ''))
+        <script>
+            $('#to-date').val('');
+        </script>
+    @endif
 @endsection

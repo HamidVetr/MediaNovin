@@ -20,6 +20,7 @@ class BlogCategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', BlogCategory::class);
         return view('Blog::dashboard.categories.index');
     }
 
@@ -30,6 +31,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', BlogCategory::class);
         return view('Blog::dashboard.categories.create');
     }
 
@@ -41,7 +43,7 @@ class BlogCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', BlogCategory::class);
     }
 
     /**
@@ -63,7 +65,7 @@ class BlogCategoryController extends Controller
      */
     public function edit(BlogCategory $blogCategory)
     {
-        //
+        $this->authorize('edit', BlogCategory::class);
     }
 
     /**
@@ -75,7 +77,7 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request, BlogCategory $blogCategory)
     {
-        //
+        $this->authorize('edit', BlogCategory::class);
     }
 
     /**
@@ -86,6 +88,6 @@ class BlogCategoryController extends Controller
      */
     public function destroy(BlogCategory $blogCategory)
     {
-        //
+        $this->authorize('delete', BlogCategory::class);
     }
 }

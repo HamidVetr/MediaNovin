@@ -2,12 +2,10 @@
 
 namespace Mwteam\Blog\App\Http\Controllers;
 
-use App\Helpers\DatetimeHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use function foo\func;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Morilog\Jalali\CalendarUtils;
 use Mwteam\Blog\App\Models\BlogArticle;
 
@@ -53,12 +51,13 @@ class BlogArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', BlogArticle::class);
     }
 
     /**
@@ -77,22 +76,24 @@ class BlogArticleController extends Controller
      *
      * @param BlogArticle $article
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(BlogArticle $blogArticle)
     {
-        //
+        $this->authorize('edit', BlogArticle::class);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param BlogArticle $article
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, BlogArticle $blogArticle)
     {
-        //
+        $this->authorize('edit', BlogArticle::class);
     }
 
     /**
@@ -100,10 +101,11 @@ class BlogArticleController extends Controller
      *
      * @param BlogArticle $article
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(BlogArticle $blogArticle)
     {
-        //
+        $this->authorize('delete', BlogArticle::class);
     }
 
     private function search($data)
@@ -122,7 +124,6 @@ class BlogArticleController extends Controller
             }
 
             if ($data['user'] != '') {
-                $users = [];
                 $userIDs = User::adminOrSuperAdmin()->whereRaw("CONCAT_WS (' ', first_name, last_name) like '%{$data['user']}%'")->select('id')->get()->toArray();
 
                 $users = array_map(function($userID){
