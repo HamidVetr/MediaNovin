@@ -17,31 +17,25 @@
         </nav>
     </div>
     <div class="br-pagetitle">
-        <i class="icon icon ion-android-exit"></i>
-        <h4 class="pd-r-10">ویرایش دسته</h4>
+
+        <h4 class="pd-r-10">
+            <img src="{{ asset('assets/dashboard/images/maintenance.png') }}" alt="">
+           ویرایش دسته
+        </h4>
     </div>
     <div class="pd-t-30">
         <div class="col-md-9">
             <div class="br-section-wrapper-level">
-                <form  id="tiketsend">
+                <form  id="creat">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="form-group row mg-t-20">
                                 <label for="" class="col-sm-2 form-control-label">
-                                    نام دسته‌ (فارسی):
+                                    نام دسته‌ :
                                     <span class="tx-danger">*</span>
                                 </label>
                                 <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" class="form-control"  name="first_name">
-                                </div>
-                            </div>
-                            <div class="form-group row mg-t-20">
-                                <label for="" class="col-sm-2 form-control-label">
-                                    نام دسته‌ (انگلیسی):
-                                    <span class="tx-danger">*</span>
-                                </label>
-                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" class="form-control"  name="first_name">
+                                    <input type="text" class="form-control"  name="categoryname">
                                 </div>
                             </div>
                             <div class="form-group row mg-t-20">
@@ -60,9 +54,43 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row mg-t-20">
+                                <label for="" class="col-sm-2 form-control-label">
+                                    متن پیام:
+                                    <span class="tx-danger">*</span>
+                                </label>
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    <textarea name="text" id="" cols="30" rows="6" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mg-t-20">
+                                <label for="" class="col-sm-2 form-control-label">
+                                    انتخاب فایل:
+                                    <span class="tx-danger">*</span>
+                                </label>
+                                <div class="col-lg-8 col-md-10">
+                                    <form class="md-form" action="#">
+                                        <div class="file-field">
+                                            <div class="btn btn-primary btn-md float-left">
+
+                                            <span>
+                                                <i class="fa fa-cloud-upload"></i>
+                                            </span>
+                                                <span class="pd-r-5">انتخاب فایل</span>
+                                                <input type="file" multiple>
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input class="file-path validate" type="text" placeholder="یک یا چند فایل را آپلود کنید" name="file">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
                             <div class="row justify-content-center">
                                 <div class="btn-demo">
-                                    <button class="btn btn-info btn-block mg-b-10">ویرایش دسته </button>
+                                    <button class="btn btn-info btn-block mg-b-10">ایجاد دسته</button>
                                 </div>
                             </div>
                         </div>
@@ -75,8 +103,10 @@
                 <div class="category-title">
                     <span>انتشار</span>
                 </div>
-                <br>
-                <br>
+                <div class="pd-t-20 text-center">
+                    <p> تاریخ آخرین انتشار:  <b> 1397/07/15 </b>   </p>
+                    <p class="mg-b-0">نوشته شده توسط‌ : <b>مریم محمدی</b> </p>
+                </div>
                 <div class="category-content pd-15">
                     <div class="row justify-content-center">
                         <a href="" class="btn btn-danger btn-with-icon mg-y-20 mg-x-5">
@@ -146,12 +176,13 @@
                 </div>
                 <div class="pd-x-20 pd-y-20">
                     <div class="form-group">
-                        <select data-placeholder="انتخاب کنید..." class="form-control js-example-placeholder-single" name="status"  id="e9">
-                            <option value=""></option>
-                            <option value="1">پاسخ داده شده</option>
-                            <option value="2">بسته شده</option>
-                            <option value="3">در انتظار پاسخ  </option>
-                            <option value="4">در حال بررسی</option>
+                        <label for="multi-select">برچسب مناسب را انتخاب کنید</label><br>
+                        <select id="multi-select" name="select" multiple="multiple">
+                            <option value="value1">Value 1</option>
+                            <option value="value2">Value 2</option>
+                            <option value="value3">Value 3</option>
+                            <option value="value4">Value 4</option>
+                            <option value="value5">Value 5</option>
                         </select>
                     </div>
                 </div>
@@ -180,17 +211,15 @@
 
 @section('bottom-assets')
     <script type="text/javascript" src="{{ asset('assets/dashboard/js/select2.min.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('assets/dashboard/js/bootstrapValidator.min.js') }}"></script>
     <script type="text/javascript">
-        $('#e9').select2();
-
-        $(".js-example-placeholder-single").select2({
-            placeholder: "انتخاب کنید...",
-            allowClear: true
+        var $mSelect = $('#multi-select');
+        $mSelect.select2({ placeholder: "انتخاب کنید...",
+            allowClear: true,
+            width: "300px"
         });
     </script>
     <script>
-
         function preview(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -201,6 +230,41 @@
             $("#img").css({top: 0, left: 0});
             preview(this);
             $("#img").draggable({ containment: 'parent',scroll: false });
+        });
+    </script>
+    <script>
+        $('#creat').bootstrapValidator({
+            fields: {
+                categoryname: {
+                    validators: {
+                        notEmpty: {
+                            message: 'نام دسته را وارد کنید'
+                        }
+                    }
+                },
+                status: {
+                    validators: {
+                        notEmpty: {
+                            message: 'دسته مادر را وارد کنید'
+                        }
+                    }
+                },
+                text: {
+                    validators: {
+                        notEmpty: {
+                            message: ' متن پیام را وارد کنید'
+                        }
+                    }
+                },
+                file: {
+                    validators: {
+                        notEmpty: {
+                            message: ' فایل مورد نظر را انتخاب کنید'
+                        }
+                    }
+                }
+
+            }
         });
     </script>
 @endsection

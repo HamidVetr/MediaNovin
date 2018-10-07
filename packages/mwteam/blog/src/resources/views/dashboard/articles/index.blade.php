@@ -20,16 +20,16 @@
             <span class="breadcrumb-item active">مقالات</span>
         </nav>
     </div>
-    <div class="br-pagetitle row">
+    <div class="br-pagetitle row pd-r-0">
 
-        <div class="col-lg-6">
-            <div class="title-add">
-                <i class="icon icon ion-android-exit"></i>
-                <h4 class="pd-r-10">لیست مقالات</h4>
-            </div>
+        <div class="col-lg-6 col-xs-6">
+                    <h4 class="pd-r-10">
+                        <i class="icon ion-ios-book"></i>
+                      لیست مقالات
+                    </h4>
         </div>
-        <div class="col-lg-6">
-            <div class="heading-elements pd-l-20">
+        <div class="col-lg-6 col-xs-6">
+            <div class="heading-elements">
                 <a href="{{ route('dashboard.blog.articles.create') }}" class="btn btn-info btn-with-icon btn-block">
                     <div class="ht-40 justify-content-between">
                         <span class="ht-58 justify-content-between pd-r-20 pd-l-20"> ایجاد مقاله جدید</span>
