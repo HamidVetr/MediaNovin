@@ -111,21 +111,21 @@
 
                                                     {!! Form::open(['method'=>'DELETE', 'url' => route('dashboard.tickets.destroyMessage',['ticketId' => $ticket->id, 'messageId' => $message->id]), 'files' => false, 'style' => 'display:inline-block;']) !!}
                                                     <div id="modal-delete-message-{{$message->id}}" class="modal fade">
-                                                  <div class="modal-dialog modal-lg" role="document">
-                                                      <div class="modal-content tx-size-sm">
-                                                          <div class="modal-body tx-center pd-y-20 pd-x-20">
-                                                              <a href="" class="close" data-dismiss="modal" aria-label="Close">
-                                                                  <span aria-hidden="true">&times;</span>
-                                                              </a>
-                                                              <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                                                              <h6 class="tx-black  tx-semibold mg-b-20">پیام حذف شود؟</h6>
-                                                              <p class="pd-x-100"></p>
-                                                              <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
-                                                              <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
-                                                          </div><!-- modal-body -->
-                                                      </div><!-- modal-content -->
-                                                  </div><!-- modal-dialog -->
-                                                </div><!-- modal -->
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body tx-center pd-y-20 pd-x-20">
+                                                                    <a href="" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </a>
+                                                                    <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                                                                    <h6 class="tx-black  tx-semibold mg-b-20">پیام حذف شود؟</h6>
+                                                                    <p class="pd-x-100"></p>
+                                                                    <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">تایید</button>
+                                                                    <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                                                                </div><!-- modal-body -->
+                                                            </div><!-- modal-content -->
+                                                        </div><!-- modal-dialog -->
+                                                    </div><!-- modal -->
                                                     {!! Form::close() !!}
                                                 @endcan
 
@@ -205,9 +205,7 @@
                             <br>
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    {!! Form::model($ticket , ['method'=>'POST', 'url' => route('dashboard.tickets.status'), 'files' => false]) !!}
-                                        {!! Form::select('status',\Mwteam\Ticket\App\Models\Ticket::statuses(), $ticket->status, ['class' => 'form-control select2']) !!}
-                                    {!! Form::close() !!}
+                                    {!! Form::select('status',\Mwteam\Ticket\App\Models\Ticket::statuses(), $ticket->status, ['class' => 'form-control', 'id' => 'status-select']) !!}
                                 </div>
                             </div>
                         </div>
@@ -270,6 +268,28 @@
                     }
                 },
             }
-        })
+        });
+
+        $('#status-select').on('change',function () {
+            $.ajax({
+                url: "{{route('dashboard.tickets.status', ['ticketId' => $ticket->id])}}",
+                method: "post",
+                data:{status: $('#status-select').val()},
+                success: function (result) {
+                    if(result['status'] == true){
+                        notify('success','وضعیت تیکت تغییر یافت.');
+                    }else{
+                        notify();
+                    }
+                },
+                error: function (xmlHttpRequest) {
+                    $('#searchresult').html(temp);
+
+                    if(xmlHttpRequest.readyState != 0 || xmlHttpRequest.status != 0){
+                        notify();
+                    }
+                }
+            });
+        });
     </script>
 @endsection

@@ -95,7 +95,6 @@
 
 @section('bottom-assets')
     <script type="text/javascript" src="{{ asset('assets/dashboard/js/select2.min.js') }}"></script>
-    <script type="text/javascript" src="assets/dashboard/js/bootstrapValidator.min.js"></script>
 
     <script type="text/javascript">
         $('.select2').select2();
