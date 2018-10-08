@@ -29,7 +29,7 @@
         ]
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'لیست مدیران'])
+    @include('dashboard::partials.page-title', ['title' => 'لیست مدیران', 'icon' => 'ion-android-contacts'])
 
     <div class="pd-t-30">
         <div class="br-section-wrapper">

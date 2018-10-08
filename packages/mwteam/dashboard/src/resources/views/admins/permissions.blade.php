@@ -23,7 +23,7 @@
         ],
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'تعیین سطح دسترسی'])
+    @include('dashboard::partials.page-title', ['title' => 'تعیین سطح دسترسی', 'icon' => 'ion-android-apps'])
 
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">

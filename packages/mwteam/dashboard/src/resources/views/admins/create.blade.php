@@ -20,7 +20,7 @@
         ],
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'افزودن مدیر', 'icon' => 'ion-android-exit'])
+    @include('dashboard::partials.page-title', ['title' => 'افزودن مدیر', 'icon' => 'ion-android-contact'])
 
     <div class="pd-t-30">
         {!! Form::open(['method'=>'POST', 'url' => route('dashboard.admins.store'), 'files' => false ,'id'=>'adminadd']) !!}

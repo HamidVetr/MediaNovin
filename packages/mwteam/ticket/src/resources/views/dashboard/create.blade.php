@@ -24,7 +24,7 @@
         ],
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'ارسال تیکت'])
+    @include('dashboard::partials.page-title', ['title' => 'ارسال تیکت', 'icon' => 'ion-email'])
 
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">

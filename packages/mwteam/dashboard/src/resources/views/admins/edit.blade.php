@@ -23,7 +23,7 @@
         ],
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'ویرایش اطلاعات'])
+    @include('dashboard::partials.page-title', ['title' => 'ویرایش اطلاعات', 'icon' => 'ion-edit'])
 
     <div class="pd-t-30">
         {!! Form::model($admin , ['method'=>'PUT', 'url' => route('dashboard.admins.update',['adminId' => $admin->id]), 'files' => false ,'id'=>'adminadd']) !!}

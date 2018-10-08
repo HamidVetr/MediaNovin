@@ -27,7 +27,7 @@
         ],
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'تیکت شماره '. $ticket->id])
+    @include('dashboard::partials.page-title', ['title' => 'تیکت شماره '. $ticket->id, 'icon' => 'ion-email'])
 
     <div class="pd-t-30">
         <div class="row">
