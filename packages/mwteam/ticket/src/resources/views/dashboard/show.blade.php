@@ -37,20 +37,16 @@
                    <div class="panel-heading">
                        <h6 class="panel-title">{{$ticket->id .' - '. $ticket->title}}</h6>
                    </div>
-                    <div class="panel-body">
+                    <div class="">
                         <ul class="media-list chat-list content-group">
                             @foreach($ticket->messages as $message)
                                 @if($message->sender == $ticket->userWithTrashed->id)
-                                    <li class="media" style="float: left">
-                                        <div class="media-left">
-                                            <img src="{{ \App\Models\User::getAvatar($message->senderWithTrashed) }} " alt="" class="img-circle img-md">
-                                        </div>
-
+                                    <li class="media reversed">
                                         <div class="media-body">
                                             <div class="media-content">
                                                 {{$message->message}}
                                             </div>
-                                            <span class="media-annotation display-block mt-10">
+                                            <span class="media-annotation display-block">
                                                 <i class="fa fa-calendar position-right text-muted"></i>
                                                 {{\App\Helpers\DatetimeHelper::toWithoutSecondsTime($message->updated_at)}}
                                                 {{\App\Helpers\DatetimeHelper::toJalaliDate($message->updated_at)}}
@@ -87,6 +83,9 @@
                                                 @endif
                                             </span>
                                         </div>
+                                        <div class="media-right">
+                                            <img src="{{ \App\Models\User::getAvatar($message->senderWithTrashed) }} " alt="" class="img-circle img-md">
+                                        </div>
                                     </li>
                                 @else
                                     <li class="media">
@@ -99,7 +98,7 @@
                                                 <h6>{{$message->senderWithTrashed->username}}:</h6>
                                                 {{$message->message}}
                                             </div>
-                                            <span class="media-annotation display-block mt-10">
+                                            <span class="media-annotation display-block">
                                                 <i class="fa fa-calendar position-right text-muted"></i>
                                                 {{\App\Helpers\DatetimeHelper::toWithoutSecondsTime($message->updated_at)}}
                                                 {{\App\Helpers\DatetimeHelper::toJalaliDate($message->updated_at)}}
@@ -157,7 +156,7 @@
                                 <div class="form-group row mg-t-20">
                                     {!! Form::label(null, 'انتخاب فایل :', ['class' => 'col-sm-2 form-control-label']) !!}
 
-                                    <div class="col-lg-8 col-md-10">
+                                    <div class="col-lg-12 col-md-10">
                                         <div class="file-field">
                                             <div class="btn btn-primary btn-md float-left">
                                                 <span>
@@ -291,5 +290,15 @@
                 }
             });
         });
+    </script>
+    <script>
+        var height = 0;
+        $('.chat-list li').each(function(i, value){
+            height += parseInt($(this).height());
+        });
+
+        height += '';
+
+        $('.chat-list').animate({scrollTop: height});
     </script>
 @endsection
