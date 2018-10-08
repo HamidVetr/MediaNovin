@@ -23,25 +23,60 @@
     <div class="pd-t-30">
         <div class="col-md-9">
             <div class="br-section-wrapper-level">
-                <form  id="tiketsend">
+                {!! Form::open(['method'=>'POST', 'route' => 'dashboard.blog.articles.store', 'files' => true]) !!}
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="form-group row mg-t-20">
-                                <label for="" class="col-sm-2 form-control-label">
-                                    عنوان :
+                                <label for="fa_title" class="col-sm-2 form-control-label">
+                                    عنوان فارسی:
                                     <span class="tx-danger">*</span>
                                 </label>
                                 <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    <input type="text" class="form-control"  name="first_name">
+                                    {!! Form::text('fa_title', null, ['class' => 'form-control', 'id' => 'fa_title']) !!}
                                 </div>
                             </div>
                             <div class="form-group row mg-t-20">
-                                <label for="" class="col-sm-2 form-control-label">
-                                    متن پیام:
+                                <label for="en_title" class="col-sm-2 form-control-label">
+                                    عنوان انگلیسی:
+                                </label>
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::text('en_title', null, ['class' => 'form-control', 'id' => 'en_title']) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row mg-t-20">
+                                <label for="fa_description" class="col-sm-2 form-control-label">
+                                    خلاصه فارسی:
+                                </label>
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::text('fa_description', null, ['class' => 'form-control', 'id' => 'fa_description']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group row mg-t-20">
+                                <label for="en_description" class="col-sm-2 form-control-label">
+                                    خلاصه انگلیسی:
+                                </label>
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::text('en_description', null, ['class' => 'form-control', 'id' => 'en_description']) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row mg-t-20">
+                                <label for="fa_body" class="col-sm-2 form-control-label">
+                                    متن فارسی مقاله:
                                     <span class="tx-danger">*</span>
                                 </label>
                                 <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                  <div class="summernote">Hello, universe!</div>
+                                    {!! Form::textarea('fa_body', null, ['class' => 'form-control', 'id' => 'fa_body']) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row mg-t-20">
+                                <label for="en_body" class="col-sm-2 form-control-label">
+                                    متن انگلیسی مقاله:
+                                </label>
+                                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                                    {!! Form::textarea('en_body', null, ['class' => 'form-control', 'id' => 'en_body']) !!}
                                 </div>
                             </div>
 
@@ -76,7 +111,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
         <div class="col-md-3">
