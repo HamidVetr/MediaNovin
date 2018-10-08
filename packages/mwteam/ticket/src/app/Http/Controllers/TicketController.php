@@ -2,6 +2,7 @@
 
 namespace Mwteam\Ticket\Controllers;
 
+use App\Helpers\DatetimeHelper;
 use App\Helpers\PackageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -10,8 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use Mwteam\Ticket\App\Models\Ticket;
 use Mwteam\Ticket\App\Models\TicketMessages;
+use Illuminate\Pagination\Paginator;
 
 class TicketController extends Controller
 {
@@ -19,10 +22,66 @@ class TicketController extends Controller
     {
         $this->authorize('tickets', Ticket::class);
 
-        $hasFilter = false;
-        $tickets = Ticket::orderBy('updated_at')->with(['messages','userWithTrashed'])->paginate(1);
+        $this->validate($request,[
+            'id' => 'nullable|integer|min:1',
+            'user' => 'nullable',
+            'status' => 'nullable|string|in:all,'. implode(',',array_keys(Ticket::statuses())),
+            'from-date' => ['nullable','regex:/^1[3-9][0-9]{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'to-date' => ['nullable','regex:/^1[3-9][0-9]{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+        ]);
+
+        if (isset($request['from-date']) && $request['from-date'] != '' && !DatetimeHelper::checkJalaliDate($request['from-date'].' 00:00:00')){
+            return redirect()->back()->withErrors(['از تاریخ صحیح نمی باشد'])->withInput($request->toArray());
+        }
+
+        if (isset($request['to-date']) && $request['to-date'] != '' && !DatetimeHelper::checkJalaliDate($request['to-date'].' 00:00:00')){
+            return redirect()->back()->withErrors(['تا تاریخ صحیح نمی باشد'])->withInput($request->toArray());
+        }
+
+        $hasFilter = count($request->except('page')) == 0 ? false:true;
+        $statuses = ['all' => 'همه'];
+        $statuses = array_merge($statuses,Ticket::statuses());
+
+        $query = Ticket::query();
+
+        if (isset($request['id']) && $request['id'] != "") {
+            $query->where('id','like','%'.$request['id'].'%');
+        }
+
+        if (isset($request['user']) && $request['user'] != "") {
+            $query->whereHas('userWithTrashed',function ($q) use ($request){
+                $q->where('username','like','%'.$request['user'].'%');
+            });
+        }else{
+            $query->with('userWithTrashed');
+        }
+
+        if (isset($request['status']) && $request['status'] != "" && $request['status'] != 'all') {
+            $query->where('status', $request['status']);
+        }
+
+        if (isset($request['from-date']) && $request['from-date'] != "") {
+            $query->where('created_at','>=',DatetimeHelper::toGregorianDatetime($request['from-date'].' 00:00:00'));
+        }
+
+        if (isset($request['to-date']) && $request['to-date'] != "") {
+            $query->where('created_at','<=',DatetimeHelper::toGregorianDatetime($request['to-date'].' 23:59:59'));
+        }
+
+        $query->orderBy('updated_at');
+        $tempQuery = clone $query;
+        $tickets = $query->paginate(2);
+
+        if ($tickets->count() == 0 && $request['page'] != 1){
+            Paginator::currentPageResolver(function ()  {
+                return 1;
+            });
+
+            $tickets = $tempQuery->paginate(2);
+        }
+
         return view('ticket::dashboard.index')->with(['tickets' => $tickets, 'hasFilter' => $hasFilter,
-            'request' => $request->all()]);
+            'request' => $request->all(),'statuses' => $statuses]);
     }
 
     public function create()
@@ -149,58 +208,24 @@ class TicketController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($ticketId)
-    {
-        $this->authorize('tickets-delete', Ticket::class);
-
-        $ticket = Ticket::where('id', $ticketId)->firstOrFail();
-        DB::beginTransaction();
-
-        try{
-            TicketMessages::where('ticket_id', $ticketId)->delete();
-            $ticket->delete();
-        }catch (\Exception $e){
-            DB::rollBack();
-            abort(500);
-        }
-
-        DB::commit();
-        session()->flash('success','تیکت شماره '. $ticketId .' حذف گردید.');
-        return redirect()->back();
-    }
-
-    public function destroyMessage($ticketId, $messageId)
-    {
-        $this->authorize('tickets-delete', Ticket::class);
-
-        Ticket::where('id', $ticketId)->firstOrFail();
-        $message = TicketMessages::where('ticket_id', $ticketId)->where('id', $messageId)->firstOrFail();
-        $message->delete();
-
-        if (!is_null($message->file)){
-            $file = Ticket::getFilePath($ticketId).$message->file;
-            File::delete($file);
-        }
-
-        session()->flash('success','پیام حذف گردید.');
-        return redirect()->back();
-    }
-
     public function status(Request $request, $ticketId)
     {
         $this->authorize('tickets', Ticket::class);
         $ticket = Ticket::where('id', $ticketId)->firstOrFail();
 
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'status' => 'required|string|in:'. implode(',',array_keys(Ticket::statuses())),
         ]);
+
+        if ($validator->fails()){
+            return response()->json(['status' => false]);
+        }
 
         $ticket->update([
             'status' => $request['status']
         ]);
 
-        session()->flash('success', 'وضعیت تیکت تغییر یافت');
-        return redirect()->back();
+        return response()->json(['status' => true]);
     }
 
     public function file($ticketId, $fileName)
@@ -221,4 +246,42 @@ class TicketController extends Controller
 
         return $response;
     }
+
+    public function destroy($ticketId)
+    {
+        $this->authorize('tickets-delete', Ticket::class);
+
+        $ticket = Ticket::where('id', $ticketId)->firstOrFail();
+        DB::beginTransaction();
+
+        try{
+            TicketMessages::where('ticket_id', $ticketId)->delete();
+            $ticket->delete();
+        }catch (\Exception $e){
+            DB::rollBack();
+            abort(500);
+        }
+
+        DB::commit();
+        session()->flash('success','تیکت شماره '. $ticketId .' حذف گردید.');
+        return redirect()->route('dashboard.tickets.index');
+    }
+
+    public function destroyMessage($ticketId, $messageId)
+    {
+        $this->authorize('tickets-delete', Ticket::class);
+
+        Ticket::where('id', $ticketId)->firstOrFail();
+        $message = TicketMessages::where('ticket_id', $ticketId)->where('id', $messageId)->firstOrFail();
+        $message->delete();
+
+        if (!is_null($message->file)){
+            $file = Ticket::getFilePath($ticketId).$message->file;
+            File::delete($file);
+        }
+
+        session()->flash('success','پیام حذف گردید.');
+        return redirect()->back();
+    }
+
 }

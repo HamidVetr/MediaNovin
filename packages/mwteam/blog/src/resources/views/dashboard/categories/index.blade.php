@@ -16,15 +16,15 @@
         </nav>
     </div>
 
-    <div class="br-pagetitle row">
-        <div class="col-lg-6">
-            <div class="title-add">
-                <i class="icon icon ion-android-exit"></i>
-                <h4 class="pd-r-10">دسته بندی</h4>
-            </div>
+    <div class="br-pagetitle row pd-r-0">
+        <div class="col-lg-6 col-xs-6">
+            <h4 class="pd-r-10">
+                <img src="{{ asset('assets/dashboard/images/maintenance.png') }}" alt="">
+                    دسته بندی
+            </h4>
         </div>
-        <div class="col-lg-6">
-            <div class="heading-elements pd-l-20">
+        <div class="col-lg-6 col-xs-6">
+            <div class="heading-elements">
                 <a href="{{route('dashboard.admins.create')}}" class="btn btn-info btn-with-icon btn-block">
                     <div class="ht-40 justify-content-between">
                         <span class="ht-58 justify-content-between pd-r-20 pd-l-20">افزودن دسته</span>
@@ -215,10 +215,10 @@
     <script src="{{ asset('assets/dashboard/js/pwt-date.js') }}"></script>
     <script src="{{ asset('assets/dashboard/js/jquery.treegrid.bootstrap3.js') }}"></script>
     <script type="text/javascript">
+
         $('.searchbtn').click(function(){
             $('#searchboxpage').stop().slideToggle();
         });
-
         $(".persianDatePricker").persianDatepicker({
             format: 'YYYY/MM/DD',
             initialValue :{

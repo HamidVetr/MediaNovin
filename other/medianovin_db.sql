@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 07, 2018 at 07:44 AM
+-- Generation Time: Oct 07, 2018 at 11:11 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -2606,19 +2606,19 @@ INSERT INTO `permissions` (`id`, `fa_title`, `en_title`, `parent`, `created_at`,
 (2, 'ارسال تیکت', 'tickets-send', 'tickets', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
 (3, 'حذف تیکت', 'tickets-delete', 'tickets', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
 (4, 'وبلاگ', 'blog', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(5, 'ایجاد مقاله', 'blog-articles-create', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(6, 'ویرایش مقاله', 'blog-articles-edit', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(7, 'حذف مقاله', 'blog-articles-delete', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(8, 'ایجاد دسته بندی', 'blog-categories-create', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(9, 'ویرایش دسته بندی', 'blog-categories-edit', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(10, 'حذف دسته بندی', 'blog-categories-delete', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(11, 'ایجاد تگ', 'blog-tags-create', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(12, 'ویرایش تگ', 'blog-tags-edit', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(13, 'حذف تگ', 'blog-tags-delete', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(14, 'تایید نظر', 'blog-comments-approve', NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(15, 'ویرایش نظر', 'blog-comments-edit', NULL, '2018-10-07 06:15:13', '2018-10-07 06:15:13'),
-(16, 'حذف نظر', 'blog-comments-delete', NULL, '2018-10-07 06:15:13', '2018-10-07 06:15:13'),
-(17, 'پاسخ به نظر', 'blog-comments-reply', NULL, '2018-10-07 06:15:13', '2018-10-07 06:15:13'),
+(5, 'ایجاد مقاله', 'blog-articles-create', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(6, 'ویرایش مقاله', 'blog-articles-edit', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(7, 'حذف مقاله', 'blog-articles-delete', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(8, 'ایجاد دسته بندی', 'blog-categories-create', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(9, 'ویرایش دسته بندی', 'blog-categories-edit', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(10, 'حذف دسته بندی', 'blog-categories-delete', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(11, 'ایجاد تگ', 'blog-tags-create', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(12, 'ویرایش تگ', 'blog-tags-edit', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(13, 'حذف تگ', 'blog-tags-delete', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(14, 'تایید نظر', 'blog-comments-approve', 'blog', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(15, 'ویرایش نظر', 'blog-comments-edit', 'blog', '2018-10-07 06:15:13', '2018-10-07 06:15:13'),
+(16, 'حذف نظر', 'blog-comments-delete', 'blog', '2018-10-07 06:15:13', '2018-10-07 06:15:13'),
+(17, 'پاسخ به نظر', 'blog-comments-reply', 'blog', '2018-10-07 06:15:13', '2018-10-07 06:15:13'),
 (18, 'مدیران', 'admins', NULL, '2018-10-07 06:15:18', '2018-10-07 06:15:18'),
 (19, 'تنظیمات', 'settings', NULL, '2018-10-07 06:15:18', '2018-10-07 06:15:18');
 
@@ -2693,15 +2693,16 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tickets`
 --
 
 INSERT INTO `tickets` (`id`, `user_id`, `title`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'تست 1', 'closed', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
-(2, 2, 'تست 2', 'in-queue', '2018-10-07 06:15:12', '2018-10-07 06:15:12');
+(1, 2, 'تست 1', 'answered', '2018-10-07 06:15:12', '2018-10-07 11:07:36'),
+(2, 2, 'تست 2', 'in-queue', '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
+(4, 3, 'sdfsdf', 'answered', '2018-10-07 09:21:08', '2018-10-07 11:07:19');
 
 -- --------------------------------------------------------
 
@@ -2720,7 +2721,7 @@ CREATE TABLE IF NOT EXISTS `ticket_messages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ticket_messages`
@@ -2732,7 +2733,8 @@ INSERT INTO `ticket_messages` (`id`, `ticket_id`, `sender`, `message`, `seen`, `
 (3, 1, 4, 'پیام 3 تست 1 ادمین', 0, NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
 (4, 2, 2, 'پیام 1 تست 2 کاربر', 0, NULL, '2018-10-07 06:15:12', '2018-10-07 06:15:12'),
 (5, 2, 1, 'dfgdfgdgdfgdfg', 0, 'c48990cb680ea65c63d2510d3225b2b6w8yET3hYZhtHks0.jpg', '2018-10-07 06:30:18', '2018-10-07 06:30:18'),
-(7, 2, 4, 'xfvxdvdgsdgsdfgdfgdfgfd', 0, NULL, '2018-10-07 07:20:15', '2018-10-07 07:20:15');
+(7, 2, 4, 'xfvxdvdgsdgsdfgdfgdfgfd', 0, NULL, '2018-10-07 07:20:15', '2018-10-07 07:20:15'),
+(10, 4, 4, 'sdfsdfsdfsdf', 0, NULL, '2018-10-07 09:21:08', '2018-10-07 09:21:08');
 
 -- --------------------------------------------------------
 

@@ -16694,7 +16694,7 @@ textarea.parsley-success:focus {
   padding-right: 15px;
 }
 .br-pagetitle .icon {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 0;
   color: #343a40;
 }
@@ -62635,7 +62635,7 @@ label[for=upload]:hover{
 label[for=upload] input{ display:none }
 .thumb{
   position:relative;
-  height:300px;
+  height:100%;
   width:300px;
   overflow:hidden;
   margin:40px 0;
@@ -62681,4 +62681,15 @@ label[for=upload] input{ display:none }
 }
 .tree-table thead tr th{
   text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear{
+  margin-right: 0!important;
+  float: left !important;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+  padding: 2px 5px 2px 20px!important;
 }

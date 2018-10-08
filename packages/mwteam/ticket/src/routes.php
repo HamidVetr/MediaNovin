@@ -7,10 +7,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/', 'TicketController@store')->name('store');
             Route::get('/{ticketId}', 'TicketController@show')->name('show');
             Route::put('/{ticketId}', 'TicketController@reply')->name('reply');
+            Route::post('/status/{ticketId}', 'TicketController@status')->name('status');
+            Route::get('/{ticketId}/{fileName}', 'TicketController@file')->name('file');
             Route::delete('/{ticketId}', 'TicketController@destroy')->name('destroy');
             Route::delete('/{ticketId}/{messageId}', 'TicketController@destroyMessage')->name('destroyMessage');
-            Route::post('/status', 'TicketController@status')->name('status');
-            Route::get('/{ticketId}/{fileName}', 'TicketController@file')->name('file');
         });
     });
 });
