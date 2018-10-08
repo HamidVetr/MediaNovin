@@ -20,7 +20,7 @@
         ],
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'افزودن مدیر'])
+    @include('dashboard::partials.page-title', ['title' => 'افزودن مدیر', 'icon' => 'ion-android-exit'])
 
     <div class="pd-t-30">
         {!! Form::open(['method'=>'POST', 'url' => route('dashboard.admins.store'), 'files' => false ,'id'=>'adminadd']) !!}
@@ -104,7 +104,6 @@
 @endsection
 
 @section('bottom-assets')
-    <script type="text/javascript" src="../assets/dashboard/js/bootstrapValidator.min.js"></script>
     <script>
         $('#adminadd').bootstrapValidator({
             fields: {
