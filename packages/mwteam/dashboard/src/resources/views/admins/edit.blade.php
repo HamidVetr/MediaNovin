@@ -106,7 +106,6 @@
     </div>
 @endsection
 @section('bottom-assets')
-    <script type="text/javascript" src="../assets/dashboard/js/bootstrapValidator.min.js"></script>
     <script>
         $('#adminadd').bootstrapValidator({
             fields: {
