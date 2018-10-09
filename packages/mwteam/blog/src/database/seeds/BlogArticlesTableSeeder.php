@@ -22,10 +22,10 @@ class BlogArticlesTableSeeder extends Seeder
         foreach (range(1,100) as $index) {
             $data = [
                 'blog_category_id' => rand(1, 20),
-                'fa_title' => $faker->firstName,
-                'fa_slug' => str_replace(' ', '-', $faker->name),
-                'fa_description' => $faker->realText(100),
-                'fa_body' => $faker->realText(700),
+                'title' => $faker->firstName,
+                'slug' => str_replace(' ', '-', $faker->name),
+                'description' => $faker->realText(100),
+                'body' => $faker->realText(700),
                 'author_id' => '1',
             ];
 

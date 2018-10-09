@@ -22,7 +22,7 @@ class BlogTagsTableSeeder extends Seeder
 
         foreach (range(1, 50) as $index){
             $tags[] = [
-                'fa_name' => $faker->firstName,
+                'name' => $faker->firstName,
                 'created_at' => $time,
                 'updated_at' => $time,
             ];

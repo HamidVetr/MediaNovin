@@ -15,8 +15,9 @@ class CreateBlogTagsTable extends Migration
     {
         Schema::create('blog_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('fa_name')->nullable(false);
-            $table->string('en_name')->nullable(true);
+            $table->unsignedInteger('parent_id')->nullable(true);
+            $table->string('name')->nullable(false);
+            $table->char('language', '2')->nullable(false)->default('fa');
             $table->timestamps();
         });
     }

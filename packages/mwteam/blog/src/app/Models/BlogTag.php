@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class BlogTag extends Model
 {
     protected $fillable = [
-        'fa_name',
-        'en_name',
+        'parent_id',
+        'name',
+        'language',
     ];
 
     public function articles()
