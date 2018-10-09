@@ -15,15 +15,13 @@ class BlogArticle extends Model
         'blog_category_id',
         'author_id',
         'editor_id',
+        'parent_id',
+        'language',
         'image',
-        'fa_title',
-        'en_title',
-        'fa_slug',
-        'en_slug',
-        'fa_description',
-        'en_description',
-        'fa_body',
-        'en_body',
+        'title',
+        'slug',
+        'description',
+        'body',
         'comments',
     ];
 
@@ -60,5 +58,15 @@ class BlogArticle extends Model
     public function jalalianUpdatedAt()
     {
         return Jalalian::forge($this->updated_at)->format('%d %B %y ساعت H:i');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(BlogArticle::class, 'parent_id');
+    }
+
+    public function getImage()
+    {
+        return asset('blogArticleIndexImages/' . $this->image);
     }
 }

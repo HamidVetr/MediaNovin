@@ -22,7 +22,7 @@ class BlogCategoriesTableSeeder extends Seeder
 
         foreach (range(1, 20) as $index){
             $categories[] = [
-                'fa_name' => $faker->firstName,
+                'name' => $faker->firstName,
                 'created_at' => $time,
                 'updated_at' => $time,
             ];

@@ -23,10 +23,10 @@
     <div class="br-pagetitle row pd-r-0">
 
         <div class="col-lg-6 col-xs-6">
-                    <h4 class="pd-r-10">
-                        <i class="icon ion-ios-book"></i>
-                      لیست مقالات
-                    </h4>
+            <h4 class="pd-r-10">
+                <i class="icon ion-ios-book"></i>
+                لیست مقالات
+            </h4>
         </div>
         <div class="col-lg-6 col-xs-6">
             <div class="heading-elements">
@@ -34,8 +34,8 @@
                     <div class="ht-40 justify-content-between">
                         <span class="ht-58 justify-content-between pd-r-20 pd-l-20"> ایجاد مقاله جدید</span>
                         <span class="icon wd-40">
-                             <i class="fa fa-plus"></i>
-                         </span>
+                            <i class="fa fa-plus"></i>
+                        </span>
                     </div>
                 </a>
             </div>
@@ -44,6 +44,7 @@
 
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
+            @include('dashboard::partials.alert-session')
             <div class="search-advance search-advance-vendor">
                 <button type="button" class="bg-teal-400 searchbtn searchbtn-store btn-icon btn-rounded"  data-toggle="tooltip" title="جستجو پیشرفته"><img src="{{ asset('assets/dashboard/images/search.svg') }}" width="18"></button>
                 <div id="searchboxpage" class="searchboxpage-vendor">
@@ -100,16 +101,24 @@
                         @foreach($articles as $article)
                             <tr>
                                 <td>{{ $article->id }}</td>
-                                <td><img style="border-radius: 25px" src="{{ is_null($article->image) ? 'https://api.adorable.io/avatars/50/' . $article->id . '@adorable.png' : $article->image }}"></td>
-                                <td>{{ $article->fa_title }}</td>
-                                <td>{{ $article->fa_description }}</td>
+                                <td><img style="border-radius: 25px; width: 50px; height: 50px;" src="{{ is_null($article->image) ? 'https://api.adorable.io/avatars/50/' . $article->id . '@adorable.png' : $article->getImage() }}"></td>
+                                <td>{{ $article->title }}</td>
+                                <td>{{ $article->description }}</td>
                                 <td>{{ $article->comments }}</td>
                                 <td>{{ $article->jalalianCreatedAt() }}</td>
                                 <td>{{ $article->author->full_name }}</td>
                                 <td>{{ $article->jalalianUpdatedAt() }}</td>
                                 <td>{{ is_null($article->editor_id) ? $article->author->full_name : $article->editor->full_name }}</td>
-                                <td><button class="btn btn-warning">ویرایش</button></td>
-                                <td><button class="btn btn-danger">حذف </button></td>
+                                <td>
+                                    <a href="{{ route('dashboard.blog.articles.edit', $article->id) }}">
+                                        <button class="btn btn-warning">ویرایش</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    {!! Form::open(['method' => 'DELETE', 'route' => ['dashboard.blog.articles.destroy', $article->id]]) !!}
+                                        <button type="submit" class="btn btn-danger">حذف </button>
+                                    {!! Form::close() !!}
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

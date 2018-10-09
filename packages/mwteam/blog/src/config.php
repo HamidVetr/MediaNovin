@@ -63,10 +63,17 @@ return [
         ]
     ],
     'seed' => [
-        'permissions' => 'Mwteam\\Blog\\Database\\Seeds\\PermissionTableSeeder',
+//        'permissions' => 'Mwteam\\Blog\\Database\\Seeds\\PermissionTableSeeder',
         'tags'        => 'Mwteam\\Blog\\Database\\Seeds\\BlogTagsTableSeeder',
         'categories'  => 'Mwteam\\Blog\\Database\\Seeds\\BlogCategoriesTableSeeder',
         'articles'    => 'Mwteam\\Blog\\Database\\Seeds\\BlogArticlesTableSeeder',
         'comments'    => 'Mwteam\\Blog\\Database\\Seeds\\BlogCommentsTableSeeder',
+    ],
+    'validation' => [
+        'image' => [
+            'laravel' => [
+                'max' => 5 * 1024
+            ]
+        ],
     ]
 ];

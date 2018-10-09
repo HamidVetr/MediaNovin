@@ -41,9 +41,11 @@
         $('[data-toggle="tooltip"]').tooltip();
 
         $.ajaxSetup({
-            headers:
-            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
+
 
         function notify(type,message) {
             type = type == undefined ? 'danger':type;
