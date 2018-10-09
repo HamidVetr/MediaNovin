@@ -21,12 +21,11 @@
         </nav>
     </div>
     <div class="br-pagetitle row pd-r-0">
-
         <div class="col-lg-6 col-xs-6">
-                    <h4 class="pd-r-10">
-                        <i class="icon ion-ios-book"></i>
-                      لیست مقالات
-                    </h4>
+            <h4 class="pd-r-10">
+                <i class="icon ion-ios-book"></i>
+              لیست مقالات
+            </h4>
         </div>
         <div class="col-lg-6 col-xs-6">
             <div class="heading-elements">
