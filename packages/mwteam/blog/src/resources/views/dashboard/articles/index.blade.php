@@ -83,7 +83,7 @@
                     <table class="table table-striped mg-b-0 table-tickets">
                         <thead>
                         <tr>
-                            <th>ردیف</th>
+                            <th>شناسه مقاله</th>
                             <th>تصویر</th>
                             <th>عنوان</th>
                             <th>خلاصه مقاله</th>
@@ -114,9 +114,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    {!! Form::open(['method' => 'DELETE', 'route' => ['dashboard.blog.articles.destroy', $article->id]]) !!}
-                                        <button type="submit" class="btn btn-danger">حذف </button>
-                                    {!! Form::close() !!}
+                                    <button type="button" data-toggle="modal" data-target="#modal-delete-article" class="btn btn-danger delete-article" id="delete-article-{{ $article->id }}">حذف </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -124,6 +122,26 @@
                     </table>
                 </div>
                 {{ $articles->appends($_GET)->links('dashboard::partials.pagination') }}
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-delete-article" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content tx-size-sm">
+                <div class="modal-body tx-center pd-y-20 pd-x-20">
+                    <a href="" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                    <i class="icon icon ion-ios-trash tx-50 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                    <h6 class="tx-black  tx-semibold mg-b-20">آیا از حذف مقاله مطمئنید؟</h6>
+                    <h6 class="tx-black  tx-semibold mg-b-20"><span style="color: red">نکته:</span> با حذف مقاله اصلی، تمام ترجمه های آن نیز پاک می گردد</h6>
+                    <p class="pd-x-100"></p>
+                    {!! Form::open(['method' => 'DELETE', 'url' => '', 'id' => 'delete-article-form']) !!}
+                        <button type="submit" class="btn btn-danger tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">حذف</button>
+                        <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-dismiss="modal" aria-label="Close">انصراف</button>
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>
@@ -143,11 +161,15 @@
                 enabled: false
             }
         });
+
+        $('.delete-article').on('click', function (event) {
+            var articleID = $(this).attr('id').substr(15);
+            $('#delete-article-form').attr('action', '{{ route('dashboard.blog.articles.destroy', '') }}/' + articleID);
+        });
     </script>
 
     @if(!isset($_GET['fromDate']) || trim($_GET['fromDate']) == '')
         <script>
-            console.log('here');
             $('#from-date').val('');
         </script>
     @endif

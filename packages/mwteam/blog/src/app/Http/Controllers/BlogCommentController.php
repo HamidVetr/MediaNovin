@@ -20,6 +20,7 @@ class BlogCommentController extends Controller
      */
     public function index()
     {
+        $comments = BlogComment::with('article')->whereHas('article')->paginate(10);
         $this->authorize('index', BlogComment::class);
         return view('Blog::dashboard.comments.index');
     }

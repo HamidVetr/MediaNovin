@@ -51,7 +51,7 @@ class BlogServiceProvider extends ServiceProvider
         ], 'blog/assets');
 
         view()->composer('dashboard::partials.sidebar', function ($view) {
-            $notApprovedComments = BlogComment::whereApproved(false)->count();
+            $notApprovedComments = BlogComment::whereHas('article')->whereApproved(false)->count();
             $total = $notApprovedComments;
             $view->with([
                 'blogNotificationsCount' => [

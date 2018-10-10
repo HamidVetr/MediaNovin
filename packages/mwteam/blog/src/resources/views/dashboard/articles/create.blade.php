@@ -57,7 +57,7 @@
                                     <span class="tx-danger">*</span>
                                 </label>
                                 <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    {!! Form::select('parent', ['0' => 'هیچ کدام'] + $parents, null, ['id' => 'parent', 'style' => 'display:none']) !!}
+                                    {!! Form::select('parent_id', ['0' => 'هیچ کدام'] + $parents, null, ['id' => 'parent', 'style' => 'display:none']) !!}
                                 </div>
                             </div>
 
@@ -86,7 +86,7 @@
                                     <span class="tx-danger">*</span>
                                 </label>
                                 <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                                    {!! Form::textarea('body', null, ['class' => 'form-control', 'id' => 'body']) !!}
+                                    {!! Form::textarea('body', null, ['class' => 'form-control', 'id' => 'body', 'style' => 'display:none']) !!}
                                 </div>
                             </div>
 
@@ -163,7 +163,7 @@
                        <span>انتخاب دسته بندی</span>
                     </div>
                     <div class="category-content pd-15">
-                        {!! Form::select('category', ['0' => 'بدون دسته بندی'] + $categories, null, ['id' => 'category', 'style' => 'display:none']) !!}
+                        {!! Form::select('blog_category_id', ['0' => 'بدون دسته بندی'] + $categories, null, ['id' => 'category', 'style' => 'display:none']) !!}
                     </div>
                 </div>
                 <div class="br-section-wrapper-category mg-y-20">

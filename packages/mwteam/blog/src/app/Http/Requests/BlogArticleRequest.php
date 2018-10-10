@@ -9,7 +9,7 @@ use Mwteam\Blog\App\Models\BlogArticle;
 use Mwteam\Blog\App\Models\BlogCategory;
 use Mwteam\Blog\App\Models\BlogTag;
 
-class BlogArticleStoreRequest extends FormRequest
+class BlogArticleRequest extends FormRequest
 {
     protected $maxImageSize;
     /**
@@ -36,7 +36,7 @@ class BlogArticleStoreRequest extends FormRequest
         $parents = [-1 => 0] + BlogArticle::whereNull('parent_id')->pluck('id')->all();
 
         return [
-            'category' => [
+            'blog_category_id' => [
                 'nullable',
                 Rule::in($categories),
             ],
@@ -46,7 +46,7 @@ class BlogArticleStoreRequest extends FormRequest
             ],
             'index_image' => 'nullable|image|max:' . $this->maxImageSize,
             'language' => 'required|in:fa,en,ar',
-            'parent' => [
+            'parent_id' => [
                 'nullable',
                 Rule::in($parents),
             ],
@@ -59,13 +59,13 @@ class BlogArticleStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'category.in' => 'دسته بندی انتخابی مجاز نمی باشد.',
+            'blog_category_id.in' => 'دسته بندی انتخابی مجاز نمی باشد.',
             'tags.*.in' => 'برچسب انتخابی مجاز نمی باشد.',
             'index_image.image' => 'فایل انتخابی برای تصویر شاخص معتبر نمی باشد.',
             'index_image.max' => "حجم تصویر نمی تواند بیشتر از {$this->maxImageSize} مگابایت باشد.",
             'language.required' => 'انتخاب زبان مقاله اجباری است.',
             'language.in' => 'زبان انتخابی مجاز نمی باشد.',
-            'parent.in' => 'مقاله انتخابی مجاز نمی باشد.',
+            'parent_id.in' => 'مقاله انتخابی مجاز نمی باشد.',
             'title.required' => 'وارد کردن عنوان اجباری می باشد.',
             'title.between' => 'طول عنوان باید بین 5 تا 190 کاراکتر باشد.',
             'description.max' => 'حداکثر طول خلاصه مقاله 190 کاراکتر می باشد.',

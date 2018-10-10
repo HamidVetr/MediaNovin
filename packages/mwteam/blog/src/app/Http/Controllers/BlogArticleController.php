@@ -5,9 +5,12 @@ namespace Mwteam\Blog\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Morilog\Jalali\CalendarUtils;
-use Mwteam\Blog\App\Http\Requests\BlogArticleStoreRequest;
+use Mwteam\Blog\App\Http\Requests\BlogArticleRequest;
 use Mwteam\Blog\App\Models\BlogArticle;
 use Mwteam\Blog\App\Models\BlogCategory;
 use Mwteam\Blog\App\Models\BlogTag;
@@ -34,7 +37,7 @@ class BlogArticleController extends Controller
         if ($search){
             $articles = $search;
         }else{
-            $articles = BlogArticle::with(['author', 'editor'])->latest()->paginate(10);
+            $articles = BlogArticle::with(['author', 'editor'])->orderBy('updated_at', 'DESC')->paginate(10);
         }
 
         return view('Blog::dashboard.articles.index', compact('articles'));
@@ -49,42 +52,36 @@ class BlogArticleController extends Controller
     public function create()
     {
         $this->authorize('create', BlogArticle::class);
+
         $categories = BlogCategory::where('language', config('app.locale'))->pluck('name', 'id')->all();
+
         $tags = BlogTag::where('language', config('app.locale'))->pluck('name', 'id')->all();
+
         $parents = BlogArticle::whereNull('parent_id')->pluck('title', 'id')->all();
+
         return view('Blog::dashboard.articles.create', compact('categories', 'tags', 'parents'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param BlogArticleRequest $request
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(BlogArticleStoreRequest $request)
+    public function store(BlogArticleRequest $request)
     {
         $this->authorize('create', BlogArticle::class);
         $input = $request->all();
-        $hasChildWithTheSameLanguage = false;
 
-        if ($input['parent'] > 0) {
-            $parentArticle = BlogArticle::with('children')->findOrFail($input['parent']);
-            if ($input['language'] == $parentArticle->language) {
-                $hasChildWithTheSameLanguage = true;
-            } else {
-                foreach ($parentArticle->children as $child) {
-                    if ($input['language'] == $child->language) {
-                        $hasChildWithTheSameLanguage = true;
-                        break;
-                    }
-                }
-            }
+        $uniqueness = $this->isUniqueArticleBasedOnLanguage($input['parent_id'], $input['language']);
+        $input['parent_id'] = $uniqueness['parent'];
+        $uniqueArticle = $uniqueness['unique'];
+
+        if (!$uniqueArticle){
+            Session::flash('danger', 'مقاله انتخابی با این زبان وجود دارد.');
+            return redirect()->back()->withInput($request->all());
         }else{
-            $input['parent'] = null;
-        }
-
-        if (!$hasChildWithTheSameLanguage){
             if($indexImage = $request->file('index_image')){
                 $name = time() . $indexImage->getClientOriginalName();
                 $indexImage->move('blogArticleIndexImages', $name);
@@ -92,9 +89,9 @@ class BlogArticleController extends Controller
             }
 
             $article = BlogArticle::create([
-                'blog_category_id' => $input['category'] < 0 ? null : $input['category'],
+                'blog_category_id' => $input['blog_category_id'] < 0 ? null : $input['blog_category_id'],
                 'author_id' => auth()->user()->getAuthIdentifier(),
-                'parent_id' => $input['parent'],
+                'parent_id' => $input['parent_id'],
                 'language' => $input['language'],
                 'image' => $input['image'],
                 'title' => $input['title'],
@@ -111,9 +108,6 @@ class BlogArticleController extends Controller
                 Session::flash('danger', 'مشکلی در ساخت مقاله رخ داد. لطفاً بعداً تلاش نمایید.');
                 return redirect(route('dashboard.blog.articles.index'));
             }
-        }else{
-            Session::flash('danger', 'مقاله انتخابی با این زبان وجود دارد.');
-            return redirect()->back()->withInput($request->all());
         }
     }
 
@@ -131,39 +125,107 @@ class BlogArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param BlogArticle $article
+     * @param BlogArticle $blogArticle
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(BlogArticle $blogArticle)
     {
-        dd($blogArticle);
         $this->authorize('edit', BlogArticle::class);
+
+        $article = $blogArticle;
+
+        $categories = BlogCategory::where('language', config('app.locale'))->pluck('name', 'id')->all();
+
+        $tags = BlogTag::where('language', config('app.locale'))->pluck('name', 'id')->all();
+
+        $parents = BlogArticle::whereNull('parent_id')->pluck('title', 'id')->all();
+
+        return view('Blog::dashboard.articles.edit', compact('article', 'categories', 'tags', 'parents'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param BlogArticle $article
+     * @param BlogArticleRequest $request
+     * @param BlogArticle $blogArticle
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Request $request, BlogArticle $blogArticle)
+    public function update(BlogArticleRequest $request, BlogArticle $blogArticle)
     {
         $this->authorize('edit', BlogArticle::class);
+        $input = $request->all();
+
+        $uniqueArticle = true;
+        if ($input['parent_id'] != $blogArticle->parent_id || $input['language'] != $blogArticle->language) {
+            $uniqueness = $this->isUniqueArticleBasedOnLanguage($input['parent_id'], $input['language']);
+            $input['parent_id'] = $uniqueness['parent'];
+            $uniqueArticle = $uniqueness['unique'];
+        }
+
+        if (!$uniqueArticle){
+            Session::flash('danger', 'مقاله انتخابی با این زبان وجود دارد.');
+            return redirect()->back()->withInput($request->all());
+        }else{
+            if($indexImage = $request->file('index_image')){
+                $currentImagePath = public_path("blogArticleIndexImages/{$blogArticle->image}");
+                if(File::exists($currentImagePath)) {
+                    File::delete($currentImagePath);
+                }
+                $name = time() . $indexImage->getClientOriginalName();
+                $indexImage->move('blogArticleIndexImages', $name);
+                $input['image'] = $name;
+            }else{
+                $input['image'] = $blogArticle->image;
+            }
+
+            $updateResult = $blogArticle->update([
+                'blog_category_id' => $input['blog_category_id'] < 0 ? null : $input['blog_category_id'],
+                'editor_id' => auth()->user()->getAuthIdentifier(),
+                'parent_id' => $input['parent_id'],
+                'language' => $input['language'],
+                'image' => $input['image'],
+                'title' => $input['title'],
+                'slug' => str_replace(' ', '-', trim($input['title'], ' /\\')),
+                'description' => $input['description'],
+                'body' => $input['body'],
+            ]);
+
+            if ($updateResult){
+                $blogArticle->tags()->sync($input['tags']);
+                Session::flash('success', 'مقاله با موفقیت ویرایش شد.');
+                return redirect(route('dashboard.blog.articles.index'));
+            }else{
+                Session::flash('danger', 'مشکلی در ویرایش مقاله رخ داد. لطفاً بعداً تلاش نمایید.');
+                return redirect(route('dashboard.blog.articles.index'));
+            }
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param BlogArticle $article
+     * @param BlogArticle $blogArticle
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Throwable
      */
     public function destroy(BlogArticle $blogArticle)
     {
         $this->authorize('delete', BlogArticle::class);
+        try {
+            DB::transaction(function () use ($blogArticle) {
+                $blogArticle->children->isEmpty() ?: $blogArticle->children()->delete();
+                $blogArticle->delete();
+            }, 3);
+            Session::flash('success', "مقاله '{$blogArticle->title}' با موفقیت حذف شد.");
+        }catch (\Exception $exception){
+            Log::debug("Error when deleting articles" . PHP_EOL . $exception->getMessage());
+            Session::flash('danger', 'حذف مقاله با مشکل مواجه شد. لطفاً بعداً تلاش نمایید.');
+        }
+
+        return redirect(route('dashboard.blog.articles.index'));
     }
 
     public function uploadInline(Request $request)
@@ -243,9 +305,35 @@ class BlogArticleController extends Controller
                 $articles->whereIn('author_id', $users);
             }
 
-            return $articles->latest()->paginate(10);
+            return $articles->orderBy('updated_at', 'DESC')->paginate(10);
         }else{
             return false;
         }
+    }
+
+    private function isUniqueArticleBasedOnLanguage($parent, $language)
+    {
+        $unique = true;
+        if ($parent > 0) {
+            $parentArticle = BlogArticle::with('children')->findOrFail($parent);
+
+            if ($language == $parentArticle->language) {
+                $unique = false;
+            } else {
+                foreach ($parentArticle->children as $child) {
+                    if ($language == $child->language) {
+                        $unique = false;
+                        break;
+                    }
+                }
+            }
+        }else{
+            $parent = null;
+        }
+
+        return [
+            'parent' => $parent,
+            'unique' => $unique,
+        ];
     }
 }

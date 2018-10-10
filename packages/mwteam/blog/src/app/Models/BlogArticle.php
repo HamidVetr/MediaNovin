@@ -67,6 +67,10 @@ class BlogArticle extends Model
 
     public function getImage()
     {
-        return asset('blogArticleIndexImages/' . $this->image);
+        if (is_null($this->image) || $this->image == '') {
+            return 'https://via.placeholder.com/300x300';
+        }else{
+            return asset('blogArticleIndexImages/' . $this->image);
+        }
     }
 }
