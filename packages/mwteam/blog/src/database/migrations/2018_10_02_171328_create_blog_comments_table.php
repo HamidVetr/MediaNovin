@@ -22,6 +22,7 @@ class CreateBlogCommentsTable extends Migration
             $table->string('mobile', 15)->nullable(true);
             $table->text('body')->nullable(false);
             $table->boolean('approved')->nullable(false)->default(false);
+            $table->text('admin_reply')->nullable(true);
             $table->timestamps();
             $table->softDeletes();
         });

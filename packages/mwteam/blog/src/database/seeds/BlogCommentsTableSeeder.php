@@ -26,6 +26,7 @@ class BlogCommentsTableSeeder extends Seeder
                 'blog_article_id' => $article_id,
                 'name' => $faker->firstName,
                 'email' => $faker->email,
+                'mobile' => $faker->phoneNumber,
                 'body' => $faker->realText(150),
                 'approved' => rand(0, 1),
             ]);

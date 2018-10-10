@@ -110,11 +110,11 @@
                                 <td>{{ is_null($article->editor_id) ? $article->author->full_name : $article->editor->full_name }}</td>
                                 <td>
                                     <a href="{{ route('dashboard.blog.articles.edit', $article->id) }}">
-                                        <button class="btn btn-warning">ویرایش</button>
+                                        <button class="btn btn-warning">ویرایش <i class="icon ion-edit tx-15"></i></button>
                                     </a>
                                 </td>
                                 <td>
-                                    <button type="button" data-toggle="modal" data-target="#modal-delete-article" class="btn btn-danger delete-article" id="delete-article-{{ $article->id }}">حذف </button>
+                                    <button type="button" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger delete-article" id="delete-article-{{ $article->id }}">حذف <i class="icon ion-ios-trash-outline tx-15"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -126,7 +126,7 @@
         </div>
     </div>
 
-    <div id="modal-delete-article" class="modal fade">
+    <div id="modal-delete" class="modal fade">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content tx-size-sm">
                 <div class="modal-body tx-center pd-y-20 pd-x-20">

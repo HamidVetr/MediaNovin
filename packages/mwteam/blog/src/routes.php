@@ -14,17 +14,35 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         Route::group(['prefix' => '/categories', 'as' => 'categories.'], function () {
-            Route::resource('/', 'BlogCategoryController');
+            Route::get('/', 'BlogCategoryController@index')->name('index');
+            Route::get('/create', 'BlogCategoryController@create')->name('create');
+            Route::post('/', 'BlogCategoryController@store')->name('store');
+            Route::get('/{blogCategory}', 'BlogCategoryController@show')->name('show');
+            Route::get('/{blogCategory}/edit', 'BlogCategoryController@edit')->name('edit');
+            Route::put('/{blogCategory}', 'BlogCategoryController@update')->name('update');
+            Route::delete('/{blogCategory}', 'BlogCategoryController@destroy')->name('destroy');
         });
 
         Route::group(['prefix' => '/tags', 'as' => 'tags.'], function () {
-            Route::resource('/', 'BlogTagController');
+            Route::get('/', 'BlogTagController@index')->name('index');
+            Route::get('/create', 'BlogTagController@create')->name('create');
+            Route::post('/', 'BlogTagController@store')->name('store');
+            Route::get('/{blogTag}', 'BlogTagController@show')->name('show');
+            Route::get('/{blogTag}/edit', 'BlogTagController@edit')->name('edit');
+            Route::put('/{blogTag}', 'BlogTagController@update')->name('update');
+            Route::delete('/{blogTag}', 'BlogTagController@destroy')->name('destroy');
         });
 
         Route::group(['prefix' => '/comments', 'as' => 'comments.'], function () {
-            Route::get('/approve/{comment}', 'BlogCommentController@approve');
-            Route::get('/reply/{comment}', 'BlogCommentController@reply');
-            Route::resource('/', 'BlogCommentController');
+            Route::get('/', 'BlogCommentController@index')->name('index');
+            Route::get('/create', 'BlogCommentController@create')->name('create');
+            Route::post('/', 'BlogCommentController@store')->name('store');
+            Route::get('/{blogComment}', 'BlogCommentController@show')->name('show');
+            Route::get('/{blogComment}/edit', 'BlogCommentController@edit')->name('edit');
+            Route::put('/{blogComment}', 'BlogCommentController@update')->name('update');
+            Route::delete('/{blogComment}', 'BlogCommentController@destroy')->name('destroy');
+            Route::get('/approve/{blogComment}', 'BlogCommentController@approve')->name('approve');
+            Route::post('/reply/{blogComment}', 'BlogCommentController@reply')->name('reply');
         });
     });
 });

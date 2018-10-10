@@ -119,7 +119,7 @@ class BlogArticleController extends Controller
      */
     public function show(BlogArticle $blogArticle)
     {
-        //
+        dd($blogArticle);
     }
 
     /**
@@ -290,7 +290,7 @@ class BlogArticleController extends Controller
             $articles = BlogArticle::with(['author', 'editor']);
 
             if (isset($title)){
-                $articles->where('fa_title', 'like', "%{$title}%");
+                $articles->where('title', 'like', "%{$title}%");
             }
 
             if (isset($fromDate) && isset($toDate)) {

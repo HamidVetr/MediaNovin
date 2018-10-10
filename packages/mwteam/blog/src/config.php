@@ -3,7 +3,7 @@
 return [
     'sidebar' => [
         [
-            'icon' => 'ion-android-chat tx-24',
+            'icon' => 'ion-ios-book tx-24',
             'title' => 'مدیریت بلاگ',
             'path' => 'dashboard/articles',
             'yield' => 'blog',
