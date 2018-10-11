@@ -16,7 +16,7 @@ class GuidesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('blog_articles')->truncate();
+        DB::table('guides')->truncate();
         $faker = Faker::create("fa_IR");
 
         foreach (range(1,100) as $index) {
