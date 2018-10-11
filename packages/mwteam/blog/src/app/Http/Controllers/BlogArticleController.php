@@ -86,6 +86,8 @@ class BlogArticleController extends Controller
                 $name = time() . $indexImage->getClientOriginalName();
                 $indexImage->move('blogArticleIndexImages', $name);
                 $input['image'] = $name;
+            }else{
+                $input['image'] = null;
             }
 
             $article = BlogArticle::create([
@@ -101,7 +103,7 @@ class BlogArticleController extends Controller
             ]);
 
             if ($article){
-                $article->tags()->attach($input['tags']);
+                !isset($input['tags']) ?: $article->tags()->attach($input['tags']);
                 Session::flash('success', 'مقاله با موفقیت ساخته شد.');
                 return redirect(route('dashboard.blog.articles.index'));
             }else{
