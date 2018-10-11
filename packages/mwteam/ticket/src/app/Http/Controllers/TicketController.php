@@ -141,7 +141,6 @@ class TicketController extends Controller
                 $file->move(Ticket::getFilePath($ticket->id), $fileName);
             }
         }catch (\Exception $e){
-            return $e->getMessage();
             DB::rollBack();
             abort(500);
         }
@@ -199,7 +198,6 @@ class TicketController extends Controller
             }
         }catch (\Exception $e){
             DB::rollBack();
-            return $e->getMessage();
             abort(500);
         }
 

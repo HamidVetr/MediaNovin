@@ -36,5 +36,15 @@ return [
     'seed' => [
         'users' => 'Mwteam\\Dashboard\\Database\\Seeds\\UsersTableSeeder',
         'permissions' => 'Mwteam\\Dashboard\\Database\\Seeds\\PermissionTableSeeder',
+    ],
+    'emails' => [
+        'info' => [
+            'email' => 'info@medianovin.com',
+            'title' => 'مدیانوین'
+        ],
+        'support' => [
+            'email' => 'support@medianovin.com',
+            'title' => 'پشتیبانی مدیانوین'
+        ],
     ]
 ];

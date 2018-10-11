@@ -3,7 +3,7 @@
         <div class="title-add">
             <i class="icon icon {{isset($icon) ? $icon:''}}"></i>
             <h4 class="pd-r-10">{{$title}}</h4>
-        </div>{{isset($icon) ? $icon:''}}
+        </div>
     </div>
 
     <div class="col-lg-6">
