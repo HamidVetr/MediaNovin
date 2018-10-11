@@ -1,0 +1,17 @@
+{
+    "name": "mwteam/guide",
+    "description": "All guides and faq related stuff of a site managed here",
+    "type": "project",
+    "require": {
+        "morilog/jalali": "dev-master",
+        "laravelcollective/html": "^5.7@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HmaidVetr",
+            "email": "hamid.vetr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

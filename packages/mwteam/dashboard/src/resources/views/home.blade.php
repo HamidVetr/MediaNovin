@@ -2,6 +2,8 @@
 
 @section('title') پنل مدیریت @endsection
 
+@section('dashboard-home') active @endsection
+
 @section('content')
     <br>
     <div class="x_content">

@@ -5,7 +5,6 @@ return [
         [
             'icon' => 'ion-ios-book tx-24',
             'title' => 'مدیریت بلاگ',
-            'path' => 'dashboard/articles',
             'yield' => 'blog',
             'policy' => 'blog',
             'model' => \Mwteam\Blog\App\Models\BlogArticle::class,

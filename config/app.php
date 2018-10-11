@@ -170,6 +170,7 @@ return [
         Mwteam\Dashboard\DashboardServiceProvider::class,
         Mwteam\Ticket\TicketServiceProvider::class,
         Mwteam\Blog\BlogServiceProvider::class,
+        Mwteam\Guide\GuideServiceProvider::class,
 
         /*
          * Application Service Providers...
