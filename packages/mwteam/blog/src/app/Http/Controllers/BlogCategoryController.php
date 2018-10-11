@@ -27,7 +27,12 @@ class BlogCategoryController extends Controller
     {
         $this->authorize('index', BlogCategory::class);
 
-        $categories = BlogCategory::with('articles')->latest()->paginate(10);
+        $search = $this->search($_GET);
+        if ($search){
+            $categories = $search;
+        }else{
+            $categories = BlogCategory::with('articles')->orderBy('updated_at', 'DESC')->paginate(10);
+        }
 
         return view('Blog::dashboard.categories.index', compact('categories'));
     }
@@ -103,8 +108,8 @@ class BlogCategoryController extends Controller
      */
     public function edit(BlogCategory $blogCategory)
     {
-        $category = $blogCategory;
         $this->authorize('edit', BlogCategory::class);
+        $category = $blogCategory;
 
         $parents = BlogCategory::whereNull('parent_id')->pluck('name', 'id')->all();
 
@@ -162,12 +167,13 @@ class BlogCategoryController extends Controller
     public function destroy(BlogCategory $blogCategory)
     {
         $this->authorize('delete', BlogCategory::class);
+
         try {
             DB::transaction(function () use ($blogCategory) {
                 $blogCategory->articles()->update(['blog_category_id' => 0]);
             }, 3);
 
-            $blogCategory->children()->delete();
+            $blogCategory->children->isEmpty() ?: $blogCategory->children()->delete();
             $blogCategory->delete();
 
             Session::flash('success', "دسته بندی '{$blogCategory->name}' با موفقیت حذف شد.");
@@ -177,6 +183,25 @@ class BlogCategoryController extends Controller
         }
 
         return redirect(route('dashboard.blog.categories.index'));
+    }
+
+    private function search($data)
+    {
+        if (isset($data['name'])) {
+            if (isset($data['name']) && $data['name'] != '') {
+                $name = $data['name'];
+            }
+
+            $categories = BlogCategory::with('articles');
+
+            if (isset($name)){
+                $categories->where('name', 'like', "%{$name}%");
+            }
+
+            return $categories->orderBy('updated_at', 'DESC')->paginate(10);
+        }else{
+            return false;
+        }
     }
 
     private function isUniqueCategoryBasedOnLanguage($parent, $language)

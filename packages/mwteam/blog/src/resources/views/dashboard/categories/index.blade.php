@@ -42,7 +42,7 @@
                     {!! Form::open(['method'=>'GET', 'route' => 'dashboard.blog.categories.index']) !!}
                         <div class="row">
                             <div class="col-md-2 col-xs-6">
-                                <div class="text-right">نام دسته</div>
+                                <div class="text-right">نام دسته بندی</div>
                                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
@@ -116,18 +116,9 @@
 @endsection
 
 @section('bottom-assets')
-    <script src="{{ asset('assets/dashboard/js/persian-datepicker-0.4.5.js') }}"></script>
-    <script src="{{ asset('assets/dashboard/js/pwt-date.js') }}"></script>
     <script type="text/javascript">
         $('.searchbtn').click(function(){
             $('#searchboxpage').stop().slideToggle();
-        });
-
-        $(".persianDatePricker").persianDatepicker({
-            format: 'YYYY/MM/DD',
-            initialValue :{
-                enabled: false
-            }
         });
 
         $('.delete-category').on('click', function (event) {
@@ -135,16 +126,4 @@
             $('#delete-category-form').attr('action', '{{ route('dashboard.blog.categories.destroy', '') }}/' + categoryID);
         });
     </script>
-
-    @if(!isset($_GET['fromDate']) || trim($_GET['fromDate']) == '')
-        <script>
-            $('#from-date').val('');
-        </script>
-    @endif
-
-    @if(!(isset($_GET['toDate']) && trim($_GET['toDate']) != ''))
-        <script>
-            $('#to-date').val('');
-        </script>
-    @endif
 @endsection

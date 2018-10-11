@@ -39,14 +39,14 @@ return [
                     'model' => \Mwteam\Blog\App\Models\BlogCategory::class,
                 ],
                 [
-                    'title' => 'تگ‌ها',
+                    'title' => 'برچسب‌ها',
                     'url' => route('dashboard.blog.tags.index'),
                     'yield' => 'blog-tags-index',
                     'policy' => 'index',
                     'model' => \Mwteam\Blog\App\Models\BlogTag::class,
                 ],
                 [
-                    'title' => 'ساخت تگ جدید',
+                    'title' => 'ساخت برچسب جدید',
                     'url' => route('dashboard.blog.tags.create'),
                     'yield' => 'blog-tags-create',
                     'policy' => 'create',

@@ -58,17 +58,17 @@ class PermissionTableSeeder extends Seeder
                 'parent' => 'blog',
             ],
             [
-                'fa_title' => 'ایجاد تگ',
+                'fa_title' => 'ایجاد برچسب',
                 'en_title' => 'blog-tags-create',
                 'parent' => 'blog',
             ],
             [
-                'fa_title' => 'ویرایش تگ',
+                'fa_title' => 'ویرایش برچسب',
                 'en_title' => 'blog-tags-edit',
                 'parent' => 'blog',
             ],
             [
-                'fa_title' => 'حذف تگ',
+                'fa_title' => 'حذف برچسب',
                 'en_title' => 'blog-tags-delete',
                 'parent' => 'blog',
             ],

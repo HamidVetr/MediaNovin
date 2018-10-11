@@ -1,8 +1,8 @@
 @extends('dashboard::master')
 
-@section('title') ساخت دسته بندی جدید @endsection
+@section('title') ویرایش دسته بندی {{ $category->name }} @endsection
 @section('blog') active @endsection
-@section('blog-categories-create') active @endsection
+@section('blog-categories-index') active @endsection
 
 @section('top-assets')
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/select2.min.css') }}">
@@ -12,14 +12,14 @@
     <div class="br-pageheader">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
             <a href="{{ route('dashboard.home') }}" class="breadcrumb-item">خانه</a>
-            <a href="{{ route('dashboard.blog.articles.index') }}" class="breadcrumb-item">دسته بندی</a>
-            <span class="breadcrumb-item active">ساخت دسته</span>
+            <a href="{{ route('dashboard.blog.categories.index') }}" class="breadcrumb-item">دسته بندی‌ها</a>
+            <span class="breadcrumb-item active">ویرایش دسته بندی {{ $category->name }}</span>
         </nav>
     </div>
     <div class="br-pagetitle">
         <h4 class="pd-r-10">
             <i class="icon ion-ios-albums"></i>
-            ساخت دسته جدید
+            ویرایش دسته بندی {{ $category->name }}
         </h4>
     </div>
     <div class="pd-t-30">
@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group row mg-t-20">
                             <label for="" class="col-sm-2 form-control-label">
-                                نام دسته‌ :
+                                نام دسته‌ بندی:
                                 <span class="tx-danger">*</span>
                             </label>
                             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
