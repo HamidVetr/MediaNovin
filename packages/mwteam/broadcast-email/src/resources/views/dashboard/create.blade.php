@@ -20,7 +20,7 @@
         ],
     ]])
 
-    @include('dashboard::partials.page-title', ['title' => 'جزئیات پیام', 'icon' => 'ion-ios-email'])
+    @include('dashboard::partials.page-title', ['title' => 'ارسال پیام', 'icon' => 'ion-ios-email'])
 
     <div class="pd-t-30">
         <div class="br-section-wrapper-level">
@@ -82,10 +82,10 @@
                         }
                     }
                 },
-                users: {
+                "users[]": {
                     validators: {
                         notEmpty: {
-                            message: 'کاربران را انتخاب کنید'
+                            message: 'کاربر را انتخاب کنید'
                         }
                     }
                 },
