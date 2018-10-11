@@ -1,8 +1,8 @@
 @extends('dashboard::master')
 
 @section('title') جزئیات پیام @endsection
-@section('blog') active @endsection
-@section('blog-articles-index') active @endsection
+@section('broadcast-email') active @endsection
+@section('broadcast-email-index') active @endsection
 
 @section('top-assets')
 
