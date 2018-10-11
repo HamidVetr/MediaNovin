@@ -1,0 +1,13 @@
+{
+  "name": "mwteam/broadcast-email",
+  "description": "Broadcast email package",
+  "authors": [
+    {
+      "name": "mwteam",
+      "email": "mwteam@mihanwebhost.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+  }
+}
