@@ -68,7 +68,7 @@ class TicketController extends Controller
             $query->where('created_at','<=',DatetimeHelper::toGregorianDatetime($request['to-date'].' 23:59:59'));
         }
 
-        $query->orderBy('updated_at');
+        $query->orderBy('updated_at','desc');
         $tempQuery = clone $query;
         $tickets = $query->paginate(2);
 
@@ -133,6 +133,7 @@ class TicketController extends Controller
             TicketMessages::create([
                 'ticket_id' => $ticket->id,
                 'sender' => auth()->user()->id,
+                'sent_from' => 'admin-panel',
                 'message' => $request['message'],
                 'file' => $fileName,
             ]);
@@ -186,6 +187,7 @@ class TicketController extends Controller
             TicketMessages::create([
                 'ticket_id' => $ticket->id,
                 'sender' => auth()->user()->id,
+                'sent_from' => 'admin-panel',
                 'message' => $request['message'],
                 'status' => 'answered',
                 'file' => $fileName,
@@ -261,6 +263,10 @@ class TicketController extends Controller
         }
 
         DB::commit();
+
+        File::deleteDirectory(Ticket::getFilePath($ticketId));
+        File::deleteDirectory(Ticket::getFilePath($ticketId));
+
         session()->flash('success','تیکت شماره '. $ticketId .' حذف گردید.');
         return redirect()->route('dashboard.tickets.index');
     }

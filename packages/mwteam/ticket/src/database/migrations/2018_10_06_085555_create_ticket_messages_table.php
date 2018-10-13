@@ -17,6 +17,7 @@ class CreateTicketMessagesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('ticket_id');
             $table->unsignedInteger('sender');
+            $table->string('sent_from');
             $table->text('message');
             $table->boolean('seen')->default(0);
             $table->string('file')->nullable();

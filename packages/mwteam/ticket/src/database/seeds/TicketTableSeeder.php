@@ -14,29 +14,32 @@ class TicketTableSeeder extends Seeder
      */
     public function run()
     {
-       $ticket = Ticket::create([
+        $ticket = Ticket::create([
            'user_id' => 2,
            'title' => 'تست 1',
            'status' => 'closed'
-       ]);
+        ]);
 
         TicketMessages::create([
             'ticket_id' => $ticket->id,
-            'sender' => 'admin',
+            'sender' => 1,
+            'sent_from' => 'admin-panel',
             'message' => 'پیام 1 تست 1 ادمین',
             'seen' => 1
         ]);
 
         TicketMessages::create([
             'ticket_id' => $ticket->id,
-            'sender' => 'user',
+            'sender' => 2,
+            'sent_from' => 'user-panel',
             'message' => 'پیام 2 تست 1 کاربر',
             'seen' => 1
         ]);
 
         TicketMessages::create([
             'ticket_id' => $ticket->id,
-            'sender' => 'admin2',
+            'sender' => 4,
+            'sent_from' => 'admin-panel',
             'message' => 'پیام 3 تست 1 ادمین',
             'seen' => 0
         ]);
@@ -49,7 +52,8 @@ class TicketTableSeeder extends Seeder
 
         TicketMessages::create([
             'ticket_id' => $ticket->id,
-            'sender' => 'user',
+            'sender' => 3,
+            'sent_from' => 'user-panel',
             'message' => 'پیام 1 تست 2 کاربر',
             'seen' => 0
         ]);
