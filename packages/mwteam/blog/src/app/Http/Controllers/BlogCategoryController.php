@@ -92,11 +92,11 @@ class BlogCategoryController extends Controller
      * Display the specified resource.
      *
      * @param BlogCategory $blogCategory
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function show(BlogCategory $blogCategory)
     {
-        //
+        dd($blogCategory);
     }
 
     /**
