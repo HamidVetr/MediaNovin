@@ -41,7 +41,14 @@
                               <input type="search" name="search"  placeholder="جستجو ">
                              </label>
                              <button type="submit" class="btn btn-info">جستجو</button>
+                             <a href="" class="btn btn-danger btn-with-icon" data-toggle="tooltip" title="حذف فیلتر">
+                                 <div class="ht-40">
+                                     <span class="icon wd-40"><i class="fa fa-times"></i></span>
+                                     <span class="pd-x-15">حذف فیلتر</span>
+                                 </div>
+                             </a>
                           </div>
+
                      </div>
                 </div>
 

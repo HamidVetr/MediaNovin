@@ -62,24 +62,36 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mg-t-20">
-                            {!! Form::label(null, 'انتخاب فایل :', ['class' => 'col-sm-2 form-control-label']) !!}
+                        {{--<div class="form-group row mg-t-20">--}}
+                            {{--{!! Form::label(null, 'انتخاب فایل :', ['class' => 'col-sm-2 form-control-label']) !!}--}}
 
+                            {{--<div class="col-lg-8 col-md-10">--}}
+                                {{--<div class="file-field">--}}
+                                    {{--<div class="btn btn-primary btn-md float-left">--}}
+                                        {{--<span>--}}
+                                            {{--<i class="fa fa-cloud-upload"></i>--}}
+                                        {{--</span>--}}
+                                        {{--<span class="pd-r-5">انتخاب فایل</span>--}}
+                                        {{--{!! Form::file('file') !!}--}}
+                                    {{--</div>--}}
+                                    {{--<div class="file-path-wrapper">--}}
+                                        {{--{!! Form::text(null, null, ['class' => 'file-path validate']) !!}--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+                        <div class="form-group row mg-t-20">
+                            <span class="tx-danger">*</span>
+                            <label class="form-control-label col-sm-2">ارسال فایل :</label>
                             <div class="col-lg-8 col-md-10">
-                                <div class="file-field">
-                                    <div class="btn btn-primary btn-md float-left">
-                                        <span>
-                                            <i class="fa fa-cloud-upload"></i>
-                                        </span>
-                                        <span class="pd-r-5">انتخاب فایل</span>
-                                        {!! Form::file('file') !!}
-                                    </div>
-                                    <div class="file-path-wrapper">
-                                        {!! Form::text(null, null, ['class' => 'file-path validate']) !!}
-                                    </div>
-                                </div>
+                                 <input type="file" name="file" class="file-styled form-control"
+                                       accept=".jpg,.png,.pdf,.ZIP">
+
                             </div>
                         </div>
+
+
 
                         <div class="row justify-content-center">
                             <div class="btn-demo">
@@ -95,6 +107,7 @@
 
 @section('bottom-assets')
     <script type="text/javascript" src="{{ asset('assets/dashboard/js/select2.min.js') }}"></script>
+    <script  type="text/javascript" src="{{ asset('assets/dashboard/js/uniform.js') }}"></script>
 
     <script type="text/javascript">
         $('.select2').select2();
