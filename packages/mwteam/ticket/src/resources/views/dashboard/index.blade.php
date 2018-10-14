@@ -45,7 +45,13 @@
         <div class="br-section-wrapper-level">
             <div class="search-advance search-advance-vendor">
                 @if($hasFilter)
-                    <a href="{{route('dashboard.tickets.index')}}" data-toggle="tooltip" title="حذف فیلتر"><i class="ion icon ion-ios-trash tx-xl-24"></i></a>
+                    {{--<a href="{{route('dashboard.tickets.index')}}" class="btn btn-danger btn-with-icon btn-block" data-toggle="tooltip" title="حذف فیلتر"></a>--}}
+                    <a href="{{route('dashboard.tickets.index')}}" class="btn btn-danger btn-with-icon btn-oblong" data-toggle="tooltip" title="حذف فیلتر">
+                        <div class="ht-40">
+                            <span class="icon wd-40-br rounded-circle"><i class="fa fa-times"></i></span>
+                            <span class="pd-x-15">حذف فیلتر</span>
+                        </div>
+                    </a>
                 @endif
                 <button type="button" class="bg-teal-400 searchbtn searchbtn-store btn-icon btn-rounded"  data-toggle="tooltip" title="جستجو پیشرفته"><img src="{{ asset('/assets/dashboard/images/search.svg') }}" width="18"></button>
                 <div id="searchboxpage" class="searchboxpage-vendor" style="display:{{$hasFilter ? 'block':'none'}}">

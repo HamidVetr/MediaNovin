@@ -141,26 +141,26 @@
                 password: {
                     validators: {
                         notEmpty: {
-                            message: 'رمز عبور را وارد کنید'
+                            message: 'رمز عبور را وارد کنید '
                         },
                         identical: {
                             field: 'password_confirmation',
-                            message: 'رمز عبور و تکرار آن یکسان نیست'
+                            message: 'رمز عبور و تکرار آن یکسان نیست '
                         },
                         stringLength: {
                             min: 6,
-                            message: 'رمز عبور باید حداقل 6 کارکتر باشد'
+                            message: 'رمز عبور باید حداقل 6 کارکتر باشد '
                         }
                     }
                 },
                 password_confirmation: {
                     validators: {
                         notEmpty: {
-                            message: 'تکرار رمز عبور را وارد کنید'
+                            message: 'تکرار رمز عبور را وارد کنید '
                         },
                         identical: {
                             field: 'password',
-                            message: 'رمز عبور و تکرار آن یکسان نیست'
+                            message: 'رمز عبور و تکرار آن یکسان نیست '
                         },
                         stringLength: {
                             min: 6,

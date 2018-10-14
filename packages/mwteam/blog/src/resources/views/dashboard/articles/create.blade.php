@@ -31,7 +31,7 @@
     </div>
     {!! Form::open(['method'=>'POST', 'route' => 'dashboard.blog.articles.store', 'files' => true]) !!}
         <div class="pd-t-30">
-            <div class="col-md-9">
+            <div class="col-md-9 col-xs-12">
                 <div class="br-section-wrapper-level">
                     @include('dashboard::partials.alert-error')
                     @include('dashboard::partials.alert-session')
@@ -123,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-12">
                 <div class="br-section-wrapper-category">
                     <div class="category-title">
                         <span>انتشار</span>
@@ -134,27 +134,27 @@
                     {{--</div>--}}
                     <div class="category-content pd-15">
                          <div class="row justify-content-center">
-                        <a href="" class="btn btn-danger btn-with-icon mg-y-20 mg-x-5">
-                            <div class="ht-40">
-                                <span class="icon wd-40">
-                                    <i class="fa fa-eye"></i>
-                                </span>
-                                <span class="pd-x-15">
-                                       پیش نمایش
-                                </span>
-                            </div>
-                        </a>
+                            <a href="" class="btn btn-danger btn-with-icon mg-y-20 mg-x-5">
+                                <div class="ht-40">
+                                    <span class="icon wd-40">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+                                    <span class="pd-x-15">
+                                           پیش نمایش
+                                    </span>
+                                </div>
+                            </a>
 
-                        <a href="" class="btn btn-success btn-with-icon mg-y-20 mg-x-5">
-                            <div class="ht-40">
-                                <span class="icon wd-40">
-                                    <i class="fa fa-floppy-o"></i>
-                                </span>
-                                <span class="pd-x-35">
-                                    ذخیره
-                                </span>
-                            </div>
-                        </a>
+                            <a href="" class="btn btn-success btn-with-icon mg-y-20 mg-x-5">
+                                <div class="ht-40">
+                                    <span class="icon wd-40">
+                                        <i class="fa fa-floppy-o"></i>
+                                    </span>
+                                    <span class="pd-x-35">
+                                        ذخیره
+                                    </span>
+                                </div>
+                            </a>
                     </div>
                     </div>
                 </div>
@@ -162,8 +162,8 @@
                     <div class="category-title">
                        <span>انتخاب دسته بندی</span>
                     </div>
-                    <div class="category-content pd-15">
-                        {!! Form::select('blog_category_id', ['0' => 'بدون دسته بندی'] + $categories, null, ['id' => 'category', 'style' => 'display:none']) !!}
+                    <div class="category-content pd-15 form-group row">
+                        {!! Form::select('blog_category_id', ['0' => 'بدون دسته بندی'] + $categories, null,['id' => 'category','class' => 'form-control', 'style'  => 'display:none']) !!}
                     </div>
                 </div>
                 <div class="br-section-wrapper-category mg-y-20">
@@ -171,11 +171,11 @@
                         <span>انتخاب برچسب</span>
                     </div>
                     <div class="pd-x-20 pd-y-20">
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="multi-select"></label>
                             {!! Form::label('tags', 'برچسب مناسب را انتخاب کنید') !!}
                             <br>
-                            {!! Form::select('tags[]', $tags, null, ['multiple' => 'multiple', 'id' => 'tags', 'style' => 'display:none']) !!}
+                            {!! Form::select('tags[]', $tags, null, ['multiple' => 'multiple', 'id' => 'tags','class' => 'form-control', 'style' => 'display:none']) !!}
                         </div>
                     </div>
                 </div>

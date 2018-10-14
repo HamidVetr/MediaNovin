@@ -148,7 +148,6 @@
 
 
   // custom scrollbar style
-  $('.overflow-y-auto').perfectScrollbar();
 
   // jquery ui datepicker
   $('.datepicker').datepicker();

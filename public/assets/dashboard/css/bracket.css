@@ -8551,6 +8551,13 @@ a.text-dark:focus, a.text-dark:hover {
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
+
+}
+.wd-40-br {
+    justify-content: center!important;
+    background-color: rgba(0, 0, 0, 0.2)!important;
+    border-radius: 50%!important;
+    width: 40px!important;
 }
 
 .btn-icon {
@@ -62488,7 +62495,7 @@ h6.panel-title, .h6.panel-title {
   /*margin-bottom: 20px!important;*/
 /*}*/
 .chat-list, .chat-stacked {
-  max-height: 250px;
+ height: 250px;
   overflow: auto;
 }
 
@@ -62604,7 +62611,7 @@ input[type=checkbox] {
 
 
 .wrap{
-  width:300px;
+  width:100%;
   margin:0 auto;
   text-align:center;
   overflow: hidden;
@@ -62626,9 +62633,8 @@ label[for=upload] input{ display:none }
 .thumb{
   position:relative;
   height:100%;
-  width:300px;
   overflow:hidden;
-  margin:40px 0;
+  margin:20px;
   cursor:move;
 
 }
