@@ -111,15 +111,14 @@
 
         <div class="row">
             <div class="col-lg-6 widget-1">
-                <div class="content-wrap no-margin">
-                    <h6 class="text-chart tx-inverse tx-uppercase tx-bold tx-14 no-margin">
-                        <i class="fa  fa-bar-chart"></i>
-                        گزارش پرداختی ماه جاری
-                    </h6>
-                </div>
+
                 <div class="chart-panel wrapper">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-xs-12">
+                                <h6 class="text-chart tx-inverse tx-uppercase tx-bold tx-14">
+                                    <i class="fa  fa-bar-chart"></i>
+                                    گزارش پرداختی ماه جاری
+                                </h6>
                             <div id="cancel"></div>
                         </div>
                     </div>
@@ -128,12 +127,12 @@
 
 
             <div class="col-lg-6 widget-1">
-                <div class="content-wrap no-margin">
-                    <h6 class="text-chart tx-inverse tx-uppercase tx-bold tx-14 no-margin">
+                {{--<div class="content-wrap no-margin">--}}
+                    <h6 class="text-chart tx-inverse tx-uppercase tx-bold tx-14">
                         <i class="fa fa-users"></i>
                         لیست 10 ورود آخر کاربر
                     </h6>
-                </div>
+                {{--</div>--}}
                      <table class="table table-striped jambo_table jambo_table-user bulk_action jambo_table-user">
                     <div class="text-center empty-state">
                         <img src="{{ asset('assets/dashboard/images/empty.png') }}" width="400">
@@ -276,72 +275,56 @@
 <script src="{{ asset('assets/dashboard/js/bootstrap-notify.min.js') }}"></script>
 <script src="{{ asset('assets/dashboard/js/highcharts.js') }}"></script>
 <script type="text/javascript">
-    Highcharts.setOptions({
-        lang: {
-            numericSymbols: null //otherwise by default ['k', 'M', 'G', 'T', 'P', 'E']
-        }
-
-    });
-    $(window).resize(function(){
-        var chart = $('#cancel').highcharts();
-
-        console.log('redraw');
-        var w = $('#cancel').closest(".wrapper").width()
-        // setsize will trigger the graph redraw
-        chart.setSize(
-            w,w * (3/4),false
-        );
-    });
-
     Highcharts.chart('cancel', {
-        colors: ['#ED561B'],
-
         chart: {
-            type: 'area', zoomType: 'x'
+            type: 'area'
         },
         title: {
+            text: 'مبلغ درآمد یک ماه گذشته'
+        },
+        subtitle: {
             text: ''
         },
-        legend: {
-            layout: 'vertical',
-            align: 'left',
-            verticalAlign: 'top',
-            x: 180,
-            y: 100,
-            floating: true,
-            borderWidth: 1, symbolPadding: -20, rtl: true, reversed: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-        },
         xAxis: {
-            categories: [10,20,15,10,5,1,15,2,9,50],
+            categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
         },
         yAxis: {
             title: {
-                text: 'تعداد '
+                text: 'مبلغ'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value / 1000;
+                }
             }
         },
         tooltip: {
             split: true,
-            useHTML: true,
-            valueSuffix: ' تعداد'
-        },
-        credits: {
-            enabled: false
+            valueSuffix: ' millions'
         },
         plotOptions: {
-            areaspline: {
-                fillOpacity: 0.5
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
             }
         },
-        series: [
-            {
-                name: 'بازدید',
-                data: [10,20,15,10,5,1,15,2,9,50],
-            }
-
-        ]
+        series: [{
+            name: 'Asia',
+            data: [502, 635, 809, 947, 1402, 3634, 5268]
+        }, {
+            name: 'Africa',
+            data: [106, 107, 111, 133, 221, 767, 1766]
+        }, ]
     });
-
 </script>
 </body>
 </html>

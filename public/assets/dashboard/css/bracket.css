@@ -62957,18 +62957,18 @@ label:hover:before {
     background-position: -80px -60px;
 }
 .br-menu-link-user.active {
-    background: #fbcc04!important;
+    background: #ffa128!important;
     background-repeat: repeat-x;
     color: #fff;
 }
 .br-logo-user > a i {
     font-style: normal;
     font-weight: 500;
-    color: #fbcc04!important;
+    color: #f19012!important;
 }
 .br-logo-user > a span {
     font-weight: 300;
-    color: #fbcc04!important;
+    color: #ed8600!important;
     display: inline-block;
     transition: all 0.2s ease-in-out;
 }
@@ -63108,10 +63108,10 @@ table.jambo_table-user thead {
 .md-list-content .uk-text-small {
     font-size: 11px;
 }
-i {
-    padding: 0 5px;
-    color: #d8d8d8;
-}
+/*i {*/
+    /*padding: 0 5px;*/
+    /*color: #d8d8d8;*/
+/*}*/
 .fa-group:before, .fa-users:before {
     content: "\f0c0";
 }

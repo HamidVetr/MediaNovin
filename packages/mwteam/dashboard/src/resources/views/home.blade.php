@@ -127,7 +127,7 @@
                 <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-t-20 mg-b-10">گزارش پرداختی ماه جاری</h6>
                 <div class="chart-panel">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-xs-12">
                             <div id="cancel"></div>
                         </div>
                     </div>

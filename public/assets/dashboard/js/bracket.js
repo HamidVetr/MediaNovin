@@ -153,10 +153,10 @@
   // $('.datepicker').datepicker();
 
   // switch button
-  $('.switch-button').switchButton();
+  // $('.switch-button').switchButton();
 
   // peity charts
-  $('.peity-bar').peity('bar');
+  // $('.peity-bar').peity('bar');
 
   // highlight syntax highlighter
   $('pre code').each(function(i, block) {
