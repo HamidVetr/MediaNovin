@@ -150,7 +150,7 @@
   // custom scrollbar style
 
   // jquery ui datepicker
-  $('.datepicker').datepicker();
+  // $('.datepicker').datepicker();
 
   // switch button
   $('.switch-button').switchButton();
