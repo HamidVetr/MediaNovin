@@ -6,13 +6,7 @@
 
 @section('top-assets')
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/select2.min.css') }}">
-    <script src="{{ asset('assets/dashboard/js/ckeditor-5/ckeditor.js') }}"></script>
-    <style>
-        .ck-editor__editable {
-            min-height: 200px;
-            direction: rtl;
-        }
-    </style>
+    <script src="{{ asset('assets/dashboard/js/ckeditor/ckeditor.js') }}"></script>
 @endsection
 
 @section('content')
@@ -153,10 +147,8 @@
         $('#parent').select2();
     </script>
     <script>
-        ClassicEditor.create( document.querySelector( '#body' ), {
-            ckfinder: {
-                uploadUrl: '{{ route('dashboard.blog.articles.uploadInline') }}'
-            }
-        } );
+        var editor = CKEDITOR.replace( 'body', {
+            filebrowserUploadUrl: '{{ route('dashboard.blog.articles.uploadInline') }}',
+        });
     </script>
 @endsection

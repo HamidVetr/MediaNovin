@@ -232,20 +232,10 @@ class BlogArticleController extends Controller
 
     public function uploadInline(Request $request)
     {
+        // ckeditor 4
         $this->validate($request, [
             'upload' => 'required|mimes:jpeg,png,bmp,jpg'
         ]);
-
-        $validator = Validator::make($request->all(), [
-            'upload' => 'required|mimes:jpeg,png,bmp,jpg'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'uploaded' => false,
-                'message' => 'فایل انتخابی مجاز نمی باشد.'
-            ]);
-        }
 
         $name = '';
 
@@ -256,10 +246,47 @@ class BlogArticleController extends Controller
 
         $url = env('APP_URL') . '/inlinePhotos/' . $name;
 
-        return response()->json([
-            'uploaded' => true,
-            'url' => $url
-        ]);
+        $return_statement  = "<script>window.parent.CKEDITOR.tools.callFunction(";
+
+        if (isset($_REQUEST['CKEditorFuncNum'])) {
+            $return_statement .= intval($_REQUEST['CKEditorFuncNum']);
+        }else{
+            $return_statement .= 1;
+        }
+
+        $return_statement .= ", '{$url}', '')</script>";
+
+        return $return_statement;
+
+        // ckeditor 5
+//        $this->validate($request, [
+//            'upload' => 'required|mimes:jpeg,png,bmp,jpg'
+//        ]);
+//
+//        $validator = Validator::make($request->all(), [
+//            'upload' => 'required|mimes:jpeg,png,bmp,jpg'
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return response()->json([
+//                'uploaded' => false,
+//                'message' => 'فایل انتخابی مجاز نمی باشد.'
+//            ]);
+//        }
+//
+//        $name = '';
+//
+//        if($file = $request->file('upload')){
+//            $name = time() . $file->getClientOriginalName();
+//            $file->move('inlinePhotos', $name);
+//        }
+//
+//        $url = env('APP_URL') . '/inlinePhotos/' . $name;
+//
+//        return response()->json([
+//            'uploaded' => true,
+//            'url' => $url
+//        ]);
     }
 
     private function search($data)
