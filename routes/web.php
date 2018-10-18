@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', 'PageController@home')->name('home');
-
+Route::get('test', function (){return view('test');});
 //************************************* auth *******************************************
 Auth::routes();
 
